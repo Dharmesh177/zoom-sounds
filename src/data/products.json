@@ -1,0 +1,110 @@
+[
+  {
+    "id": "prod-001",
+    "title": "Thunder Pro X9000",
+    "category": "big-dj-systems",
+    "description": "Professional DJ sound system with 9000W power output, perfect for large events and outdoor concerts.",
+    "usp": "Crystal clear bass with zero distortion at maximum volume",
+    "image": "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "featured": true
+  },
+  {
+    "id": "prod-002",
+    "title": "HomeSync Elite 7.2",
+    "category": "home-theater",
+    "description": "Premium 7.2 channel home theater system with Dolby Atmos support for immersive cinema experience.",
+    "usp": "Wireless subwoofer with smart room calibration technology",
+    "image": "https://images.pexels.com/photos/1090974/pexels-photo-1090974.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "featured": true
+  },
+  {
+    "id": "prod-003",
+    "title": "IndustrialMax 5000",
+    "category": "industry-sound",
+    "description": "Heavy-duty industrial PA system designed for factories, warehouses, and large commercial spaces.",
+    "usp": "Weather-resistant with 10-year warranty and 24/7 operation capability",
+    "image": "https://images.pexels.com/photos/164938/pexels-photo-164938.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "featured": true
+  },
+  {
+    "id": "prod-004",
+    "title": "BassKing Subwoofer 18\"",
+    "category": "big-dj-systems",
+    "description": "Dual 18-inch subwoofer system delivering earth-shaking bass for club and event applications.",
+    "usp": "Proprietary bass reflex design for deeper, cleaner low frequencies",
+    "image": "https://images.pexels.com/photos/210766/pexels-photo-210766.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "featured": false
+  },
+  {
+    "id": "prod-005",
+    "title": "Studio Monitor Pro 8",
+    "category": "home-theater",
+    "description": "Reference-quality studio monitors with 8-inch woofers for accurate sound reproduction.",
+    "usp": "Flat frequency response from 35Hz to 22kHz",
+    "image": "https://images.pexels.com/photos/257904/pexels-photo-257904.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "featured": false
+  },
+  {
+    "id": "prod-006",
+    "title": "CompactHome 5.1",
+    "category": "home-theater",
+    "description": "Space-saving 5.1 surround sound system perfect for apartments and medium-sized rooms.",
+    "usp": "Wireless connectivity with Bluetooth 5.0 and WiFi streaming",
+    "image": "https://images.pexels.com/photos/1279730/pexels-photo-1279730.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "featured": false
+  },
+  {
+    "id": "prod-007",
+    "title": "EventMaster Column Array",
+    "category": "big-dj-systems",
+    "description": "Professional column array speaker system for concerts, weddings, and corporate events.",
+    "usp": "360-degree coverage with built-in DSP and preset modes",
+    "image": "https://images.pexels.com/photos/1449791/pexels-photo-1449791.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "featured": true
+  },
+  {
+    "id": "prod-008",
+    "title": "WarehouseVoice PA",
+    "category": "industry-sound",
+    "description": "High-intelligibility PA system for clear announcements in noisy industrial environments.",
+    "usp": "Voice-optimized frequency response cuts through ambient noise",
+    "image": "https://images.pexels.com/photos/3756774/pexels-photo-3756774.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "featured": false
+  },
+  {
+    "id": "prod-009",
+    "title": "MegaBass DJ Package",
+    "category": "big-dj-systems",
+    "description": "Complete DJ package with dual speakers, subwoofers, and mixer for mobile DJs.",
+    "usp": "All-in-one solution with road cases and professional cabling included",
+    "image": "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "featured": false
+  },
+  {
+    "id": "prod-010",
+    "title": "CinemaLux Soundbar",
+    "category": "home-theater",
+    "description": "Premium soundbar with virtual surround technology and wireless subwoofer.",
+    "usp": "Ultra-slim design with HDMI eARC and 4K passthrough",
+    "image": "https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "featured": false
+  },
+  {
+    "id": "prod-011",
+    "title": "FactoryAlert Pro",
+    "category": "industry-sound",
+    "description": "Emergency notification system with horn speakers and backup battery power.",
+    "usp": "IP67 rated with temperature range from -40°C to +70°C",
+    "image": "https://images.pexels.com/photos/256219/pexels-photo-256219.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "featured": false
+  },
+  {
+    "id": "prod-012",
+    "title": "PortablePower 2000",
+    "category": "big-dj-systems",
+    "description": "Battery-powered portable PA system for outdoor events and street performances.",
+    "usp": "12-hour battery life with solar panel charging option",
+    "image": "https://images.pexels.com/photos/63703/pexels-photo-63703.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "featured": false
+  }
+]

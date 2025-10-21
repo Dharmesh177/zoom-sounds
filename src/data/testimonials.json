@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "Rajesh Patel",
+    "role": "Event Organizer",
+    "company": "Surat Events Co.",
+    "content": "Zoom Sounds has been our trusted partner for over 5 years. Their sound systems never disappoint, and the quality is unmatched in Surat.",
+    "rating": 5
+  },
+  {
+    "id": 2,
+    "name": "Priya Shah",
+    "role": "Wedding Planner",
+    "company": "Dream Weddings",
+    "content": "The home theater systems from Zoom Sounds are exceptional. Our clients love the crystal-clear sound quality and modern designs.",
+    "rating": 5
+  },
+  {
+    "id": 3,
+    "name": "Amit Desai",
+    "role": "Factory Manager",
+    "company": "Gujarat Industries Ltd.",
+    "content": "We installed their industrial PA system across our 3 facilities. Excellent clarity and durability even in harsh conditions.",
+    "rating": 5
+  },
+  {
+    "id": 4,
+    "name": "DJ Karan",
+    "role": "Professional DJ",
+    "company": "Beats & Beyond",
+    "content": "As a professional DJ, I trust only Zoom Sounds equipment. The bass response is incredible and they've never let me down at any event.",
+    "rating": 5
+  }
+]
