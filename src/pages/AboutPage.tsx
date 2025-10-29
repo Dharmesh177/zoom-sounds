@@ -79,7 +79,7 @@ export default function AboutPage() {
               description: '100% genuine products with transparent pricing and honest advice',
             },
           ].map((value, idx) => (
-            <div key={idx} className="bg-white rounded-2xl p-8 shadow-lg border border-slate-200 hover:shadow-xl transition-shadow">
+            <div key={idx} className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 hover:shadow-xl transition-shadow">
               <div className="bg-gradient-to-br from-orange-500 to-red-600 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
                 <value.icon className="h-7 w-7 text-white" />
               </div>

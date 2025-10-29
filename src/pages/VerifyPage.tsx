@@ -94,7 +94,7 @@ export default function VerifyPage() {
                   setVerificationMethod('uuid');
                   handleReset();
                 }}
-                className={`p-6 rounded-xl border-2 transition-all ${
+                className={`p-5 rounded-lg border-2 transition-all ${
                   verificationMethod === 'uuid'
                     ? 'border-orange-500 bg-orange-50'
                     : 'border-slate-300 hover:border-orange-300'
@@ -109,7 +109,7 @@ export default function VerifyPage() {
                   setVerificationMethod('image');
                   handleReset();
                 }}
-                className={`p-6 rounded-xl border-2 transition-all ${
+                className={`p-5 rounded-lg border-2 transition-all ${
                   verificationMethod === 'image'
                     ? 'border-orange-500 bg-orange-50'
                     : 'border-slate-300 hover:border-orange-300'
@@ -134,7 +134,7 @@ export default function VerifyPage() {
                     setVerificationResult(null);
                   }}
                   placeholder="e.g., a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all font-mono text-sm"
+                  className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all font-mono text-sm"
                 />
                 <p className="text-xs text-slate-500 mt-2">
                   The UUID code is printed on the product label and warranty card
@@ -170,7 +170,7 @@ export default function VerifyPage() {
                 isVerifying ||
                 (verificationMethod === 'uuid' ? !uuid.trim() : !imageFile)
               }
-              className="w-full mt-6 bg-gradient-to-r from-orange-500 to-red-600 text-white px-6 py-4 rounded-xl font-semibold hover:from-orange-600 hover:to-red-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+              className="w-full mt-6 bg-gradient-to-r from-orange-500 to-red-600 text-white px-6 py-3 rounded-lg text-base font-semibold hover:from-orange-600 hover:to-red-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
             >
               <Shield className="h-5 w-5" />
               <span>{isVerifying ? 'Verifying...' : 'Verify Product'}</span>

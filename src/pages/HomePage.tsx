@@ -35,13 +35,13 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={() => onNavigate('products')}
-                className="bg-gradient-to-r from-orange-500 to-red-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-orange-600 hover:to-red-700 transition-all shadow-lg hover:shadow-xl hover:scale-105"
+                className="bg-gradient-to-r from-orange-500 to-red-600 text-white px-8 py-3.5 rounded-lg text-base font-semibold hover:from-orange-600 hover:to-red-700 transition-all shadow-lg hover:shadow-xl"
               >
                 Explore Products
               </button>
               <button
                 onClick={() => onNavigate('contact')}
-                className="bg-white text-slate-900 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-slate-100 transition-all shadow-lg hover:shadow-xl hover:scale-105"
+                className="bg-white text-slate-900 px-8 py-3.5 rounded-lg text-base font-semibold hover:bg-slate-100 transition-all shadow-lg hover:shadow-xl"
               >
                 Contact Us
               </button>
@@ -127,19 +127,19 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                     </div>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                  <div className="flex flex-col sm:flex-row gap-3 pt-4">
                     <a
                       href={createWhatsAppLink(product.title)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center space-x-2 bg-green-500 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-green-600 transition-all shadow-lg hover:shadow-xl flex-1"
+                      className="flex items-center justify-center space-x-2 bg-green-500 text-white px-6 py-3 rounded-lg text-base font-semibold hover:bg-green-600 transition-all shadow-md hover:shadow-lg flex-1"
                     >
-                      <MessageCircle className="h-6 w-6" />
+                      <MessageCircle className="h-5 w-5" />
                       <span>Enquire on WhatsApp</span>
                     </a>
                     <button
                       onClick={() => onNavigate('products')}
-                      className="flex items-center justify-center border-2 border-slate-300 text-slate-700 px-8 py-4 rounded-xl text-lg font-semibold hover:border-orange-500 hover:text-orange-600 transition-all"
+                      className="flex items-center justify-center border-2 border-slate-300 text-slate-700 px-6 py-3 rounded-lg text-base font-semibold hover:border-orange-500 hover:text-orange-600 transition-all"
                     >
                       View Details
                     </button>
@@ -152,7 +152,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <div className="text-center mt-20">
             <button
               onClick={() => onNavigate('products')}
-              className="bg-gradient-to-r from-orange-500 to-red-600 text-white px-10 py-5 rounded-xl text-lg font-semibold hover:from-orange-600 hover:to-red-700 transition-all shadow-lg hover:shadow-xl hover:scale-105"
+              className="bg-gradient-to-r from-orange-500 to-red-600 text-white px-8 py-3.5 rounded-lg text-base font-semibold hover:from-orange-600 hover:to-red-700 transition-all shadow-lg hover:shadow-xl"
             >
               View All Products
             </button>
@@ -207,14 +207,14 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               href={`https://wa.me/${phoneNumber}?text=${encodeURIComponent('Hi, I want to know more about your products')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center space-x-2 bg-green-500 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-green-600 transition-all shadow-lg hover:shadow-xl"
+              className="inline-flex items-center justify-center space-x-2 bg-green-500 text-white px-8 py-3.5 rounded-lg text-base font-semibold hover:bg-green-600 transition-all shadow-lg hover:shadow-xl"
             >
-              <MessageCircle className="h-6 w-6" />
+              <MessageCircle className="h-5 w-5" />
               <span>Chat on WhatsApp</span>
             </a>
             <button
               onClick={() => onNavigate('contact')}
-              className="bg-white text-orange-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-slate-100 transition-all shadow-lg hover:shadow-xl"
+              className="bg-white text-orange-600 px-8 py-3.5 rounded-lg text-base font-semibold hover:bg-slate-100 transition-all shadow-lg hover:shadow-xl"
             >
               Contact Us
             </button>

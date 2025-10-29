@@ -42,7 +42,7 @@ export default function ProductsPage() {
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-3 rounded-xl font-medium transition-all ${
+                className={`px-5 py-2.5 rounded-lg font-medium transition-all ${
                   selectedCategory === category.id
                     ? 'bg-gradient-to-r from-orange-500 to-red-600 text-white shadow-lg'
                     : 'bg-white text-slate-700 border border-slate-300 hover:border-orange-500 hover:text-orange-600'
@@ -91,9 +91,9 @@ export default function ProductsPage() {
                   href={createWhatsAppLink(product.title)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center space-x-2 bg-green-500 text-white px-4 py-3 rounded-xl font-semibold hover:bg-green-600 transition-colors w-full"
+                  className="flex items-center justify-center space-x-2 bg-green-500 text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-green-600 transition-colors w-full"
                 >
-                  <MessageCircle className="h-5 w-5" />
+                  <MessageCircle className="h-4 w-4" />
                   <span>Buy Now on WhatsApp</span>
                 </a>
               </div>
