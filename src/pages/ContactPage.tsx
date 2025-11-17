@@ -21,30 +21,34 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <section className="bg-gradient-to-r from-slate-900 to-slate-800 text-white py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
-          <p className="text-xl text-slate-300">We're here to help with all your sound system needs</p>
+    <div className="min-h-screen bg-white">
+      <section className="relative bg-gradient-to-br from-blue-50 via-white to-blue-50 text-slate-900 py-20 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200/30 rounded-full filter blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100/30 rounded-full filter blur-3xl"></div>
+        </div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">Contact Us</h1>
+          <p className="text-xl text-slate-600">We're here to help with all your sound system needs</p>
         </div>
       </section>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-slate-200 hover:shadow-xl transition-shadow">
-            <div className="bg-gradient-to-br from-orange-500 to-red-600 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+          <div className="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl hover:scale-105 transition-all border border-slate-200 hover:border-blue-300">
+            <div className="bg-gradient-to-br from-blue-600 to-blue-700 w-14 h-14 rounded-xl flex items-center justify-center mb-4 shadow-lg">
               <MapPin className="h-7 w-7 text-white" />
             </div>
             <h3 className="text-xl font-bold text-slate-900 mb-3">Visit Us</h3>
             <p className="text-slate-600 leading-relaxed">
-              Ring Road, Near City Mall<br />
-              Surat, Gujarat 395002<br />
-              India
+              Surat, Gujarat<br />
+              India<br />
+              &nbsp;
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-slate-200 hover:shadow-xl transition-shadow">
-            <div className="bg-gradient-to-br from-orange-500 to-red-600 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+          <div className="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl hover:scale-105 transition-all border border-slate-200 hover:border-blue-300">
+            <div className="bg-gradient-to-br from-blue-600 to-blue-700 w-14 h-14 rounded-xl flex items-center justify-center mb-4 shadow-lg">
               <Phone className="h-7 w-7 text-white" />
             </div>
             <h3 className="text-xl font-bold text-slate-900 mb-3">Call Us</h3>
@@ -55,8 +59,8 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-slate-200 hover:shadow-xl transition-shadow">
-            <div className="bg-gradient-to-br from-orange-500 to-red-600 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+          <div className="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl hover:scale-105 transition-all border border-slate-200 hover:border-blue-300">
+            <div className="bg-gradient-to-br from-blue-600 to-blue-700 w-14 h-14 rounded-xl flex items-center justify-center mb-4 shadow-lg">
               <Clock className="h-7 w-7 text-white" />
             </div>
             <h3 className="text-xl font-bold text-slate-900 mb-3">Business Hours</h3>
@@ -83,7 +87,7 @@ export default function ContactPage() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all"
+                  className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
                   placeholder="Enter your name"
                 />
               </div>
@@ -100,7 +104,7 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all"
+                    className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -116,7 +120,7 @@ export default function ContactPage() {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all"
+                    className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
                     placeholder="+91 98765 43210"
                   />
                 </div>
@@ -132,7 +136,7 @@ export default function ContactPage() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all"
+                  className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
                 >
                   <option value="">Select a subject</option>
                   <option value="product-inquiry">Product Inquiry</option>
@@ -161,7 +165,7 @@ export default function ContactPage() {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-orange-500 to-red-600 text-white px-6 py-3 rounded-lg text-base font-semibold hover:from-orange-600 hover:to-red-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-lg text-base font-semibold hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
               >
                 <Send className="h-5 w-5" />
                 <span>Send Message</span>
@@ -184,12 +188,12 @@ export default function ContactPage() {
               ></iframe>
             </div>
 
-            <div className="mt-8 bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl p-8 text-white">
+            <div className="mt-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white">
               <h3 className="text-2xl font-bold mb-4">Quick Contact</h3>
               <div className="space-y-4">
-                <a href="mailto:info@zoomsounds.com" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                <a href="mailto:info@zsindia.com" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
                   <Mail className="h-5 w-5" />
-                  <span>info@zoomsounds.com</span>
+                  <span>info@zsindia.com</span>
                 </a>
                 <a href="tel:+919876543210" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
                   <Phone className="h-5 w-5" />

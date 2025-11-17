@@ -83,9 +83,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center space-x-2 bg-orange-100 rounded-full px-4 py-2 mb-4">
-              <Star className="h-4 w-4 text-orange-600 fill-orange-600" />
-              <span className="text-sm font-semibold text-orange-700">Featured Collection</span>
+            <div className="inline-flex items-center space-x-2 bg-blue-100 rounded-full px-4 py-2 mb-4">
+              <Star className="h-4 w-4 text-blue-600 fill-blue-600" />
+              <span className="text-sm font-semibold text-blue-700">Featured Collection</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
               Premium Sound Systems
@@ -99,56 +99,65 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             {featuredProducts.map((product) => (
               <div
                 key={product.id}
-                className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border border-slate-200"
+                className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-4 border border-slate-200 hover:border-blue-400 transform hover:scale-105"
               >
-                <div className="relative h-72 overflow-hidden bg-slate-100">
+                <div className="relative h-80 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent"></div>
                   <img
                     src={product.image}
                     alt={product.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-125 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
-                  <div className="absolute top-4 right-4 bg-gradient-to-r from-orange-500 to-red-600 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center space-x-1">
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/30 to-transparent group-hover:from-slate-900/80 transition-all"></div>
+                  <div className="absolute top-4 right-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-xl flex items-center space-x-1 backdrop-blur-sm border border-white/20">
                     <Star className="h-3 w-3 fill-white" />
                     <span>Featured</span>
                   </div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="bg-white/95 backdrop-blur-sm rounded-xl px-3 py-2">
-                      <p className="text-xs font-semibold text-orange-600 uppercase tracking-wide">
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <div className="bg-white/95 backdrop-blur-sm rounded-xl px-4 py-3 shadow-xl border border-white/30">
+                      <p className="text-xs font-bold text-blue-600 uppercase tracking-widest">
                         {product.category.replace(/-/g, ' ')}
+                      </p>
+                      <p className="text-sm font-bold text-slate-900 mt-1 line-clamp-1">
+                        {product.title}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-orange-600 transition-colors">
+                <div className="p-7">
+                  <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
                     {product.title}
                   </h3>
-                  <p className="text-slate-600 mb-4 leading-relaxed line-clamp-2">
+                  <p className="text-slate-600 text-sm mb-5 leading-relaxed line-clamp-2">
                     {product.description}
                   </p>
 
-                  <div className="bg-gradient-to-br from-orange-50 to-red-50 border border-orange-200 rounded-xl p-4 mb-5">
-                    <div className="flex items-start space-x-2">
-                      <Sparkles className="h-4 w-4 text-orange-600 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-orange-900 font-medium leading-relaxed">{product.usp}</p>
+                  <div className="bg-gradient-to-r from-blue-50 via-cyan-50 to-blue-50 border border-blue-200 rounded-xl p-5 mb-6 shadow-sm hover:shadow-md transition-all">
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-full p-2.5 flex-shrink-0 mt-0.5 shadow-md">
+                        <Zap className="h-3.5 w-3.5 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold text-blue-900 mb-1 uppercase tracking-wide">Key Feature</p>
+                        <p className="text-sm text-slate-700 font-medium leading-relaxed">{product.usp}</p>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-3">
                     <a
                       href={createWhatsAppLink(product.title)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center space-x-2 bg-green-500 text-white px-5 py-3 rounded-xl text-sm font-semibold hover:bg-green-600 transition-all shadow-md hover:shadow-lg"
+                      className="flex items-center justify-center space-x-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-5 py-3.5 rounded-xl text-sm font-bold hover:from-green-600 hover:to-emerald-700 transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
                     >
                       <MessageCircle className="h-4 w-4" />
                       <span>Enquire Now</span>
                     </a>
                     <button
                       onClick={() => onNavigate('products')}
-                      className="flex items-center justify-center border-2 border-slate-200 text-slate-700 px-5 py-3 rounded-xl text-sm font-semibold hover:border-orange-500 hover:text-orange-600 hover:bg-orange-50 transition-all"
+                      className="flex items-center justify-center border-2 border-slate-300 text-slate-700 px-5 py-2.5 rounded-xl text-sm font-semibold hover:border-blue-600 hover:text-white hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-700 transition-all shadow-sm hover:shadow-md active:scale-95"
                     >
                       View Details
                     </button>

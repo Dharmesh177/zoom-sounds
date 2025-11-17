@@ -42,20 +42,24 @@ export default function VerifyPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <section className="bg-gradient-to-r from-slate-900 to-slate-800 text-white py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white">
+      <section className="relative bg-gradient-to-br from-blue-50 via-white to-blue-50 text-slate-900 py-20 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200/30 rounded-full filter blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100/30 rounded-full filter blur-3xl"></div>
+        </div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="flex items-center space-x-4 mb-4">
-            <Shield className="h-12 w-12 text-orange-400" />
-            <h1 className="text-4xl md:text-5xl font-bold">Verify Your Product</h1>
+            <Shield className="h-12 w-12 text-blue-600" />
+            <h1 className="text-5xl md:text-6xl font-bold">Verify Your Product</h1>
           </div>
-          <p className="text-xl text-slate-300">Confirm the authenticity of your Zoom Sounds product</p>
+          <p className="text-xl text-slate-600">Confirm the authenticity of your ZSINDIA product</p>
         </div>
       </section>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl p-8 text-white mb-12">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white mb-12">
             <h2 className="text-2xl font-bold mb-4">Why Verify?</h2>
             <ul className="space-y-3">
               <li className="flex items-start space-x-3">
@@ -96,8 +100,8 @@ export default function VerifyPage() {
                 }}
                 className={`p-5 rounded-lg border-2 transition-all ${
                   verificationMethod === 'uuid'
-                    ? 'border-orange-500 bg-orange-50'
-                    : 'border-slate-300 hover:border-orange-300'
+                    ? 'border-blue-600 bg-blue-50'
+                    : 'border-slate-300 hover:border-blue-300'
                 }`}
               >
                 <h3 className="text-lg font-semibold text-slate-900 mb-2">Enter UUID Code</h3>
@@ -134,7 +138,7 @@ export default function VerifyPage() {
                     setVerificationResult(null);
                   }}
                   placeholder="e.g., a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-                  className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all font-mono text-sm"
+                  className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none transition-all font-mono text-sm"
                 />
                 <p className="text-xs text-slate-500 mt-2">
                   The UUID code is printed on the product label and warranty card
@@ -145,7 +149,7 @@ export default function VerifyPage() {
                 <label className="block text-sm font-semibold text-slate-700 mb-2">
                   Upload Product Image
                 </label>
-                <div className="border-2 border-dashed border-slate-300 rounded-xl p-8 text-center hover:border-orange-500 transition-colors">
+                <div className="border-2 border-dashed border-slate-300 rounded-xl p-8 text-center hover:border-blue-600 transition-colors">
                   <input
                     type="file"
                     accept="image/*"
@@ -170,7 +174,7 @@ export default function VerifyPage() {
                 isVerifying ||
                 (verificationMethod === 'uuid' ? !uuid.trim() : !imageFile)
               }
-              className="w-full mt-6 bg-gradient-to-r from-orange-500 to-red-600 text-white px-6 py-3 rounded-lg text-base font-semibold hover:from-orange-600 hover:to-red-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+              className="w-full mt-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-lg text-base font-semibold hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
             >
               <Shield className="h-5 w-5" />
               <span>{isVerifying ? 'Verifying...' : 'Verify Product'}</span>
@@ -203,7 +207,7 @@ export default function VerifyPage() {
                   } leading-relaxed`}
                 >
                   {verificationResult === 'genuine'
-                    ? 'Congratulations! This is an authentic Zoom Sounds product. Your warranty and support are fully active. Thank you for choosing genuine products.'
+                    ? 'Congratulations! This is an authentic ZSINDIA product. Your warranty and support are fully active. Thank you for choosing genuine products.'
                     : 'This product could not be verified in our system. It may be counterfeit. Please contact our support team immediately with your purchase details for assistance.'}
                 </p>
                 {verificationResult === 'fake' && (
