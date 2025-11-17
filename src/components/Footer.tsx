@@ -1,17 +1,6 @@
 import { Zap, Phone, Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
 
-interface FooterProps {
-  onNavigate?: (page: string) => void;
-}
-
-export default function Footer({ onNavigate }: FooterProps) {
-  const handleNavClick = (page: string) => {
-    if (onNavigate) {
-      onNavigate(page);
-      window.scrollTo(0, 0);
-    }
-  };
-
+export default function Footer() {
   return (
     <footer className="bg-slate-900 text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -34,11 +23,11 @@ export default function Footer({ onNavigate }: FooterProps) {
           <div>
             <h4 className="text-lg font-semibold mb-4 text-blue-400">Quick Links</h4>
             <ul className="space-y-2">
-              <li><button onClick={() => handleNavClick('home')} className="text-slate-400 hover:text-blue-400 transition-colors text-sm cursor-pointer">Home</button></li>
-              <li><button onClick={() => handleNavClick('products')} className="text-slate-400 hover:text-blue-400 transition-colors text-sm cursor-pointer">Products</button></li>
-              <li><button onClick={() => handleNavClick('verify')} className="text-slate-400 hover:text-blue-400 transition-colors text-sm cursor-pointer">Verify Product</button></li>
-              <li><button onClick={() => handleNavClick('about')} className="text-slate-400 hover:text-blue-400 transition-colors text-sm cursor-pointer">About Us</button></li>
-              <li><button onClick={() => handleNavClick('contact')} className="text-slate-400 hover:text-blue-400 transition-colors text-sm cursor-pointer">Contact Us</button></li>
+              <li><a href="#" className="text-slate-400 hover:text-blue-400 transition-colors text-sm">Home</a></li>
+              <li><a href="#" className="text-slate-400 hover:text-blue-400 transition-colors text-sm">Products</a></li>
+              <li><a href="#" className="text-slate-400 hover:text-blue-400 transition-colors text-sm">Verify Product</a></li>
+              <li><a href="#" className="text-slate-400 hover:text-blue-400 transition-colors text-sm">About Us</a></li>
+              <li><a href="#" className="text-slate-400 hover:text-blue-400 transition-colors text-sm">Contact Us</a></li>
             </ul>
           </div>
 

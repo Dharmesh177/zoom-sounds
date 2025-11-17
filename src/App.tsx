@@ -33,7 +33,7 @@ function App() {
       <main className="flex-grow">
         {renderPage()}
       </main>
-      <Footer onNavigate={setCurrentPage} />
+      <Footer />
     </div>
   );
 }
