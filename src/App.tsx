@@ -10,10 +10,15 @@ import VerifyPage from './pages/VerifyPage';
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
+  const handleNavigate = (page: string) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <HomePage onNavigate={setCurrentPage} />;
+        return <HomePage onNavigate={handleNavigate} />;
       case 'products':
         return <ProductsPage />;
       case 'about':
@@ -23,17 +28,17 @@ function App() {
       case 'verify':
         return <VerifyPage />;
       default:
-        return <HomePage onNavigate={setCurrentPage} />;
+        return <HomePage onNavigate={handleNavigate} />;
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header currentPage={currentPage} onNavigate={setCurrentPage} />
+      <Header currentPage={currentPage} onNavigate={handleNavigate} />
       <main className="flex-grow">
         {renderPage()}
       </main>
-      <Footer />
+      <Footer onNavigate={handleNavigate} />
     </div>
   );
 }

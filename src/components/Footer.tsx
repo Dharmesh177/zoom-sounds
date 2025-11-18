@@ -1,6 +1,10 @@
 import { Zap, Phone, Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
 
-export default function Footer() {
+interface FooterProps {
+  onNavigate: (page: string) => void;
+}
+
+export default function Footer({ onNavigate }: FooterProps) {
   return (
     <footer className="bg-slate-900 text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -23,11 +27,11 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4 text-blue-400">Quick Links</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-slate-400 hover:text-blue-400 transition-colors text-sm">Home</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-blue-400 transition-colors text-sm">Products</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-blue-400 transition-colors text-sm">Verify Product</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-blue-400 transition-colors text-sm">About Us</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-blue-400 transition-colors text-sm">Contact Us</a></li>
+              <li><button onClick={() => onNavigate('home')} className="text-slate-400 hover:text-blue-400 transition-colors text-sm text-left">Home</button></li>
+              <li><button onClick={() => onNavigate('products')} className="text-slate-400 hover:text-blue-400 transition-colors text-sm text-left">Products</button></li>
+              <li><button onClick={() => onNavigate('verify')} className="text-slate-400 hover:text-blue-400 transition-colors text-sm text-left">Verify Product</button></li>
+              <li><button onClick={() => onNavigate('about')} className="text-slate-400 hover:text-blue-400 transition-colors text-sm text-left">About Us</button></li>
+              <li><button onClick={() => onNavigate('contact')} className="text-slate-400 hover:text-blue-400 transition-colors text-sm text-left">Contact Us</button></li>
             </ul>
           </div>
 
