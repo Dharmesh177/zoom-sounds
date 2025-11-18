@@ -61,85 +61,62 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjAyIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-40"></div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center space-x-2 bg-blue-100 rounded-full px-4 py-2 mb-4">
-              <Star className="h-4 w-4 text-blue-600 fill-blue-600" />
-              <span className="text-sm font-semibold text-blue-700">Featured Collection</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-              Premium Sound Systems
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 uppercase tracking-tight">
+              Latest Products
             </h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
               Top-rated audio equipment trusted by professionals across India
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {featuredProducts.map((product) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
+            {featuredProducts.map((product, index) => (
               <div
                 key={product.id}
-                className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all hover:-translate-y-3 border border-slate-200 hover:border-blue-300"
+                className="group relative bg-white overflow-hidden transition-all duration-500 hover:scale-[1.02]"
               >
-                <div className="relative h-80 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent"></div>
-
-                  <div className="absolute top-4 right-4">
-                    <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center space-x-1 backdrop-blur-sm">
-                      <Sparkles className="h-3 w-3 fill-white" />
-                      <span>Featured</span>
-                    </div>
+                <div className="relative h-[500px] overflow-hidden bg-gradient-to-br from-slate-50 to-white">
+                  <div className="absolute inset-0 flex items-center justify-center p-12">
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700"
+                    />
                   </div>
 
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="bg-white/95 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
-                      <p className="text-xs font-bold text-blue-600 uppercase tracking-wide">
-                        {product.category.replace(/-/g, ' ')}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-90"></div>
 
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
-                    {product.title}
-                  </h3>
-                  <p className="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3 h-16">
-                    {product.description}
-                  </p>
-
-                  <div className="bg-gradient-to-br from-blue-50 to-slate-50 border border-blue-200 rounded-lg p-4 mb-5">
-                    <div className="flex items-start space-x-3">
-                      <div className="bg-blue-600 rounded-full p-1.5 flex-shrink-0 mt-0.5">
-                        <Zap className="h-3 w-3 text-white" />
-                      </div>
+                  <div className="absolute top-0 left-0 right-0 p-6">
+                    <div className="flex items-start justify-between">
                       <div>
-                        <p className="text-xs font-bold text-blue-900 mb-1 uppercase">Key Feature</p>
-                        <p className="text-sm text-slate-700 font-medium leading-relaxed">{product.usp}</p>
+                        <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">
+                          {product.category.replace(/-/g, ' ')}
+                        </p>
+                        <div className="bg-slate-900 text-white px-3 py-1 rounded text-xs font-semibold inline-block">
+                          Featured
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-2">
-                    <a
-                      href={createWhatsAppLink(product.title)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center space-x-2 bg-gradient-to-r from-green-500 to-green-600 text-white px-5 py-3 rounded-lg text-sm font-bold hover:from-green-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg"
-                    >
-                      <MessageCircle className="h-4 w-4" />
-                      <span>Enquire Now</span>
-                    </a>
-                    <button
-                      onClick={() => onNavigate('products')}
-                      className="flex items-center justify-center border-2 border-slate-300 text-slate-700 px-5 py-2.5 rounded-lg text-sm font-semibold hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 transition-all"
-                    >
-                      View Details
-                    </button>
+                  <div className="absolute bottom-0 left-0 right-0 p-8">
+                    <div className="space-y-4">
+                      <h3 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
+                        {product.title}
+                      </h3>
+                      <p className="text-base text-slate-600 leading-relaxed line-clamp-2">
+                        {product.description}
+                      </p>
+                      <a
+                        href={createWhatsAppLink(product.title)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block bg-slate-900 text-white px-6 py-3 text-sm font-bold uppercase tracking-wider hover:bg-slate-800 transition-all"
+                      >
+                        Learn More
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
