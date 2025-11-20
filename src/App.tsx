@@ -3,15 +3,20 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
+import ProductDetailPage from './pages/ProductDetailPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import VerifyPage from './pages/VerifyPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
 
-  const handleNavigate = (page: string) => {
+  const handleNavigate = (page: string, productId?: string) => {
     setCurrentPage(page);
+    if (productId) {
+      setSelectedProductId(productId);
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -21,6 +26,12 @@ function App() {
         return <HomePage onNavigate={handleNavigate} />;
       case 'products':
         return <ProductsPage />;
+      case 'product-detail':
+        return selectedProductId ? (
+          <ProductDetailPage productId={selectedProductId} onNavigate={handleNavigate} />
+        ) : (
+          <HomePage onNavigate={handleNavigate} />
+        );
       case 'about':
         return <AboutPage />;
       case 'contact':

@@ -1,4 +1,4 @@
-import { Zap, Phone, Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
+import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (page: string) => void;
@@ -10,14 +10,12 @@ export default function Footer({ onNavigate }: FooterProps) {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="bg-gradient-to-br from-blue-600 to-blue-700 p-2 rounded-xl shadow-lg">
-                <Zap className="h-6 w-6 text-white" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold">ZSINDIA</h3>
-                <p className="text-xs text-blue-400">Premium Audio Solutions</p>
-              </div>
+            <div className="mb-4 bg-white p-3 rounded-lg inline-block">
+              <img
+                src="/zsindia-logo.png"
+                alt="ZS ACOUSTICS"
+                className="h-20 w-auto object-contain"
+              />
             </div>
             <p className="text-slate-400 text-sm leading-relaxed">
               Leading manufacturer and dealer of premium sound systems. Quality you can trust, sound you can feel.

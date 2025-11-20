@@ -6,7 +6,49 @@
     "description": "Professional DJ sound system with 9000W power output, perfect for large events and outdoor concerts.",
     "usp": "Crystal clear bass with zero distortion at maximum volume",
     "image": "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "featured": true
+    "images": [
+      "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1540406/pexels-photo-1540406.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1389429/pexels-photo-1389429.jpeg?auto=compress&cs=tinysrgb&w=800"
+    ],
+    "featured": true,
+    "topPoints": [
+      "9000W peak power output",
+      "Professional-grade components",
+      "Long-throw woofers for extended range",
+      "Built-in crossover network",
+      "Rugged steel construction"
+    ],
+    "specifications": {
+      "Power Output": "9000W Peak / 4500W RMS",
+      "Frequency Response": "35Hz - 20kHz",
+      "Impedance": "4-8 Ohms",
+      "Speaker Configuration": "Dual 15\" woofers + 2\" compression driver",
+      "Connectivity": "XLR, TRS, Speakon",
+      "Weight": "68 kg",
+      "Dimensions": "1200 x 600 x 550 mm"
+    },
+    "features": [
+      "Advanced thermal protection circuitry",
+      "Pole mount compatible for elevated positioning",
+      "Integrated handles for easy transport",
+      "Professional-grade crossover network",
+      "Weather-resistant coating for outdoor use"
+    ],
+    "idealFor": [
+      "Large outdoor concerts and festivals",
+      "Wedding receptions and celebrations",
+      "Corporate events and conferences",
+      "Professional DJ performances",
+      "Live music venues"
+    ],
+    "applications": [
+      "Outdoor Concert Venues: Delivers powerful, clear sound across large open spaces",
+      "Wedding Halls: Provides balanced audio coverage for ceremonies and receptions",
+      "Corporate Events: Ensures every announcement and presentation is heard clearly",
+      "Festival Stages: Handles multiple acts with consistent quality throughout the day"
+    ],
+    "externalLinks": []
   },
   {
     "id": "prod-002",
@@ -15,7 +57,49 @@
     "description": "Premium 7.2 channel home theater system with Dolby Atmos support for immersive cinema experience.",
     "usp": "Wireless subwoofer with smart room calibration technology",
     "image": "https://images.pexels.com/photos/1090974/pexels-photo-1090974.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "featured": true
+    "images": [
+      "https://images.pexels.com/photos/1090974/pexels-photo-1090974.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1038916/pexels-photo-1038916.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1566852/pexels-photo-1566852.jpeg?auto=compress&cs=tinysrgb&w=800"
+    ],
+    "featured": true,
+    "topPoints": [
+      "Dolby Atmos and DTS:X support",
+      "7.2 channel configuration",
+      "Wireless dual subwoofers",
+      "Auto room calibration",
+      "4K HDR passthrough"
+    ],
+    "specifications": {
+      "Channels": "7.2 Surround Sound",
+      "Power Output": "150W per channel",
+      "Frequency Response": "20Hz - 20kHz",
+      "Subwoofer": "Dual 10\" wireless subwoofers (250W each)",
+      "Connectivity": "HDMI 2.1, Optical, Bluetooth 5.0, Wi-Fi",
+      "Audio Formats": "Dolby Atmos, DTS:X, Dolby TrueHD",
+      "Dimensions": "Main unit: 435 x 180 x 330 mm"
+    },
+    "features": [
+      "Smart room calibration automatically optimizes sound",
+      "Voice control via Alexa and Google Assistant",
+      "Multi-room audio streaming",
+      "Premium cloth finish on all speakers",
+      "Low-profile satellite speakers"
+    ],
+    "idealFor": [
+      "Home cinema enthusiasts",
+      "Living rooms 200-400 sq ft",
+      "Movie marathons and gaming",
+      "Music streaming and parties",
+      "Sports viewing experiences"
+    ],
+    "applications": [
+      "Home Theater: Creates an immersive cinematic experience with precise object-based audio",
+      "Gaming Setup: Enhances spatial awareness with 3D audio positioning",
+      "Music Listening: Delivers high-fidelity stereo and multi-channel music playback",
+      "TV Enhancement: Transforms regular TV audio into rich, dynamic sound"
+    ],
+    "externalLinks": []
   },
   {
     "id": "prod-003",
@@ -24,7 +108,50 @@
     "description": "Heavy-duty industrial PA system designed for factories, warehouses, and large commercial spaces.",
     "usp": "Weather-resistant with 10-year warranty and 24/7 operation capability",
     "image": "https://images.pexels.com/photos/164938/pexels-photo-164938.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "featured": true
+    "images": [
+      "https://images.pexels.com/photos/164938/pexels-photo-164938.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1660995/pexels-photo-1660995.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/159358/construction-site-build-construction-work-159358.jpeg?auto=compress&cs=tinysrgb&w=800"
+    ],
+    "featured": true,
+    "topPoints": [
+      "IP65 weather-resistant rating",
+      "24/7 continuous operation",
+      "High-intelligibility voice reproduction",
+      "10-year warranty coverage",
+      "Corrosion-resistant materials"
+    ],
+    "specifications": {
+      "Power Output": "500W RMS",
+      "Coverage Area": "Up to 5000 sq meters",
+      "Frequency Response": "200Hz - 8kHz (voice optimized)",
+      "Impedance": "70V/100V line",
+      "Protection Rating": "IP65 (dust tight, water resistant)",
+      "Operating Temperature": "-20°C to +60°C",
+      "Material": "Stainless steel and reinforced ABS",
+      "Dimensions": "450 x 350 x 280 mm"
+    },
+    "features": [
+      "Voice-optimized frequency response for clear announcements",
+      "Failsafe backup input for emergency systems",
+      "Mounting bracket for walls and poles included",
+      "Anti-tamper screws and security features",
+      "Dual voice coil for redundancy"
+    ],
+    "idealFor": [
+      "Manufacturing facilities and factories",
+      "Warehouses and distribution centers",
+      "Construction sites",
+      "Outdoor industrial complexes",
+      "Emergency notification systems"
+    ],
+    "applications": [
+      "Factory Announcements: Ensures safety messages are heard clearly over machinery noise",
+      "Warehouse Operations: Coordinates logistics and alerts across large storage areas",
+      "Construction Sites: Provides safety alerts and coordination in noisy environments",
+      "Emergency Systems: Integrated with fire alarm and evacuation notification systems"
+    ],
+    "externalLinks": []
   },
   {
     "id": "prod-004",
@@ -33,7 +160,50 @@
     "description": "Dual 18-inch subwoofer system delivering earth-shaking bass for club and event applications.",
     "usp": "Proprietary bass reflex design for deeper, cleaner low frequencies",
     "image": "https://images.pexels.com/photos/210766/pexels-photo-210766.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "featured": false
+    "images": [
+      "https://images.pexels.com/photos/210766/pexels-photo-210766.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/744320/pexels-photo-744320.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1864642/pexels-photo-1864642.jpeg?auto=compress&cs=tinysrgb&w=800"
+    ],
+    "featured": false,
+    "topPoints": [
+      "Dual 18-inch long-excursion woofers",
+      "Proprietary bass reflex port design",
+      "5000W peak power handling",
+      "Heavy-duty plywood construction",
+      "Integrated rigging points"
+    ],
+    "specifications": {
+      "Power Handling": "5000W Peak / 2500W RMS",
+      "Frequency Response": "28Hz - 150Hz",
+      "Impedance": "4 Ohms",
+      "Sensitivity": "102 dB",
+      "Max SPL": "138 dB",
+      "Woofer": "Dual 18\" neodymium drivers",
+      "Weight": "85 kg",
+      "Dimensions": "650 x 650 x 900 mm"
+    },
+    "features": [
+      "Advanced port tuning for extended low-frequency response",
+      "Dual Speakon NL4 connectors",
+      "M20 pole mount socket",
+      "Recessed handles for easy handling",
+      "Black textured finish"
+    ],
+    "idealFor": [
+      "Nightclubs and dance venues",
+      "EDM concerts and festivals",
+      "Mobile DJ setups",
+      "Live music performances",
+      "Stadium events"
+    ],
+    "applications": [
+      "Nightclub Systems: Provides the foundation for dance music with deep, powerful bass",
+      "Festival Main Stage: Delivers consistent low-end across massive outdoor crowds",
+      "Mobile DJ Rigs: Portable yet powerful enough for any event size",
+      "Concert Reinforcement: Extends bass response of full-range systems"
+    ],
+    "externalLinks": []
   },
   {
     "id": "prod-005",
@@ -42,7 +212,50 @@
     "description": "Reference-quality studio monitors with 8-inch woofers for accurate sound reproduction.",
     "usp": "Flat frequency response from 35Hz to 22kHz",
     "image": "https://images.pexels.com/photos/257904/pexels-photo-257904.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "featured": false
+    "images": [
+      "https://images.pexels.com/photos/257904/pexels-photo-257904.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1279730/pexels-photo-1279730.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/164697/pexels-photo-164697.jpeg?auto=compress&cs=tinysrgb&w=800"
+    ],
+    "featured": false,
+    "topPoints": [
+      "Reference-flat frequency response",
+      "8-inch Kevlar woofer",
+      "1-inch silk dome tweeter",
+      "Bi-amplified design (150W total)",
+      "Room EQ compensation controls"
+    ],
+    "specifications": {
+      "Power Output": "100W LF + 50W HF bi-amp",
+      "Frequency Response": "35Hz - 22kHz (±1.5dB)",
+      "Woofer": "8\" Kevlar cone",
+      "Tweeter": "1\" silk dome",
+      "Max SPL": "115 dB",
+      "Inputs": "XLR, TRS balanced",
+      "Dimensions": "380 x 290 x 325 mm",
+      "Weight": "14 kg each"
+    },
+    "features": [
+      "Acoustic space switches for boundary compensation",
+      "High-frequency trim control",
+      "Magnetically shielded design",
+      "Isolated cabinet construction reduces resonance",
+      "Front-firing bass port"
+    ],
+    "idealFor": [
+      "Home recording studios",
+      "Music production",
+      "Audio mixing and mastering",
+      "Critical listening rooms",
+      "Audiophile music playback"
+    ],
+    "applications": [
+      "Music Production: Accurate monitoring for mixing and mastering decisions",
+      "Home Studios: Professional-grade reference for recording and editing",
+      "Hi-Fi Listening: Reveals every detail in your favorite music",
+      "Content Creation: Precise audio monitoring for podcasts and videos"
+    ],
+    "externalLinks": []
   },
   {
     "id": "prod-006",
@@ -51,7 +264,50 @@
     "description": "Space-saving 5.1 surround sound system perfect for apartments and medium-sized rooms.",
     "usp": "Wireless connectivity with Bluetooth 5.0 and WiFi streaming",
     "image": "https://images.pexels.com/photos/1279730/pexels-photo-1279730.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "featured": false
+    "images": [
+      "https://images.pexels.com/photos/1279730/pexels-photo-1279730.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1090974/pexels-photo-1090974.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1444416/pexels-photo-1444416.jpeg?auto=compress&cs=tinysrgb&w=800"
+    ],
+    "featured": false,
+    "topPoints": [
+      "Compact satellite speakers",
+      "Wireless subwoofer",
+      "Bluetooth 5.0 and Wi-Fi",
+      "HDMI ARC support",
+      "Voice assistant compatible"
+    ],
+    "specifications": {
+      "Channels": "5.1 Surround Sound",
+      "Total Power": "400W",
+      "Subwoofer": "8\" wireless (150W)",
+      "Satellite Speakers": "5 x 50W",
+      "Connectivity": "HDMI ARC, Optical, Bluetooth 5.0, Wi-Fi",
+      "Audio Formats": "Dolby Digital, DTS",
+      "Wireless Range": "30 meters",
+      "Dimensions": "Satellites: 180 x 120 x 140 mm"
+    },
+    "features": [
+      "Wall-mountable compact satellite speakers",
+      "One-remote control for all functions",
+      "Music streaming from Spotify and more",
+      "Easy setup with auto speaker detection",
+      "Energy-efficient standby mode"
+    ],
+    "idealFor": [
+      "Apartments and condos",
+      "Small to medium rooms (100-250 sq ft)",
+      "First-time home theater buyers",
+      "Bedroom entertainment systems",
+      "Budget-conscious audiophiles"
+    ],
+    "applications": [
+      "Apartment Living: Immersive sound without taking up valuable space",
+      "Bedroom Theater: Complete cinema experience in compact form",
+      "Gaming Setup: Surround sound enhances gameplay immersion",
+      "Streaming Content: Perfect for binge-watching shows and movies"
+    ],
+    "externalLinks": []
   },
   {
     "id": "prod-007",
@@ -60,7 +316,51 @@
     "description": "Professional column array speaker system for concerts, weddings, and corporate events.",
     "usp": "360-degree coverage with built-in DSP and preset modes",
     "image": "https://images.pexels.com/photos/1449791/pexels-photo-1449791.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "featured": true
+    "images": [
+      "https://images.pexels.com/photos/1449791/pexels-photo-1449791.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1047442/pexels-photo-1047442.jpeg?auto=compress&cs=tinysrgb&w=800"
+    ],
+    "featured": true,
+    "topPoints": [
+      "360-degree sound coverage",
+      "Built-in DSP with preset modes",
+      "Modular column design",
+      "Integrated subwoofer",
+      "Bluetooth streaming"
+    ],
+    "specifications": {
+      "Power Output": "2000W Peak",
+      "Coverage": "360-degree horizontal",
+      "Frequency Response": "40Hz - 18kHz",
+      "Subwoofer": "12\" integrated bass unit",
+      "Column Array": "8 x 3\" neodymium drivers",
+      "DSP Presets": "Speech, Music, DJ, Custom",
+      "Connectivity": "XLR, TRS, Bluetooth 5.0",
+      "Weight": "32 kg",
+      "Height": "1800 mm"
+    },
+    "features": [
+      "Quick-setup telescopic pole",
+      "Built-in mixer with 3 channels",
+      "LED status indicators",
+      "Wireless remote control",
+      "Rolling transport bag included"
+    ],
+    "idealFor": [
+      "Wedding ceremonies and receptions",
+      "Corporate presentations",
+      "Small to medium concerts",
+      "Mobile DJs",
+      "Outdoor gatherings"
+    ],
+    "applications": [
+      "Wedding Venues: Even coverage ensures all guests hear clearly",
+      "Corporate Events: Professional presentation audio with speech clarity",
+      "Small Concerts: Portable yet powerful for intimate performances",
+      "Outdoor Events: Weather-resistant design for garden parties and festivals"
+    ],
+    "externalLinks": []
   },
   {
     "id": "prod-008",
@@ -69,7 +369,51 @@
     "description": "High-intelligibility PA system for clear announcements in noisy industrial environments.",
     "usp": "Voice-optimized frequency response cuts through ambient noise",
     "image": "https://images.pexels.com/photos/3756774/pexels-photo-3756774.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "featured": false
+    "images": [
+      "https://images.pexels.com/photos/3756774/pexels-photo-3756774.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1267338/pexels-photo-1267338.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg?auto=compress&cs=tinysrgb&w=800"
+    ],
+    "featured": false,
+    "topPoints": [
+      "Voice-optimized frequency range",
+      "High speech intelligibility index",
+      "Wide dispersion horn",
+      "70V/100V line compatible",
+      "Indoor/outdoor rated"
+    ],
+    "specifications": {
+      "Power Handling": "300W",
+      "Coverage Pattern": "90° x 60°",
+      "Frequency Response": "300Hz - 6kHz",
+      "Sensitivity": "108 dB",
+      "Impedance": "70V/100V/8 Ohm",
+      "Protection Rating": "IP54",
+      "Material": "Polycarbonate housing",
+      "Dimensions": "380 x 280 x 250 mm",
+      "Weight": "5.5 kg"
+    },
+    "features": [
+      "High-efficiency compression driver",
+      "Multi-tap transformer for various power levels",
+      "U-bracket for flexible mounting",
+      "Grille protects components",
+      "Ceramic terminal block"
+    ],
+    "idealFor": [
+      "Warehouses and logistics centers",
+      "Manufacturing plants",
+      "Shopping malls",
+      "Transportation terminals",
+      "Large retail spaces"
+    ],
+    "applications": [
+      "Warehouse Operations: Clear paging and safety announcements across large spaces",
+      "Manufacturing Floors: Ensures critical messages heard over production noise",
+      "Retail Spaces: Customer service announcements and promotional messages",
+      "Transportation Hubs: Arrival and departure information for travelers"
+    ],
+    "externalLinks": []
   },
   {
     "id": "prod-009",
@@ -78,7 +422,50 @@
     "description": "Complete DJ package with dual speakers, subwoofers, and mixer for mobile DJs.",
     "usp": "All-in-one solution with road cases and professional cabling included",
     "image": "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "featured": false
+    "images": [
+      "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1111434/pexels-photo-1111434.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=800"
+    ],
+    "featured": false,
+    "topPoints": [
+      "Complete turnkey system",
+      "Dual 15\" tops with horns",
+      "Dual 18\" subwoofers",
+      "Professional DJ mixer included",
+      "Road cases and cables"
+    ],
+    "specifications": {
+      "Top Speakers": "2 x 15\" + 1.75\" driver (1500W each)",
+      "Subwoofers": "2 x 18\" (2500W each)",
+      "Total Power": "8000W Peak",
+      "Mixer": "4-channel DJ mixer with FX",
+      "Coverage": "90° x 50° (tops)",
+      "Frequency Response": "30Hz - 18kHz (full system)",
+      "Package Weight": "180 kg total",
+      "Includes": "4 road cases, speaker stands, cables"
+    },
+    "features": [
+      "Heavy-duty rolling road cases with wheels",
+      "Professional-grade XLR and Speakon cables",
+      "Adjustable speaker stands (up to 2m)",
+      "DJ mixer with built-in effects",
+      "System carry bag for accessories"
+    ],
+    "idealFor": [
+      "Mobile DJ businesses",
+      "Event rental companies",
+      "Wedding DJs",
+      "School dances and proms",
+      "Private parties"
+    ],
+    "applications": [
+      "Mobile DJ Services: Complete professional setup ready for any gig",
+      "Wedding Receptions: Powerful enough for large venues, refined enough for ceremonies",
+      "School Events: Easy transport and setup for dances and assemblies",
+      "Corporate Functions: Professional appearance and sound quality"
+    ],
+    "externalLinks": []
   },
   {
     "id": "prod-010",
@@ -87,7 +474,50 @@
     "description": "Premium soundbar with virtual surround technology and wireless subwoofer.",
     "usp": "Ultra-slim design with HDMI eARC and 4K passthrough",
     "image": "https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "featured": false
+    "images": [
+      "https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1647962/pexels-photo-1647962.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/2251206/pexels-photo-2251206.jpeg?auto=compress&cs=tinysrgb&w=800"
+    ],
+    "featured": false,
+    "topPoints": [
+      "Ultra-slim 35mm profile",
+      "Virtual 3D surround sound",
+      "Wireless 8\" subwoofer",
+      "HDMI 2.1 eARC",
+      "4K HDR passthrough"
+    ],
+    "specifications": {
+      "Total Power": "320W",
+      "Soundbar": "220W (6 drivers + 2 tweeters)",
+      "Subwoofer": "100W wireless 8\"",
+      "Virtual Surround": "DTS Virtual:X",
+      "HDMI": "eARC, 4K@120Hz, HDR10+",
+      "Connectivity": "HDMI x2, Optical, Bluetooth 5.0, Wi-Fi",
+      "Soundbar Dimensions": "1100 x 65 x 35 mm",
+      "Weight": "3.2 kg (soundbar), 6.8 kg (subwoofer)"
+    },
+    "features": [
+      "Voice enhancement mode for clear dialogue",
+      "Night mode reduces bass for late viewing",
+      "Wall-mountable with included bracket",
+      "Multi-room audio with app control",
+      "Adaptive audio adjusts to content type"
+    ],
+    "idealFor": [
+      "TV upgrade seekers",
+      "Minimalist living spaces",
+      "Apartment dwellers",
+      "Late-night movie watchers",
+      "Streamers and gamers"
+    ],
+    "applications": [
+      "TV Enhancement: Transform built-in TV speakers into cinema-quality audio",
+      "Gaming: Immersive 3D audio positioning without cluttering your space",
+      "Streaming: Optimized sound for Netflix, Prime, and other services",
+      "Music: High-quality stereo and wireless streaming from your devices"
+    ],
+    "externalLinks": []
   },
   {
     "id": "prod-011",
@@ -96,7 +526,51 @@
     "description": "Emergency notification system with horn speakers and backup battery power.",
     "usp": "IP67 rated with temperature range from -40°C to +70°C",
     "image": "https://images.pexels.com/photos/256219/pexels-photo-256219.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "featured": false
+    "images": [
+      "https://images.pexels.com/photos/256219/pexels-photo-256219.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/221047/pexels-photo-221047.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/257851/pexels-photo-257851.jpeg?auto=compress&cs=tinysrgb&w=800"
+    ],
+    "featured": false,
+    "topPoints": [
+      "IP67 weatherproof rating",
+      "Extreme temperature operation",
+      "Backup battery system",
+      "140 dB emergency alert",
+      "Fire alarm integration"
+    ],
+    "specifications": {
+      "Max Output": "140 dB @ 1 meter",
+      "Power": "100W continuous",
+      "Protection Rating": "IP67 (submersion resistant)",
+      "Operating Temp": "-40°C to +70°C",
+      "Backup Battery": "24V, 72 hours standby",
+      "Horn Material": "Aluminum with powder coating",
+      "Mounting": "Wall, pole, or surface mount",
+      "Dimensions": "400 x 350 x 300 mm",
+      "Weight": "12 kg"
+    },
+    "features": [
+      "Dual-tone emergency alert capability",
+      "Self-monitoring for fault detection",
+      "Tamper-resistant enclosure",
+      "LED status indicator",
+      "Supervised inputs for fire alarm integration"
+    ],
+    "idealFor": [
+      "Industrial facilities",
+      "Chemical plants",
+      "Oil and gas installations",
+      "Mining operations",
+      "Emergency evacuation systems"
+    ],
+    "applications": [
+      "Emergency Evacuation: Life-safety alerts that can be heard across entire facilities",
+      "Fire Alarm Systems: Integrated audio warnings synchronized with visual alarms",
+      "Chemical Plant Safety: Alert workers to hazardous situations immediately",
+      "Mining Operations: Underground and surface notification in harsh conditions"
+    ],
+    "externalLinks": []
   },
   {
     "id": "prod-012",
@@ -105,6 +579,51 @@
     "description": "Battery-powered portable PA system for outdoor events and street performances.",
     "usp": "12-hour battery life with solar panel charging option",
     "image": "https://images.pexels.com/photos/63703/pexels-photo-63703.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "featured": false
+    "images": [
+      "https://images.pexels.com/photos/63703/pexels-photo-63703.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/167491/pexels-photo-167491.jpeg?auto=compress&cs=tinysrgb&w=800"
+    ],
+    "featured": false,
+    "topPoints": [
+      "12-hour rechargeable battery",
+      "Solar panel charging capable",
+      "2000W peak power",
+      "Built-in mixer and Bluetooth",
+      "Telescopic handle and wheels"
+    ],
+    "specifications": {
+      "Power Output": "2000W Peak / 1000W RMS",
+      "Battery Life": "12 hours @ moderate volume",
+      "Charge Time": "4 hours (AC), 8 hours (solar)",
+      "Speaker": "15\" woofer + 1\" compression driver",
+      "Mixer": "4-channel with EQ and reverb",
+      "Wireless": "Bluetooth 5.0, wireless mic ready",
+      "Weight": "28 kg",
+      "Dimensions": "520 x 380 x 680 mm"
+    },
+    "features": [
+      "Lithium-ion battery with smart charging",
+      "Solar panel input for eco-friendly charging",
+      "USB charging port for devices",
+      "LED battery level indicator",
+      "Telescopic handle and rugged wheels",
+      "Microphone and guitar inputs with volume controls"
+    ],
+    "idealFor": [
+      "Street performers and buskers",
+      "Outdoor fitness classes",
+      "Beach parties and picnics",
+      "Camping and outdoor adventures",
+      "Emergency backup PA"
+    ],
+    "applications": [
+      "Street Performance: Truly portable system for musicians on the go",
+      "Fitness Instruction: Take classes outdoors without power restrictions",
+      "Beach Events: Battery power means no generator needed",
+      "Protests and Rallies: Mobile sound for speeches and chants",
+      "Emergency Response: Backup communication when power is unavailable"
+    ],
+    "externalLinks": []
   }
 ]
