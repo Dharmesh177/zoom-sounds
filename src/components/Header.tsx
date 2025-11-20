@@ -1,4 +1,4 @@
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Volume2, Waves } from 'lucide-react';
 import { useState } from 'react';
 
 interface HeaderProps {
@@ -18,18 +18,35 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   ];
 
   return (
-    <header className="bg-white text-slate-900 sticky top-0 z-50 shadow-md border-b border-slate-200">
+    <header className="bg-white/95 backdrop-blur-md text-slate-900 sticky top-0 z-50 shadow-lg border-b border-slate-200/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <button
             onClick={() => onNavigate('home')}
-            className="flex items-center hover:opacity-90 transition-opacity group py-2"
+            className="flex items-center space-x-3 hover:opacity-90 transition-all group"
           >
-            <img
-              src="/zsindia-logo.png"
-              alt="ZS ACOUSTICS"
-              className="w-auto object-contain transition-opacity h-12 md:h-16"
-            />
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl blur-md opacity-40 group-hover:opacity-60 transition-opacity"></div>
+              <div className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-cyan-600 p-2.5 md:p-3 rounded-2xl shadow-xl group-hover:shadow-2xl transition-all">
+                <div className="relative">
+                  <Volume2 className="h-6 w-6 md:h-7 md:w-7 text-white" />
+                  <Waves className="absolute -bottom-0.5 -right-0.5 h-3 w-3 text-cyan-300 opacity-70" />
+                </div>
+              </div>
+            </div>
+            <div className="text-left">
+              <div className="text-xl md:text-2xl font-black tracking-tight leading-none">
+                <span className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
+                  ZS
+                </span>
+                <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-700 bg-clip-text text-transparent">
+                  ACOUSTICS
+                </span>
+              </div>
+              <div className="text-[8px] md:text-[9px] text-slate-500 font-bold tracking-[0.25em] mt-0.5 uppercase">
+                Sound Engineering
+              </div>
+            </div>
           </button>
 
           <nav className="hidden md:flex items-center space-x-1">

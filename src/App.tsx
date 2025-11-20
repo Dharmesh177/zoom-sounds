@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Preloader from './components/Preloader';
+import ScrollToTop from './components/ScrollToTop';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
@@ -11,6 +13,13 @@ import VerifyPage from './pages/VerifyPage';
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
 
   const handleNavigate = (page: string, productId?: string) => {
     setCurrentPage(page);
@@ -25,7 +34,7 @@ function App() {
       case 'home':
         return <HomePage onNavigate={handleNavigate} />;
       case 'products':
-        return <ProductsPage />;
+        return <ProductsPage onNavigate={handleNavigate} />;
       case 'product-detail':
         return selectedProductId ? (
           <ProductDetailPage productId={selectedProductId} onNavigate={handleNavigate} />
@@ -43,6 +52,10 @@ function App() {
     }
   };
 
+  if (isLoading) {
+    return <Preloader />;
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header currentPage={currentPage} onNavigate={handleNavigate} />
@@ -50,6 +63,7 @@ function App() {
         {renderPage()}
       </main>
       <Footer onNavigate={handleNavigate} />
+      <ScrollToTop />
     </div>
   );
 }

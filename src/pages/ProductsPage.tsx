@@ -1,8 +1,12 @@
 import { useState, useMemo } from 'react';
-import { MessageCircle, Star, Package, Zap, ChevronLeft, ChevronRight, Search, Grid3x3, List } from 'lucide-react';
+import { MessageCircle, Star, Package, Zap, ChevronLeft, ChevronRight, Search, Grid3x3, List, ArrowRight } from 'lucide-react';
 import productsData from '../data/products.json';
 
-export default function ProductsPage() {
+interface ProductsPageProps {
+  onNavigate: (page: string, productId?: string) => void;
+}
+
+export default function ProductsPage({ onNavigate }: ProductsPageProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -218,15 +222,23 @@ export default function ProductsPage() {
                         </div>
                       </div>
 
-                      <a
-                        href={createWhatsAppLink(product.title)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center space-x-2 bg-gradient-to-r from-green-500 to-green-600 text-white px-5 py-3 rounded-xl text-sm font-bold hover:from-green-600 hover:to-green-700 transition-colors shadow-md hover:shadow-lg w-full"
-                      >
-                        <MessageCircle className="h-4 w-4" />
-                        <span>Enquire on WhatsApp</span>
-                      </a>
+                      <div className="flex gap-3">
+                        <button
+                          onClick={() => onNavigate('product-detail', product.id)}
+                          className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-4 py-3 rounded-xl text-sm font-bold hover:shadow-xl transition-all"
+                        >
+                          <span>Learn More</span>
+                          <ArrowRight className="h-4 w-4" />
+                        </button>
+                        <a
+                          href={createWhatsAppLink(product.title)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center space-x-2 bg-gradient-to-r from-green-500 to-green-600 text-white px-5 py-3 rounded-xl text-sm font-bold hover:from-green-600 hover:to-green-700 transition-colors shadow-md hover:shadow-lg"
+                        >
+                          <MessageCircle className="h-4 w-4" />
+                        </a>
+                      </div>
                     </div>
                   </div>
                 ) : (
@@ -278,15 +290,23 @@ export default function ProductsPage() {
                         </div>
                       </div>
 
-                      <a
-                        href={createWhatsAppLink(product.title)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center space-x-2 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-xl text-sm font-bold hover:from-green-600 hover:to-green-700 transition-colors shadow-md hover:shadow-lg md:w-auto"
-                      >
-                        <MessageCircle className="h-4 w-4" />
-                        <span>Enquire on WhatsApp</span>
-                      </a>
+                      <div className="flex gap-3">
+                        <button
+                          onClick={() => onNavigate('product-detail', product.id)}
+                          className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-3 rounded-xl text-sm font-bold hover:shadow-xl transition-all"
+                        >
+                          <span>Learn More</span>
+                          <ArrowRight className="h-4 w-4" />
+                        </button>
+                        <a
+                          href={createWhatsAppLink(product.title)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center space-x-2 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-xl text-sm font-bold hover:from-green-600 hover:to-green-700 transition-colors shadow-md hover:shadow-lg"
+                        >
+                          <MessageCircle className="h-4 w-4" />
+                        </a>
+                      </div>
                     </div>
                   </div>
                 )
