@@ -11,22 +11,45 @@ export default function ContactPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   const phoneNumber = '919876543210';
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitSuccess(false);
+    setSubmitError(false);
 
-    setTimeout(() => {
+    try {
+      const response = await fetch('http://localhost:3000/api/v1/query', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          type: formData.subject,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitSuccess(true);
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+        setTimeout(() => {
+          setSubmitSuccess(false);
+        }, 5000);
+      } else {
+        setSubmitError(true);
+      }
+    } catch (error) {
+      setSubmitError(true);
+    } finally {
       setIsSubmitting(false);
-      setSubmitSuccess(true);
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-
-      setTimeout(() => {
-        setSubmitSuccess(false);
-      }, 5000);
-    }, 1500);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -115,6 +138,22 @@ export default function ContactPage() {
               </div>
             )}
 
+            {submitError && (
+              <div className="bg-gradient-to-br from-red-50 to-red-50 border-2 border-red-500 rounded-xl p-6 mb-8">
+                <div className="flex items-center space-x-3">
+                  <div className="bg-red-600 rounded-full p-2">
+                    <svg className="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-bold text-red-900">Failed to Send Message</p>
+                    <p className="text-sm text-red-800">Please try again or contact us directly.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-bold text-slate-900 uppercase tracking-wide mb-2">
@@ -179,11 +218,11 @@ export default function ContactPage() {
                   className="w-full px-5 py-4 rounded-xl border-2 border-slate-300 focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition-all"
                 >
                   <option value="">Select a subject</option>
-                  <option value="product-inquiry">Product Inquiry</option>
+                  <option value="product_inquiry">Product Inquiry</option>
                   <option value="quotation">Request Quotation</option>
-                  <option value="technical-support">Technical Support</option>
-                  <option value="installation">Installation Services</option>
-                  <option value="warranty">Warranty & Service</option>
+                  <option value="technical_support">Technical Support</option>
+                  <option value="installation_service">Installation Services</option>
+                  <option value="warranty_service">Warranty & Service</option>
                   <option value="partnership">Business Partnership</option>
                   <option value="feedback">Feedback</option>
                   <option value="other">Other</option>
