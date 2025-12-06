@@ -55,10 +55,10 @@ export default function Footer({ onNavigate }: FooterProps) {
             <h4 className="text-lg font-semibold mb-4 text-blue-400">Follow Us</h4>
             <p className="text-slate-400 text-sm mb-4">Stay connected for latest updates and offers</p>
             <div className="flex space-x-3">
-              <a href="#" className="bg-slate-800 p-2.5 rounded-lg hover:bg-blue-600 transition-colors">
+              <a href="https://www.facebook.com/people/zoom_sound_/100064127614433/" className="bg-slate-800 p-2.5 rounded-lg hover:bg-blue-600 transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="bg-slate-800 p-2.5 rounded-lg hover:bg-blue-600 transition-colors">
+              <a href="https://www.instagram.com/zoom_sound_/?hl=en" className="bg-slate-800 p-2.5 rounded-lg hover:bg-blue-600 transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
               <a href="#" className="bg-slate-800 p-2.5 rounded-lg hover:bg-blue-600 transition-colors">
