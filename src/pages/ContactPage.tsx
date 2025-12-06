@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Headphones } from 'lucide-react';
+import { QUERY_TYPES, QUERY_TYPE_LABELS } from '../constants/CommonConstants'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -13,7 +14,8 @@ export default function ContactPage() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState(false);
 
-  const phoneNumber = '919876543210';
+  const phoneNumber = '916354495770';
+  const apiBaseUrl = import.meta.env.VITE_PUBLIC_API_URL;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,7 +24,7 @@ export default function ContactPage() {
     setSubmitError(false);
 
     try {
-      const response = await fetch('http://localhost:3000/api/v1/query', {
+      const response = await fetch(`${apiBaseUrl}/query`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -85,19 +87,19 @@ export default function ContactPage() {
             {
               icon: MapPin,
               title: 'Visit Our Showroom',
-              details: ['Ring Road, Near City Mall', 'Surat, Gujarat 395002', 'India'],
+              details: ['B-4, Vrundavan Shopping Centre,', 'near gitanjali petrol pump', 'Surat, Gujarat, India'],
               color: 'from-blue-600 to-blue-700',
             },
             {
               icon: Phone,
               title: 'Call or Text Us',
-              details: ['Sales: +91 98765 43210', 'Support: +91 98765 43211', 'WhatsApp Available'],
+              details: ['Sales: +91 63544 95770', 'Support: +91 63544 95770', 'WhatsApp Available'],
               color: 'from-cyan-600 to-cyan-700',
             },
             {
               icon: Clock,
               title: 'Business Hours',
-              details: ['Monday - Saturday', '10:00 AM - 8:00 PM', 'Sunday: Closed'],
+              details: ['Monday - Saturday', '9:00 AM - 9:00 PM', 'Sunday: 9:00 AM - 1:00 PM'],
               color: 'from-teal-600 to-teal-700',
             },
           ].map((info, idx) => (
@@ -218,14 +220,11 @@ export default function ContactPage() {
                   className="w-full px-5 py-4 rounded-xl border-2 border-slate-300 focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition-all"
                 >
                   <option value="">Select a subject</option>
-                  <option value="product_inquiry">Product Inquiry</option>
-                  <option value="quotation">Request Quotation</option>
-                  <option value="technical_support">Technical Support</option>
-                  <option value="installation_service">Installation Services</option>
-                  <option value="warranty_service">Warranty & Service</option>
-                  <option value="partnership">Business Partnership</option>
-                  <option value="feedback">Feedback</option>
-                  <option value="other">Other</option>
+                  {QUERY_TYPES.map((type) => (
+                    <option key={type} value={type}>
+                      {QUERY_TYPE_LABELS[type]}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -311,14 +310,14 @@ export default function ContactPage() {
                     className="flex items-center justify-center space-x-3 bg-white/10 border-2 border-white/30 text-white px-6 py-4 rounded-xl font-bold hover:bg-white/20 transition-all"
                   >
                     <Phone className="h-5 w-5" />
-                    <span>Call: +91 98765 43210</span>
+                    <span>Call: +91 63544 95770</span>
                   </a>
                   <a
-                    href="mailto:info@zsindia.com"
+                    href="mailto:zsindia.pro@gmail.com"
                     className="flex items-center justify-center space-x-3 bg-white/10 border-2 border-white/30 text-white px-6 py-4 rounded-xl font-bold hover:bg-white/20 transition-all"
                   >
                     <Mail className="h-5 w-5" />
-                    <span>info@zsindia.com</span>
+                    <span>zsindia.pro@gmail.com</span>
                   </a>
                 </div>
               </div>

@@ -11,7 +11,7 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
   const product = productsData.find(p => p.id === productId);
   const [selectedImage, setSelectedImage] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const phoneNumber = '919876543210';
+  const phoneNumber = '6354495770';
 
   useEffect(() => {
     if (!product?.images || product.images.length <= 1 || !isAutoPlaying) return;
