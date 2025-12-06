@@ -202,7 +202,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     className="w-full px-5 py-4 rounded-xl border-2 border-slate-300 focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition-all"
-                    placeholder="+91 98765 43210"
+                    placeholder="+91 63544 95770"
                   />
                 </div>
               </div>

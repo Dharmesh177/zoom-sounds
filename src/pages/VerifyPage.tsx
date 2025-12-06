@@ -296,7 +296,7 @@ export default function VerifyPage() {
                     <ul className="text-sm text-red-800 space-y-2">
                       <li className="flex items-start space-x-2">
                         <span className="text-red-600 font-bold">•</span>
-                        <span>Contact our support team at +91 98765 43210</span>
+                        <span>Contact our support team at +91 63544 95770</span>
                       </li>
                       <li className="flex items-start space-x-2">
                         <span className="text-red-600 font-bold">•</span>

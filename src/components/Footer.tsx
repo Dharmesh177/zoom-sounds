@@ -42,11 +42,11 @@ export default function Footer({ onNavigate }: FooterProps) {
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-blue-400 flex-shrink-0" />
-                <span className="text-slate-400 text-sm">+91 98765 43210</span>
+                <span className="text-slate-400 text-sm">+91 63544 95770</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-blue-400 flex-shrink-0" />
-                <span className="text-slate-400 text-sm">info@zsindia.com</span>
+                <span className="text-slate-400 text-sm">zsindia.pro@gmail.com</span>
               </li>
             </ul>
           </div>
