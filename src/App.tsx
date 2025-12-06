@@ -9,13 +9,23 @@ import ProductDetailPage from './pages/ProductDetailPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import VerifyPage from './pages/VerifyPage';
+import ProductVerificationPage from './pages/ProductVerificationPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
+  const [serialNumber, setSerialNumber] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const path = window.location.pathname;
+    const verifyMatch = path.match(/\/verify\/([A-Z0-9-]+)/i);
+
+    if (verifyMatch && verifyMatch[1]) {
+      setSerialNumber(verifyMatch[1]);
+      setCurrentPage('product-verification');
+    }
+
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
@@ -47,6 +57,12 @@ function App() {
         return <ContactPage />;
       case 'verify':
         return <VerifyPage />;
+      case 'product-verification':
+        return serialNumber ? (
+          <ProductVerificationPage serialNumber={serialNumber} />
+        ) : (
+          <VerifyPage />
+        );
       default:
         return <HomePage onNavigate={handleNavigate} />;
     }

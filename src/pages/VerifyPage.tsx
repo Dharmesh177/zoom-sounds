@@ -1,32 +1,117 @@
 import { useState } from 'react';
 import { Upload, CheckCircle, XCircle, Shield, Sparkles, AlertCircle } from 'lucide-react';
+import { api, Product, SerialNumber } from '../services/api';
+import ProductVerificationPage from './ProductVerificationPage';
+import jsQR from 'jsqr';
 
 export default function VerifyPage() {
   const [verificationMethod, setVerificationMethod] = useState<'uuid' | 'image'>('uuid');
   const [uuid, setUuid] = useState('');
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [verificationResult, setVerificationResult] = useState<'genuine' | 'fake' | null>(null);
+  const [verificationResult, setVerificationResult] = useState<'verified' | 'failed' | null>(null);
   const [isVerifying, setIsVerifying] = useState(false);
+  const [verifiedSerialNumber, setVerifiedSerialNumber] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const genuineUUIDs = [
-    'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-    'b2c3d4e5-f6a7-8901-bcde-f12345678901',
-    'c3d4e5f6-a7b8-9012-cdef-123456789012',
-  ];
+  const decodeQRFromImage = async (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          if (!ctx) {
+            reject(new Error('Failed to get canvas context'));
+            return;
+          }
 
-  const handleVerify = () => {
-    setIsVerifying(true);
-    setTimeout(() => {
-      if (verificationMethod === 'uuid') {
-        const isGenuine = genuineUUIDs.includes(uuid.toLowerCase().trim());
-        setVerificationResult(isGenuine ? 'genuine' : 'fake');
-      } else {
-        const isGenuine = Math.random() > 0.3;
-        setVerificationResult(isGenuine ? 'genuine' : 'fake');
-      }
-      setIsVerifying(false);
-    }, 1500);
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+          if (code && code.data) {
+            resolve(code.data);
+          } else {
+            reject(new Error('No QR code found in image'));
+          }
+        };
+        img.onerror = () => reject(new Error('Failed to load image'));
+        img.src = e.target?.result as string;
+      };
+      reader.onerror = () => reject(new Error('Failed to read file'));
+      reader.readAsDataURL(file);
+    });
   };
+
+  const extractSerialFromUrl = (url: string): string | null => {
+    const match = url.match(/\/verify\/([A-Z0-9-]+)/i);
+    return match ? match[1] : null;
+  };
+
+  const handleVerify = async () => {
+    setIsVerifying(true);
+    setVerificationResult(null);
+    setErrorMessage('');
+
+    try {
+      let serialNumberToVerify = '';
+
+      if (verificationMethod === 'uuid') {
+        serialNumberToVerify = uuid.trim();
+      } else if (imageFile) {
+        try {
+          const qrData = await decodeQRFromImage(imageFile);
+          const extractedSerial = extractSerialFromUrl(qrData);
+
+          if (!extractedSerial) {
+            setVerificationResult('failed');
+            setErrorMessage('Could not extract serial number from QR code. Please ensure the QR code contains a valid verification URL.');
+            setIsVerifying(false);
+            return;
+          }
+
+          serialNumberToVerify = extractedSerial;
+        } catch (error) {
+          console.error('QR decode error:', error);
+          setVerificationResult('failed');
+          setErrorMessage('Failed to decode QR code. Please ensure the image is clear and contains a valid QR code.');
+          setIsVerifying(false);
+          return;
+        }
+      }
+
+      if (!serialNumberToVerify) {
+        setVerificationResult('failed');
+        setErrorMessage('No serial number provided');
+        setIsVerifying(false);
+        return;
+      }
+
+      const result = await api.verifySerialNumber(serialNumberToVerify);
+
+      if (result.valid && result.product) {
+        setVerificationResult('verified');
+        setVerifiedSerialNumber(serialNumberToVerify);
+      } else {
+        setVerificationResult('failed');
+        setErrorMessage(result.message || 'Invalid or deactivated serial number');
+      }
+    } catch (error) {
+      console.error('Verification error:', error);
+      setVerificationResult('failed');
+      setErrorMessage('Verification failed. Please check your connection and try again.');
+    } finally {
+      setIsVerifying(false);
+    }
+  };
+
+  if (verificationResult === 'verified' && verifiedSerialNumber) {
+    return <ProductVerificationPage serialNumber={verifiedSerialNumber} />;
+  }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -248,98 +333,66 @@ export default function VerifyPage() {
               )}
             </button>
 
-            {verificationResult && (
-              <div
-                className={`mt-10 p-8 rounded-2xl border-2 ${
-                  verificationResult === 'genuine'
-                    ? 'bg-gradient-to-br from-green-50 to-emerald-50 border-green-500'
-                    : 'bg-gradient-to-br from-red-50 to-rose-50 border-red-500'
-                }`}
-              >
+            {verificationResult === 'failed' && (
+              <div className="mt-10 p-8 rounded-2xl border-2 bg-gradient-to-br from-red-50 to-rose-50 border-red-500">
                 <div className="flex items-center space-x-4 mb-4">
-                  {verificationResult === 'genuine' ? (
-                    <>
-                      <div className="bg-green-600 rounded-full p-3">
-                        <CheckCircle className="h-8 w-8 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-bold text-green-900">Verified Genuine Product</h3>
-                        <p className="text-green-700 font-medium">Your product is 100% authentic</p>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="bg-red-600 rounded-full p-3">
-                        <XCircle className="h-8 w-8 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-bold text-red-900">Verification Failed</h3>
-                        <p className="text-red-700 font-medium">Warning: Potential counterfeit product</p>
-                      </div>
-                    </>
-                  )}
-                </div>
-                <p
-                  className={`text-base leading-relaxed mb-6 ${
-                    verificationResult === 'genuine' ? 'text-green-800' : 'text-red-800'
-                  }`}
-                >
-                  {verificationResult === 'genuine'
-                    ? 'Congratulations! This is an authentic ZSINDIA product. Your warranty and after-sales support are fully active. Thank you for choosing genuine products and supporting quality manufacturing.'
-                    : 'This product could not be verified in our authentication system. It may be counterfeit or the verification code may be invalid. For your safety and to ensure warranty coverage, please contact our support team immediately.'}
-                </p>
-                {verificationResult === 'fake' && (
-                  <div className="bg-red-100 border border-red-300 rounded-xl p-6">
-                    <p className="text-sm font-bold text-red-900 mb-3 uppercase tracking-wide">
-                      Immediate Actions Required:
-                    </p>
-                    <ul className="text-sm text-red-800 space-y-2">
-                      <li className="flex items-start space-x-2">
-                        <span className="text-red-600 font-bold">•</span>
-                        <span>Contact our support team at +91 63544 95770</span>
-                      </li>
-                      <li className="flex items-start space-x-2">
-                        <span className="text-red-600 font-bold">•</span>
-                        <span>Provide your purchase receipt and seller details</span>
-                      </li>
-                      <li className="flex items-start space-x-2">
-                        <span className="text-red-600 font-bold">•</span>
-                        <span>Do not use the product as it may be unsafe or perform poorly</span>
-                      </li>
-                      <li className="flex items-start space-x-2">
-                        <span className="text-red-600 font-bold">•</span>
-                        <span>Report the seller to help us combat counterfeit products</span>
-                      </li>
-                    </ul>
+                  <div className="bg-red-600 rounded-full p-3">
+                    <XCircle className="h-8 w-8 text-white" />
                   </div>
-                )}
+                  <div>
+                    <h3 className="text-2xl font-bold text-red-900">Verification Failed</h3>
+                    <p className="text-red-700 font-medium">Warning: Potential counterfeit product</p>
+                  </div>
+                </div>
+                <p className="text-base leading-relaxed mb-6 text-red-800">
+                  {errorMessage || 'This product could not be verified in our authentication system. It may be counterfeit or the serial number may be invalid. For your safety and to ensure warranty coverage, please contact our support team immediately.'}
+                </p>
+                <div className="bg-red-100 border border-red-300 rounded-xl p-6">
+                  <p className="text-sm font-bold text-red-900 mb-3 uppercase tracking-wide">
+                    Immediate Actions Required:
+                  </p>
+                  <ul className="text-sm text-red-800 space-y-2">
+                    <li className="flex items-start space-x-2">
+                      <span className="text-red-600 font-bold">•</span>
+                      <span>Contact our support team at +91 63544 95770</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <span className="text-red-600 font-bold">•</span>
+                      <span>Provide your purchase receipt and seller details</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <span className="text-red-600 font-bold">•</span>
+                      <span>Do not use the product as it may be unsafe or perform poorly</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <span className="text-red-600 font-bold">•</span>
+                      <span>Report the seller to help us combat counterfeit products</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             )}
           </div>
 
           <div className="mt-12 bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 border border-slate-200 shadow-md">
-            <h3 className="text-xl font-bold text-slate-900 mb-4">Sample UUID Codes for Testing</h3>
-            <p className="text-sm text-slate-600 mb-6">
-              Use these sample UUID codes to test the verification system and see how it works:
+            <h3 className="text-xl font-bold text-slate-900 mb-4">Need Help?</h3>
+            <p className="text-sm text-slate-600 mb-4">
+              If you're having trouble finding your product's serial number or verification code:
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {genuineUUIDs.map((id, idx) => (
-                <div
-                  key={id}
-                  className="bg-white rounded-lg p-4 border border-slate-300 hover:border-blue-400 hover:shadow-md transition-all group cursor-pointer"
-                  onClick={() => {
-                    setUuid(id);
-                    setVerificationMethod('uuid');
-                    setVerificationResult(null);
-                  }}
-                >
-                  <p className="text-xs font-bold text-slate-500 mb-2 uppercase tracking-wide">
-                    Sample {idx + 1}
-                  </p>
-                  <p className="font-mono text-xs text-slate-700 break-all">{id}</p>
-                </div>
-              ))}
-            </div>
+            <ul className="text-sm text-slate-700 space-y-2">
+              <li className="flex items-start space-x-2">
+                <span className="text-blue-600 font-bold">•</span>
+                <span>Check the product label on the device or packaging</span>
+              </li>
+              <li className="flex items-start space-x-2">
+                <span className="text-blue-600 font-bold">•</span>
+                <span>Look for the warranty card that came with your product</span>
+              </li>
+              <li className="flex items-start space-x-2">
+                <span className="text-blue-600 font-bold">•</span>
+                <span>Contact our support team at +91 63544 95770 for assistance</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
