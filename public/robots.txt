@@ -1,4 +1,4 @@
-# robots.txt for ZSINDIA Sound Engineering
+# robots.txt for Zoom Sounds | ZS India | ZSAcoustics
 User-agent: *
 Allow: /
 
@@ -10,3 +10,6 @@ Sitemap: https://www.zsindia.com/sitemap.xml
 
 # Crawl-delay (optional, helps prevent server overload)
 Crawl-delay: 1
+
+# Additional metadata for search engines
+# Host: www.zsindia.com

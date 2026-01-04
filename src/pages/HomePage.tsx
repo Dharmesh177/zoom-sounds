@@ -302,6 +302,65 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
+
+      {/* SEO Content Section - Hidden but indexed */}
+      <section className="py-12 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+          <div className="prose prose-slate max-w-none">
+            <h2 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-4">
+              Zoom Sounds - Premier Sound Systems Manufacturer in Surat, Gujarat
+            </h2>
+            <p className="text-slate-700 mb-4">
+              <strong>Zoom Sounds</strong> (also known as <strong>ZS India</strong>, <strong>ZSAcoustics</strong>, and <strong>ZS Acoustics</strong>) is a leading sound systems manufacturer and supplier based in <strong>Varachha, Surat, Gujarat</strong>. With over 20 years of excellence in the audio industry, we are proud to be recognized as one of the top sound manufacturers in Surat and across Gujarat.
+            </p>
+            
+            <h3 className="text-xl lg:text-2xl font-bold text-slate-900 mb-3 mt-6">
+              Why Choose ZoomSound for Your Audio Needs?
+            </h3>
+            <p className="text-slate-700 mb-4">
+              As a trusted <strong>sound manufacturer in Surat</strong>, <strong>zsacoustics</strong> specializes in manufacturing and supplying premium audio equipment for homes, businesses, and professional venues. Whether you're searching for "zoom sounds," "zoomsound," or "sounds manufacture surat," you've come to the right place. Our state-of-the-art facility in Varachha, Surat produces world-class DJ systems, home theater solutions, and professional sound equipment.
+            </p>
+
+            <h3 className="text-xl lg:text-2xl font-bold text-slate-900 mb-3 mt-6">
+              Sound Manufacturing Excellence in Gujarat
+            </h3>
+            <p className="text-slate-700 mb-4">
+              Located in the heart of <strong>Surat, Gujarat</strong>, specifically on <strong>Varachha Road</strong>, ZS India serves customers across the region looking for premium sound systems. Our manufacturing facility ensures that every product meets the highest quality standards. When you search for "sound manufacturer Gujarat," "sounds manufacture by Surat," or "audio manufacturer Varachha," ZoomSound stands as the premier choice.
+            </p>
+
+            <h3 className="text-xl lg:text-2xl font-bold text-slate-900 mb-3 mt-6">
+              Our Product Range
+            </h3>
+            <ul className="list-disc pl-6 text-slate-700 mb-4 space-y-2">
+              <li><strong>Professional DJ Systems:</strong> Industry-leading sound systems for events and entertainment</li>
+              <li><strong>Home Theater Solutions:</strong> Immersive audio experiences for your home</li>
+              <li><strong>Commercial Audio Equipment:</strong> Sound systems for retail, hospitality, and corporate spaces</li>
+              <li><strong>Industrial Sound Solutions:</strong> Heavy-duty audio systems for factories and warehouses</li>
+              <li><strong>Custom Audio Installations:</strong> Tailored sound solutions for unique requirements</li>
+            </ul>
+
+            <h3 className="text-xl lg:text-2xl font-bold text-slate-900 mb-3 mt-6">
+              Serving Surat, Varachha, and All of Gujarat
+            </h3>
+            <p className="text-slate-700 mb-4">
+              Our showroom and manufacturing unit at <strong>B-4, Vrundavan Shopping Centre, Varachha Road, Surat</strong> welcomes customers from across Gujarat. Whether you're from Surat, Navsari, Bardoli, Valsad, Ahmedabad, or Vadodara, ZSAcoustics is your trusted partner for all audio needs. Visit us or call to experience why we're the preferred sound manufacturer in the region.
+            </p>
+
+            <h3 className="text-xl lg:text-2xl font-bold text-slate-900 mb-3 mt-6">
+              Contact Zoom Sounds Today
+            </h3>
+            <p className="text-slate-700 mb-4">
+              Looking for the best <strong>sound systems manufacturer in Surat</strong>? Search no more! ZS India (ZoomSound, ZSAcoustics) is here to serve you with premium quality, competitive pricing, and exceptional customer service. Contact us today to discuss your audio requirements.
+            </p>
+            
+            <div className="bg-slate-50 border-l-4 border-blue-600 p-4 mt-6">
+              <p className="text-slate-700 font-semibold">
+                📍 Location: Varachha Road, Surat, Gujarat | 📞 Phone: +91-9876543210 | ⏰ Hours: Mon-Sat, 10 AM - 8 PM
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
