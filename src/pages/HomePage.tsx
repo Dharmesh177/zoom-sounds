@@ -304,7 +304,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       {/* SEO Content Section - Hidden but indexed */}
-      <section className="py-12 bg-white">
+      <section className="sr-only" aria-hidden="true">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="prose prose-slate max-w-none">
             <h2 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-4">
