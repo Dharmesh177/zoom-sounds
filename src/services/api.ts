@@ -39,11 +39,49 @@ export interface SerialNumber {
   lastVerifiedAt?: string;
 }
 
+export interface Warranty {
+  startDate: string;
+  endDate: string;
+  durationDays: number;
+  status: string;
+}
+
+export interface Customer {
+  name: string;
+  email: string;
+  phone: string;
+}
+
 export interface VerificationResponse {
   valid: boolean;
   product?: Product;
   serialData?: SerialNumber;
+  warranty?: Warranty;
+  warrantyClaimed?: boolean;
+  customer?: Customer;
   message?: string;
+}
+
+export interface WarrantyClaimRequest {
+  name: string;
+  email: string;
+  phone: string;
+  serialNumber: string;
+  firebaseIdToken: string;
+}
+
+export interface WarrantyClaimResponse {
+  status: string;
+  message: string;
+  data?: {
+    customer: Customer;
+    warranty: Warranty;
+    product: {
+      name: string;
+      category: string;
+    };
+    serialNumber: string;
+  };
 }
 
 export const api = {
@@ -70,6 +108,29 @@ export const api = {
       return data;
     } catch (error) {
       console.error('Verification error:', error);
+      throw error;
+    }
+  },
+
+  async claimWarranty(claimData: WarrantyClaimRequest): Promise<WarrantyClaimResponse> {
+    try {
+      const response = await fetch(`${API_URL}/serial-numbers/warranty/claim/verify`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(claimData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || 'Failed to claim warranty');
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Warranty claim error:', error);
       throw error;
     }
   },

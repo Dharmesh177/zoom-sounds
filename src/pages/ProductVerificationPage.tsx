@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { CheckCircle2, XCircle, AlertTriangle, Shield, Package } from 'lucide-react';
-import { api, Product, SerialNumber } from '../services/api';
+import { CheckCircle2, XCircle, AlertTriangle, Shield, Package, Clock, Award } from 'lucide-react';
+import { api, Product, SerialNumber, Warranty, Customer } from '../services/api';
+import WarrantyClaimForm from '../components/WarrantyClaimForm';
 
 interface ProductVerificationPageProps {
   serialNumber: string;
@@ -9,9 +10,13 @@ interface ProductVerificationPageProps {
 export default function ProductVerificationPage({ serialNumber }: ProductVerificationPageProps) {
   const [product, setProduct] = useState<Product | null>(null);
   const [serialData, setSerialData] = useState<SerialNumber | null>(null);
+  const [warranty, setWarranty] = useState<Warranty | null>(null);
+  const [warrantyClaimed, setWarrantyClaimed] = useState(false);
+  const [customer, setCustomer] = useState<Customer | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [showClaimForm, setShowClaimForm] = useState(false);
 
   useEffect(() => {
     const verifyProduct = async () => {
@@ -21,6 +26,9 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
         if (result.valid && result.product) {
           setProduct(result.product);
           setSerialData(result.serialData || null);
+          setWarranty(result.warranty || null);
+          setWarrantyClaimed(result.warrantyClaimed || false);
+          setCustomer(result.customer || null);
         } else {
           setError(true);
           setErrorMessage(result.message || 'Invalid or deactivated serial number');
@@ -36,6 +44,49 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
 
     verifyProduct();
   }, [serialNumber]);
+
+  const handleWarrantyClaimSuccess = async () => {
+    setShowClaimForm(false);
+    setLoading(true);
+    try {
+      const result = await api.verifySerialNumber(serialNumber);
+      if (result.valid && result.product) {
+        setProduct(result.product);
+        setSerialData(result.serialData || null);
+        setWarranty(result.warranty || null);
+        setWarrantyClaimed(result.warrantyClaimed || false);
+        setCustomer(result.customer || null);
+      }
+    } catch (error) {
+      console.error('Failed to refresh warranty data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const calculateRemainingTime = (endDate: string): string => {
+    const end = new Date(endDate);
+    const now = new Date();
+    const diffTime = end.getTime() - now.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays < 0) {
+      return 'Warranty expired';
+    } else if (diffDays === 0) {
+      return 'Expires today';
+    } else if (diffDays === 1) {
+      return '1 day remaining';
+    } else if (diffDays < 30) {
+      return `${diffDays} days remaining`;
+    } else if (diffDays < 365) {
+      const months = Math.floor(diffDays / 30);
+      return `${months} ${months === 1 ? 'month' : 'months'} remaining`;
+    } else {
+      const years = Math.floor(diffDays / 365);
+      const months = Math.floor((diffDays % 365) / 30);
+      return `${years} ${years === 1 ? 'year' : 'years'}${months > 0 ? `, ${months} ${months === 1 ? 'month' : 'months'}` : ''} remaining`;
+    }
+  };
 
   if (loading) {
     return (
@@ -152,29 +203,107 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white shadow-xl">
-          <div className="flex items-start gap-4">
-            <div className="bg-white/20 rounded-full p-3 flex-shrink-0">
-              <CheckCircle2 className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold mb-3">Warranty Activated Successfully</h2>
-              <p className="text-blue-100 leading-relaxed mb-4">
-                Your product warranty has been automatically activated. You are now eligible for
-                full after-sales support and service coverage as per the warranty terms.
-              </p>
-              <div className="bg-white/10 rounded-lg p-4">
-                <p className="text-sm font-semibold text-white mb-2">Your Benefits Include:</p>
-                <ul className="space-y-1 text-sm text-blue-100">
-                  <li>• Manufacturer warranty coverage</li>
-                  <li>• Priority customer support</li>
-                  <li>• Genuine spare parts guarantee</li>
-                  <li>• Free service consultations</li>
-                </ul>
+{showClaimForm ? (
+          <WarrantyClaimForm
+            serialNumber={serialNumber}
+            onSuccess={handleWarrantyClaimSuccess}
+            onCancel={() => setShowClaimForm(false)}
+          />
+        ) : warrantyClaimed && warranty ? (
+          <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-8 text-white shadow-xl">
+            <div className="flex items-start gap-4">
+              <div className="bg-white/20 rounded-full p-3 flex-shrink-0">
+                <Award className="h-6 w-6 text-white" />
+              </div>
+              <div className="flex-1">
+                <h2 className="text-2xl font-bold mb-3">Warranty Active</h2>
+                <p className="text-green-100 leading-relaxed mb-4">
+                  Your product warranty is registered and active. You are eligible for full after-sales support and service coverage.
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div className="bg-white/10 rounded-lg p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Clock className="h-5 w-5 text-white" />
+                      <p className="text-sm font-semibold text-white">Time Remaining</p>
+                    </div>
+                    <p className="text-lg font-bold text-white">{calculateRemainingTime(warranty.endDate)}</p>
+                  </div>
+
+                  <div className="bg-white/10 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-white mb-2">Warranty Status</p>
+                    <p className="text-lg font-bold text-white capitalize">{warranty.status}</p>
+                  </div>
+                </div>
+
+                <div className="bg-white/10 rounded-lg p-4 mb-4">
+                  <p className="text-sm font-semibold text-white mb-3">Warranty Period</p>
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <p className="text-green-200">Start Date</p>
+                      <p className="font-semibold text-white">{new Date(warranty.startDate).toLocaleDateString()}</p>
+                    </div>
+                    <div>
+                      <p className="text-green-200">End Date</p>
+                      <p className="font-semibold text-white">{new Date(warranty.endDate).toLocaleDateString()}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {customer && (
+                  <div className="bg-white/10 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-white mb-2">Registered Customer</p>
+                    <div className="space-y-1 text-sm text-green-100">
+                      <p><span className="font-semibold">Name:</span> {customer.name}</p>
+                      <p><span className="font-semibold">Email:</span> {customer.email}</p>
+                      <p><span className="font-semibold">Phone:</span> {customer.phone}</p>
+                    </div>
+                  </div>
+                )}
+
+                <div className="bg-white/10 rounded-lg p-4 mt-4">
+                  <p className="text-sm font-semibold text-white mb-2">Your Benefits Include:</p>
+                  <ul className="space-y-1 text-sm text-green-100">
+                    <li>• Manufacturer warranty coverage</li>
+                    <li>• Priority customer support</li>
+                    <li>• Genuine spare parts guarantee</li>
+                    <li>• Free service consultations</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white shadow-xl">
+            <div className="flex items-start gap-4">
+              <div className="bg-white/20 rounded-full p-3 flex-shrink-0">
+                <Shield className="h-6 w-6 text-white" />
+              </div>
+              <div className="flex-1">
+                <h2 className="text-2xl font-bold mb-3">Claim Your Warranty</h2>
+                <p className="text-blue-100 leading-relaxed mb-4">
+                  This product is eligible for warranty coverage. Claim your warranty now to activate full after-sales support and service coverage.
+                </p>
+                <div className="bg-white/10 rounded-lg p-4 mb-4">
+                  <p className="text-sm font-semibold text-white mb-2">Benefits of Claiming Warranty:</p>
+                  <ul className="space-y-1 text-sm text-blue-100">
+                    <li>• Manufacturer warranty coverage</li>
+                    <li>• Priority customer support</li>
+                    <li>• Genuine spare parts guarantee</li>
+                    <li>• Free service consultations</li>
+                  </ul>
+                </div>
+                <button
+                  onClick={() => setShowClaimForm(true)}
+                  className="bg-white text-blue-700 px-8 py-3 rounded-xl font-bold hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl flex items-center gap-2"
+                >
+                  <Award className="h-5 w-5" />
+                  <span>Claim Warranty Now</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="flex items-center gap-3 mb-6">

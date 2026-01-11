@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Upload, CheckCircle, XCircle, Shield, Sparkles, AlertCircle } from 'lucide-react';
-import { api, Product, SerialNumber } from '../services/api';
+import { api } from '../services/api';
 import ProductVerificationPage from './ProductVerificationPage';
 import jsQR from 'jsqr';
 
 export default function VerifyPage() {
-  const [verificationMethod, setVerificationMethod] = useState<'uuid' | 'image'>('uuid');
-  const [uuid, setUuid] = useState('');
+  const [verificationMethod, setVerificationMethod] = useState<'serial' | 'image'>('serial');
+  const [serialNumber, setSerialNumber] = useState('');
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [verificationResult, setVerificationResult] = useState<'verified' | 'failed' | null>(null);
   const [isVerifying, setIsVerifying] = useState(false);
@@ -60,8 +60,8 @@ export default function VerifyPage() {
     try {
       let serialNumberToVerify = '';
 
-      if (verificationMethod === 'uuid') {
-        serialNumberToVerify = uuid.trim();
+      if (verificationMethod === 'serial') {
+        serialNumberToVerify = serialNumber.trim();
       } else if (imageFile) {
         try {
           const qrData = await decodeQRFromImage(imageFile);
@@ -121,7 +121,7 @@ export default function VerifyPage() {
   };
 
   const handleReset = () => {
-    setUuid('');
+    setSerialNumber('');
     setImageFile(null);
     setVerificationResult(null);
   };
@@ -210,27 +210,27 @@ export default function VerifyPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
               <button
                 onClick={() => {
-                  setVerificationMethod('uuid');
+                  setVerificationMethod('serial');
                   handleReset();
                 }}
                 className={`group p-8 rounded-xl border-2 transition-all ${
-                  verificationMethod === 'uuid'
+                  verificationMethod === 'serial'
                     ? 'border-blue-600 bg-blue-50 shadow-lg scale-105'
                     : 'border-slate-300 hover:border-blue-400 hover:shadow-md'
                 }`}
               >
                 <div className={`inline-flex p-3 rounded-xl mb-4 transition-colors ${
-                  verificationMethod === 'uuid'
+                  verificationMethod === 'serial'
                     ? 'bg-blue-600'
                     : 'bg-slate-200 group-hover:bg-blue-100'
                 }`}>
                   <Shield className={`h-6 w-6 ${
-                    verificationMethod === 'uuid' ? 'text-white' : 'text-slate-600 group-hover:text-blue-600'
+                    verificationMethod === 'serial' ? 'text-white' : 'text-slate-600 group-hover:text-blue-600'
                   }`} />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">UUID Code</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Serial Number</h3>
                 <p className="text-sm text-slate-600">
-                  Enter the unique identification code found on your product label
+                  Enter the serial number found on your product label
                 </p>
               </button>
 
@@ -261,25 +261,25 @@ export default function VerifyPage() {
               </button>
             </div>
 
-            {verificationMethod === 'uuid' ? (
+            {verificationMethod === 'serial' ? (
               <div className="space-y-4">
-                <label htmlFor="uuid" className="block text-sm font-bold text-slate-900 uppercase tracking-wide mb-2">
-                  Product UUID Code
+                <label htmlFor="serialNumber" className="block text-sm font-bold text-slate-900 uppercase tracking-wide mb-2">
+                  Product Serial Number
                 </label>
                 <input
                   type="text"
-                  id="uuid"
-                  value={uuid}
+                  id="serialNumber"
+                  value={serialNumber}
                   onChange={(e) => {
-                    setUuid(e.target.value);
+                    setSerialNumber(e.target.value);
                     setVerificationResult(null);
                   }}
-                  placeholder="e.g., a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                  placeholder="e.g., ZS-123456"
                   className="w-full px-5 py-4 rounded-xl border-2 border-slate-300 focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition-all font-mono text-base"
                 />
                 <p className="text-sm text-slate-600 flex items-start space-x-2">
                   <AlertCircle className="h-4 w-4 flex-shrink-0 mt-0.5" />
-                  <span>Find the UUID code on your product label, warranty card, or packaging</span>
+                  <span>Find the serial number on your product label, warranty card, or packaging</span>
                 </p>
               </div>
             ) : (
@@ -316,7 +316,7 @@ export default function VerifyPage() {
               onClick={handleVerify}
               disabled={
                 isVerifying ||
-                (verificationMethod === 'uuid' ? !uuid.trim() : !imageFile)
+                (verificationMethod === 'serial' ? !serialNumber.trim() : !imageFile)
               }
               className="w-full mt-8 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-5 rounded-xl text-lg font-bold hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3 hover:scale-105"
             >

@@ -304,7 +304,7 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
             </section>
           )}
 
-          {product.externalLinks && product.externalLinks.length > 0 && (
+          {product.externalLinks && Array.isArray(product.externalLinks) && product.externalLinks.length > 0 && (
             <section className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm">
               <div className="flex items-center space-x-3 mb-5">
                 <div className="bg-blue-600 rounded-lg p-2">
@@ -313,7 +313,7 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
                 <h2 className="text-2xl font-bold text-slate-900">Related Resources</h2>
               </div>
               <div className="space-y-2">
-                {product.externalLinks.map((link, idx) => (
+                {product.externalLinks.map((link: any, idx: number) => (
                   <a
                     key={idx}
                     href={link.url}
