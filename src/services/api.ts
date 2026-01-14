@@ -37,6 +37,8 @@ export interface SerialNumber {
   isActive: boolean;
   verifiedCount: number;
   lastVerifiedAt?: string;
+  claimedWarranty?: boolean;
+  claimedAt?: string;
 }
 
 export interface Warranty {
@@ -50,6 +52,7 @@ export interface Customer {
   name: string;
   email: string;
   phone: string;
+  claimedAt?: string;
 }
 
 export interface VerificationResponse {
@@ -58,6 +61,14 @@ export interface VerificationResponse {
   serialData?: SerialNumber;
   warranty?: Warranty;
   warrantyClaimed?: boolean;
+  claimed?: boolean;
+  claimedWarranty?: boolean;
+  warrantyStatus?: string;
+  warrantyExpireTime?: string;
+  daysRemaining?: number;
+  hoursRemaining?: number;
+  isExpired?: boolean;
+  customerInfo?: Customer;
   customer?: Customer;
   message?: string;
 }
@@ -124,7 +135,7 @@ export const api = {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || 'Failed to claim warranty');
+        throw new Error(errorData.error || errorData.message || 'Failed to claim warranty');
       }
 
       const data = await response.json();

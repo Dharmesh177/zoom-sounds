@@ -11,7 +11,8 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
   const [product, setProduct] = useState<Product | null>(null);
   const [serialData, setSerialData] = useState<SerialNumber | null>(null);
   const [warranty, setWarranty] = useState<Warranty | null>(null);
-  const [warrantyClaimed, setWarrantyClaimed] = useState(false);
+  const [claimedWarranty, setClaimedWarranty] = useState(false);
+  const [warrantyStatus, setWarrantyStatus] = useState<string>('');
   const [customer, setCustomer] = useState<Customer | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -27,8 +28,9 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
           setProduct(result.product);
           setSerialData(result.serialData || null);
           setWarranty(result.warranty || null);
-          setWarrantyClaimed(result.warrantyClaimed || false);
-          setCustomer(result.customer || null);
+          setClaimedWarranty(result.claimedWarranty || result.claimed || result.serialData?.claimedWarranty || false);
+          setWarrantyStatus(result.warrantyStatus || result.warranty?.status || '');
+          setCustomer(result.customerInfo || result.customer || null);
         } else {
           setError(true);
           setErrorMessage(result.message || 'Invalid or deactivated serial number');
@@ -54,8 +56,9 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
         setProduct(result.product);
         setSerialData(result.serialData || null);
         setWarranty(result.warranty || null);
-        setWarrantyClaimed(result.warrantyClaimed || false);
-        setCustomer(result.customer || null);
+        setClaimedWarranty(result.claimedWarranty || result.claimed || result.serialData?.claimedWarranty || false);
+        setWarrantyStatus(result.warrantyStatus || result.warranty?.status || '');
+        setCustomer(result.customerInfo || result.customer || null);
       }
     } catch (error) {
       console.error('Failed to refresh warranty data:', error);
@@ -209,7 +212,7 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
             onSuccess={handleWarrantyClaimSuccess}
             onCancel={() => setShowClaimForm(false)}
           />
-        ) : warrantyClaimed && warranty ? (
+        ) : claimedWarranty && warrantyStatus === 'active' && warranty ? (
           <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-8 text-white shadow-xl">
             <div className="flex items-start gap-4">
               <div className="bg-white/20 rounded-full p-3 flex-shrink-0">
