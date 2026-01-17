@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CheckCircle2, XCircle, AlertTriangle, Shield, Package, Clock, Award } from 'lucide-react';
-import { api, Product, SerialNumber, Warranty, Customer } from '../services/api';
+import { api, Product, SerialNumber, Warranty, Customer, CustomerInfo } from '../services/api';
 import WarrantyClaimForm from '../components/WarrantyClaimForm';
 
 interface ProductVerificationPageProps {
@@ -13,7 +13,12 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
   const [warranty, setWarranty] = useState<Warranty | null>(null);
   const [claimedWarranty, setClaimedWarranty] = useState(false);
   const [warrantyStatus, setWarrantyStatus] = useState<string>('');
+  const [warrantyExpireTime, setWarrantyExpireTime] = useState<string>('');
+  const [daysRemaining, setDaysRemaining] = useState<number | undefined>(undefined);
+  const [hoursRemaining, setHoursRemaining] = useState<number | undefined>(undefined);
+  const [isExpired, setIsExpired] = useState(false);
   const [customer, setCustomer] = useState<Customer | null>(null);
+  const [customerInfo, setCustomerInfo] = useState<CustomerInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -28,9 +33,21 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
           setProduct(result.product);
           setSerialData(result.serialData || null);
           setWarranty(result.warranty || null);
-          setClaimedWarranty(result.claimedWarranty || result.claimed || result.serialData?.claimedWarranty || false);
-          setWarrantyStatus(result.warrantyStatus || result.warranty?.status || '');
-          setCustomer(result.customerInfo || result.customer || null);
+
+          const isClaimed = result.claimedWarranty ||
+                           result.claimed ||
+                           result.warrantyClaimed ||
+                           result.serialData?.claimedWarranty ||
+                           false;
+
+          setClaimedWarranty(isClaimed);
+          setWarrantyStatus(result.warrantyStatus || '');
+          setWarrantyExpireTime(result.warrantyExpireTime || '');
+          setDaysRemaining(result.daysRemaining);
+          setHoursRemaining(result.hoursRemaining);
+          setIsExpired(result.isExpired || false);
+          setCustomer(result.customer || null);
+          setCustomerInfo(result.customerInfo || null);
         } else {
           setError(true);
           setErrorMessage(result.message || 'Invalid or deactivated serial number');
@@ -56,9 +73,21 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
         setProduct(result.product);
         setSerialData(result.serialData || null);
         setWarranty(result.warranty || null);
-        setClaimedWarranty(result.claimedWarranty || result.claimed || result.serialData?.claimedWarranty || false);
-        setWarrantyStatus(result.warrantyStatus || result.warranty?.status || '');
-        setCustomer(result.customerInfo || result.customer || null);
+
+        const isClaimed = result.claimedWarranty ||
+                         result.claimed ||
+                         result.warrantyClaimed ||
+                         result.serialData?.claimedWarranty ||
+                         false;
+
+        setClaimedWarranty(isClaimed);
+        setWarrantyStatus(result.warrantyStatus || '');
+        setWarrantyExpireTime(result.warrantyExpireTime || '');
+        setDaysRemaining(result.daysRemaining);
+        setHoursRemaining(result.hoursRemaining);
+        setIsExpired(result.isExpired || false);
+        setCustomer(result.customer || null);
+        setCustomerInfo(result.customerInfo || null);
       }
     } catch (error) {
       console.error('Failed to refresh warranty data:', error);
@@ -67,28 +96,52 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
     }
   };
 
-  const calculateRemainingTime = (endDate: string): string => {
-    const end = new Date(endDate);
-    const now = new Date();
-    const diffTime = end.getTime() - now.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    if (diffDays < 0) {
+  const getRemainingTimeDisplay = (): string => {
+    if (isExpired) {
       return 'Warranty expired';
-    } else if (diffDays === 0) {
-      return 'Expires today';
-    } else if (diffDays === 1) {
-      return '1 day remaining';
-    } else if (diffDays < 30) {
-      return `${diffDays} days remaining`;
-    } else if (diffDays < 365) {
-      const months = Math.floor(diffDays / 30);
-      return `${months} ${months === 1 ? 'month' : 'months'} remaining`;
-    } else {
-      const years = Math.floor(diffDays / 365);
-      const months = Math.floor((diffDays % 365) / 30);
-      return `${years} ${years === 1 ? 'year' : 'years'}${months > 0 ? `, ${months} ${months === 1 ? 'month' : 'months'}` : ''} remaining`;
     }
+
+    if (daysRemaining !== undefined) {
+      if (daysRemaining === 0 && hoursRemaining !== undefined) {
+        if (hoursRemaining === 0) {
+          return 'Expires today';
+        } else if (hoursRemaining === 1) {
+          return '1 hour remaining';
+        } else {
+          return `${hoursRemaining} hours remaining`;
+        }
+      } else if (daysRemaining === 1) {
+        return '1 day remaining';
+      } else if (daysRemaining < 30) {
+        return `${daysRemaining} days remaining`;
+      } else if (daysRemaining < 365) {
+        const months = Math.floor(daysRemaining / 30);
+        return `${months} ${months === 1 ? 'month' : 'months'} remaining`;
+      } else {
+        const years = Math.floor(daysRemaining / 365);
+        const months = Math.floor((daysRemaining % 365) / 30);
+        return `${years} ${years === 1 ? 'year' : 'years'}${months > 0 ? `, ${months} ${months === 1 ? 'month' : 'months'}` : ''} remaining`;
+      }
+    }
+
+    if (warrantyExpireTime) {
+      const end = new Date(warrantyExpireTime);
+      const now = new Date();
+      const diffTime = end.getTime() - now.getTime();
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      if (diffDays < 0) {
+        return 'Warranty expired';
+      } else if (diffDays === 0) {
+        return 'Expires today';
+      } else if (diffDays === 1) {
+        return '1 day remaining';
+      } else {
+        return `${diffDays} days remaining`;
+      }
+    }
+
+    return 'N/A';
   };
 
   if (loading) {
@@ -212,7 +265,7 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
             onSuccess={handleWarrantyClaimSuccess}
             onCancel={() => setShowClaimForm(false)}
           />
-        ) : claimedWarranty && warrantyStatus === 'active' && warranty ? (
+        ) : claimedWarranty && warrantyStatus === 'active' ? (
           <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-8 text-white shadow-xl">
             <div className="flex items-start gap-4">
               <div className="bg-white/20 rounded-full p-3 flex-shrink-0">
@@ -230,36 +283,38 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
                       <Clock className="h-5 w-5 text-white" />
                       <p className="text-sm font-semibold text-white">Time Remaining</p>
                     </div>
-                    <p className="text-lg font-bold text-white">{calculateRemainingTime(warranty.endDate)}</p>
+                    <p className="text-lg font-bold text-white">{getRemainingTimeDisplay()}</p>
                   </div>
 
                   <div className="bg-white/10 rounded-lg p-4">
                     <p className="text-sm font-semibold text-white mb-2">Warranty Status</p>
-                    <p className="text-lg font-bold text-white capitalize">{warranty.status}</p>
+                    <p className="text-lg font-bold text-white capitalize">{warrantyStatus}</p>
                   </div>
                 </div>
 
-                <div className="bg-white/10 rounded-lg p-4 mb-4">
-                  <p className="text-sm font-semibold text-white mb-3">Warranty Period</p>
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <p className="text-green-200">Start Date</p>
-                      <p className="font-semibold text-white">{new Date(warranty.startDate).toLocaleDateString()}</p>
-                    </div>
-                    <div>
-                      <p className="text-green-200">End Date</p>
-                      <p className="font-semibold text-white">{new Date(warranty.endDate).toLocaleDateString()}</p>
+                {warranty && (
+                  <div className="bg-white/10 rounded-lg p-4 mb-4">
+                    <p className="text-sm font-semibold text-white mb-3">Warranty Period</p>
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <p className="text-green-200">Start Date</p>
+                        <p className="font-semibold text-white">{new Date(warranty.startDate).toLocaleDateString()}</p>
+                      </div>
+                      <div>
+                        <p className="text-green-200">End Date</p>
+                        <p className="font-semibold text-white">{new Date(warranty.endDate).toLocaleDateString()}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
 
-                {customer && (
+                {(customer || customerInfo) && (
                   <div className="bg-white/10 rounded-lg p-4">
                     <p className="text-sm font-semibold text-white mb-2">Registered Customer</p>
                     <div className="space-y-1 text-sm text-green-100">
-                      <p><span className="font-semibold">Name:</span> {customer.name}</p>
-                      <p><span className="font-semibold">Email:</span> {customer.email}</p>
-                      <p><span className="font-semibold">Phone:</span> {customer.phone}</p>
+                      <p><span className="font-semibold">Name:</span> {customer?.name || customerInfo?.name}</p>
+                      <p><span className="font-semibold">Email:</span> {customer?.email || customerInfo?.email}</p>
+                      <p><span className="font-semibold">Phone:</span> {customer?.phone || customerInfo?.phone}</p>
                     </div>
                   </div>
                 )}

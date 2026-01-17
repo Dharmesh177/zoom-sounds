@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || 'https://api.zsindia.com/api/v1';
 
 export interface ProductSpecifications {
   powerOutput?: string;
@@ -55,6 +55,13 @@ export interface Customer {
   claimedAt?: string;
 }
 
+export interface CustomerInfo {
+  name: string;
+  email: string;
+  phone: string;
+  claimedAt?: string;
+}
+
 export interface VerificationResponse {
   valid: boolean;
   product?: Product;
@@ -68,8 +75,8 @@ export interface VerificationResponse {
   daysRemaining?: number;
   hoursRemaining?: number;
   isExpired?: boolean;
-  customerInfo?: Customer;
   customer?: Customer;
+  customerInfo?: CustomerInfo;
   message?: string;
 }
 
@@ -125,7 +132,7 @@ export const api = {
 
   async claimWarranty(claimData: WarrantyClaimRequest): Promise<WarrantyClaimResponse> {
     try {
-      const response = await fetch(`${API_URL}/serial-numbers/warranty/claim/verify`, {
+      const response = await fetch(`${API_URL}/warranty/claim/verify`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -135,7 +142,7 @@ export const api = {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || errorData.message || 'Failed to claim warranty');
+        throw new Error(errorData.message || 'Failed to claim warranty');
       }
 
       const data = await response.json();

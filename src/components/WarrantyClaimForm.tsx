@@ -112,8 +112,8 @@ export default function WarrantyClaimForm({ serialNumber, onSuccess, onCancel }:
         onSuccess();
       }, 3000);
     } catch (error: any) {
-      console.error('Warranty claim error:', error);
-      setError(error.message || 'Failed to claim warranty. Please try again.');
+      console.error('Verify OTP error:', error);
+      setError(error.message || 'Invalid OTP. Please try again.');
     } finally {
       setLoading(false);
     }
