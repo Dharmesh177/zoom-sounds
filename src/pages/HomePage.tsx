@@ -111,7 +111,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       <section className="lg:hidden relative text-white overflow-hidden min-h-screen flex flex-col">
         {/* Background Image - Adjusted to show the starry/galaxy background better */}
         <div
-          className="absolute inset-0 bg-cover bg-[center_-180px]"
+          className="absolute inset-0 bg-cover bg-[center_-210px]"
           style={{ backgroundImage: "url(/design/mobile_bg.png)" }}
         ></div>
 
@@ -139,7 +139,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             </p>
 
             {/* Hero Image - The Amplifiers */}
-            <div className="py-8 -mx-6">
+            <div className="py-4 -mx-6">
               <img
                 src="/design/amplifier_stack.png"
                 alt=""
@@ -148,6 +148,14 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             </div>
 
             <div className="py-8 -mx-6">
+              <img
+                src="/design/amplifier_stack.png"
+                alt=""
+                className="w-full h-auto object-contain scale-110"
+              />
+            </div>
+
+            <div className="py-4 -mx-6">
               <img
                 src="/design/amplifier_stack.png"
                 alt=""
