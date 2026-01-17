@@ -49,6 +49,18 @@ cd zoom-sounds
 npm install
 ```
 
+3. Configure environment variables
+Create/edit `.env` file with:
+```env
+VITE_API_URL=https://api.zsindia.com/api/v1
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+```
+
 See `WARRANTY_SETUP.md` for detailed Firebase setup instructions.
 
 4. Run development server

@@ -64,7 +64,7 @@ export default function ProductWidget({
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <button
               onClick={() => onLearnMore(product.slug)}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 group/btn"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 hover:-translate-y-0.5 active:scale-95 group/btn"
             >
               Learn More
               <ArrowRight className="w-5 h-5 transition-transform group-hover/btn:translate-x-1" />
@@ -72,9 +72,9 @@ export default function ProductWidget({
 
             <button
               onClick={handleInquiry}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-blue-600 rounded-xl font-semibold border-2 border-blue-200 hover:border-blue-600 hover:bg-blue-50 transition-all duration-300 shadow hover:shadow-lg group/btn"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-blue-600 rounded-xl font-semibold border-2 border-blue-200 hover:border-blue-600 hover:bg-blue-50 transition-all duration-300 shadow hover:shadow-lg hover:scale-105 hover:-translate-y-0.5 active:scale-95 group/btn"
             >
-              <MessageCircle className="w-5 h-5" />
+              <MessageCircle className="w-5 h-5 group-hover/btn:rotate-12 transition-transform" />
               Inquiry
             </button>
           </div>

@@ -18,9 +18,9 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   ];
 
   return (
-    <header className="bg-white/95 backdrop-blur-md text-slate-900 sticky top-0 z-50 shadow-lg border-b border-slate-200/50">
+    <header className="bg-white/95 backdrop-blur-md text-slate-900 sticky top-0 z-50 shadow-sm border-b border-slate-200/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between h-20">
           <button
             onClick={() => onNavigate('home')}
             className="flex items-center space-x-3 hover:opacity-90 transition-all group"
