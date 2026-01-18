@@ -8,12 +8,12 @@ import {
   Sparkles,
   MessageSquare,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import testimonialsData from "../data/testimonials.json";
 import TopProducts from "../components/TopProducts";
-import { dummyProducts } from "../data/products";
 import { Product } from "../types/product";
 import TestimonialForm from "../components/TestimonialForm";
+import { api } from "../services/api";
 
 interface HomePageProps {
   onNavigate: (page: string, productId?: string) => void;
@@ -22,14 +22,36 @@ interface HomePageProps {
 export default function HomePage({ onNavigate }: HomePageProps) {
   const phoneNumber = "919876543210";
   const [showTestimonialForm, setShowTestimonialForm] = useState(false);
+  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
+  const [productsError, setProductsError] = useState<string | null>(null);
 
-  const handleLearnMore = (slug: string) => {
-    onNavigate("product-detail", slug);
+  useEffect(() => {
+    const fetchFeaturedProducts = async () => {
+      try {
+        setIsLoadingProducts(true);
+        setProductsError(null);
+        const response = await api.getFeaturedProducts();
+        setFeaturedProducts(response.product);
+      } catch (error) {
+        console.error("Failed to fetch featured products:", error);
+        setProductsError("Failed to load featured products");
+      } finally {
+        setIsLoadingProducts(false);
+      }
+    };
+
+    fetchFeaturedProducts();
+  }, []);
+
+  const handleLearnMore = (productId: string) => {
+    onNavigate("product-detail", productId);
   };
 
   const handleInquiry = (product: Product) => {
+    const productName = product.name || product.title || "this product";
     const message = encodeURIComponent(
-      `Hi, I'm interested in learning more about ${product.title}`
+      `Hi, I'm interested in learning more about ${productName}`
     );
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
   };
@@ -204,11 +226,30 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       {/* Top Products Section */}
-      <TopProducts
-        products={dummyProducts}
-        onLearnMore={handleLearnMore}
-        onInquiry={handleInquiry}
-      />
+      {isLoadingProducts ? (
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+              <p className="mt-4 text-slate-600">Loading featured products...</p>
+            </div>
+          </div>
+        </section>
+      ) : productsError ? (
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center text-red-600">
+              <p>{productsError}</p>
+            </div>
+          </div>
+        </section>
+      ) : featuredProducts.length > 0 ? (
+        <TopProducts
+          products={featuredProducts}
+          onLearnMore={handleLearnMore}
+          onInquiry={handleInquiry}
+        />
+      ) : null}
 
       {/* Testimonials Section */}
       <section className="py-16 lg:py-24 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white relative overflow-hidden">

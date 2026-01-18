@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, MessageCircle, CheckCircle, Zap, Package, Target, Lightbulb, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
-import productsData from '../data/products.json';
+import { ArrowLeft, MessageCircle, CheckCircle, Zap, Package, Target, Lightbulb, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Product } from '../types/product';
+import { api } from '../services/api';
 
 interface ProductDetailPageProps {
   productId: string;
@@ -8,10 +9,32 @@ interface ProductDetailPageProps {
 }
 
 export default function ProductDetailPage({ productId, onNavigate }: ProductDetailPageProps) {
-  const product = productsData.find(p => p.id === productId);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const phoneNumber = '6354495770';
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const response = await api.getProductById(productId);
+        setProduct(response.product);
+      } catch (error) {
+        console.error('Failed to fetch product:', error);
+        setError('Product not found');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (productId) {
+      fetchProduct();
+    }
+  }, [productId]);
 
   useEffect(() => {
     if (!product?.images || product.images.length <= 1 || !isAutoPlaying) return;
@@ -40,11 +63,22 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
     setSelectedImage(idx);
   };
 
-  if (!product) {
+  if (isLoading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-slate-900 mb-4">Product Not Found</h1>
+          <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600 mb-4"></div>
+          <p className="text-lg text-slate-600">Loading product...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !product) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-slate-900 mb-4">{error || 'Product Not Found'}</h1>
           <button
             onClick={() => onNavigate('home')}
             className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
@@ -56,8 +90,11 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
     );
   }
 
+  const productName = product.name || product.title || 'Product';
+  const productImages = product.images && product.images.length > 0 ? product.images : [product.thumbnail || '/placeholder.jpg'];
+
   const createWhatsAppLink = () => {
-    const message = encodeURIComponent(`Hi, I'm interested in ${product.title}. Can you provide more details and pricing?`);
+    const message = encodeURIComponent(`Hi, I'm interested in ${productName}. Can you provide more details and pricing?`);
     return `https://wa.me/${phoneNumber}?text=${message}`;
   };
 
@@ -80,12 +117,12 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
           <div className="lg:col-span-5 space-y-4">
             <div className="relative overflow-hidden rounded-xl bg-white border border-slate-200 aspect-[4/3] group shadow-sm hover:shadow-md transition-shadow">
               <img
-                src={product.images?.[selectedImage] || product.image}
-                alt={product.title}
+                src={productImages[selectedImage]}
+                alt={productName}
                 className="w-full h-full object-contain p-6 lg:p-8 transition-all duration-500"
               />
 
-              {product.images && product.images.length > 1 && (
+              {productImages.length > 1 && (
                 <>
                   <button
                     onClick={handlePrevImage}
@@ -103,7 +140,7 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
                   </button>
 
                   <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-white/95 backdrop-blur-sm px-3 py-2 rounded-full shadow-md">
-                    {product.images.map((_, idx) => (
+                    {productImages.map((_, idx) => (
                       <button
                         key={idx}
                         onClick={() => handleThumbnailClick(idx)}
@@ -118,7 +155,7 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
                   </div>
 
                   <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm text-slate-700 px-2.5 py-1 rounded-md text-xs font-medium shadow-sm">
-                    {selectedImage + 1} / {product.images.length}
+                    {selectedImage + 1} / {productImages.length}
                   </div>
 
                   {isAutoPlaying && (
@@ -131,9 +168,9 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
               )}
             </div>
 
-            {product.images && product.images.length > 1 && (
+            {productImages.length > 1 && (
               <div className="grid grid-cols-5 gap-2">
-                {product.images.map((image, idx) => (
+                {productImages.map((image, idx) => (
                   <button
                     key={idx}
                     onClick={() => handleThumbnailClick(idx)}
@@ -146,7 +183,7 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
                     <div className="aspect-square bg-white p-2">
                       <img
                         src={image}
-                        alt={`${product.title} ${idx + 1}`}
+                        alt={`${productName} ${idx + 1}`}
                         className="w-full h-full object-contain"
                       />
                     </div>
@@ -159,29 +196,31 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
           <div className="lg:col-span-7 space-y-6">
             <div>
               <span className="inline-block text-xs font-semibold text-blue-600 uppercase tracking-wider bg-blue-50 px-3 py-1 rounded-full mb-3">
-                {product.category.replace(/-/g, ' ')}
+                {product.category?.replace(/-/g, ' ') || 'Product'}
               </span>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
-                {product.title}
+                {productName}
               </h1>
               <p className="text-lg text-slate-600 leading-relaxed">
-                {product.description}
+                {product.overview || product.description || ''}
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-100 p-5 rounded-xl">
-              <div className="flex items-start space-x-3">
-                <div className="bg-blue-600 p-2 rounded-lg flex-shrink-0">
-                  <Zap className="h-5 w-5 text-white" />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-blue-900 mb-1.5 uppercase tracking-wide">
-                    Key Highlight
-                  </p>
-                  <p className="text-base text-slate-700 leading-relaxed">{product.usp}</p>
+            {product.keyHighlights && product.keyHighlights.length > 0 && (
+              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-100 p-5 rounded-xl">
+                <div className="flex items-start space-x-3">
+                  <div className="bg-blue-600 p-2 rounded-lg flex-shrink-0">
+                    <Zap className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-blue-900 mb-1.5 uppercase tracking-wide">
+                      Key Highlight
+                    </p>
+                    <p className="text-base text-slate-700 leading-relaxed">{product.keyHighlights[0]}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <a
@@ -204,16 +243,16 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
         </div>
 
         <div className="space-y-8">
-          {product.topPoints && product.topPoints.length > 0 && (
+          {product.keyHighlights && product.keyHighlights.length > 0 && (
             <section className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm">
               <div className="flex items-center space-x-3 mb-5">
                 <div className="bg-blue-600 rounded-lg p-2">
                   <CheckCircle className="h-5 w-5 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold text-slate-900">Top Points</h2>
+                <h2 className="text-2xl font-bold text-slate-900">Key Highlights</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {product.topPoints.map((point, idx) => (
+                {product.keyHighlights.map((point, idx) => (
                   <div key={idx} className="flex items-start space-x-3 bg-slate-50 p-4 rounded-lg">
                     <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
                     <span className="text-slate-700">{point}</span>
@@ -232,12 +271,36 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
                 <h2 className="text-2xl font-bold text-slate-900">Specifications</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {Object.entries(product.specifications).map(([key, value], idx) => (
-                  <div key={idx} className="bg-slate-50 p-4 rounded-lg">
-                    <p className="text-xs font-bold text-slate-900 uppercase tracking-wide mb-1">{key}</p>
-                    <p className="text-slate-700">{value}</p>
-                  </div>
-                ))}
+                {Object.entries(product.specifications).map(([key, value], idx) => {
+                  // Skip undefined or empty values
+                  if (!value) return null;
+                  
+                  // Handle nested objects like toneControl
+                  if (typeof value === 'object') {
+                    return (
+                      <div key={idx} className="bg-slate-50 p-4 rounded-lg md:col-span-2">
+                        <p className="text-xs font-bold text-slate-900 uppercase tracking-wide mb-2">{key.replace(/([A-Z])/g, ' $1').trim()}</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 ml-4">
+                          {Object.entries(value).map(([subKey, subValue]) => (
+                            <div key={subKey} className="text-sm">
+                              <span className="font-semibold text-slate-600">{subKey}: </span>
+                              <span className="text-slate-700">{subValue as string}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  }
+                  
+                  return (
+                    <div key={idx} className="bg-slate-50 p-4 rounded-lg">
+                      <p className="text-xs font-bold text-slate-900 uppercase tracking-wide mb-1">
+                        {key.replace(/([A-Z])/g, ' $1').trim()}
+                      </p>
+                      <p className="text-slate-700">{value as string}</p>
+                    </div>
+                  );
+                })}
               </div>
             </section>
           )}
@@ -300,33 +363,6 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
                     </div>
                   );
                 })}
-              </div>
-            </section>
-          )}
-
-          {product.externalLinks && Array.isArray(product.externalLinks) && product.externalLinks.length > 0 && (
-            <section className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm">
-              <div className="flex items-center space-x-3 mb-5">
-                <div className="bg-blue-600 rounded-lg p-2">
-                  <ExternalLink className="h-5 w-5 text-white" />
-                </div>
-                <h2 className="text-2xl font-bold text-slate-900">Related Resources</h2>
-              </div>
-              <div className="space-y-2">
-                {product.externalLinks.map((link: any, idx: number) => (
-                  <a
-                    key={idx}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between bg-slate-50 p-4 rounded-lg hover:bg-blue-50 hover:border-blue-200 border border-transparent transition-all group"
-                  >
-                    <span className="text-slate-700 group-hover:text-blue-600 text-sm">
-                      {link.title}
-                    </span>
-                    <ExternalLink className="h-4 w-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
-                  </a>
-                ))}
               </div>
             </section>
           )}

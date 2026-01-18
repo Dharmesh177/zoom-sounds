@@ -15,7 +15,7 @@ export default function ContactPage() {
   const [submitError, setSubmitError] = useState(false);
 
   const phoneNumber = '916354495770';
-  const apiBaseUrl = import.meta.env.VITE_PUBLIC_API_URL;
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ export default function ContactPage() {
     setSubmitError(false);
 
     try {
-      const response = await fetch(`${apiBaseUrl}/query`, {
+      const response = await fetch(`${API_URL}/query`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

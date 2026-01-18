@@ -14,13 +14,15 @@ export default function TestimonialForm({ onClose }: TestimonialFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1';
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
     try {
-      const response = await fetch('http://localhost:3000/api/v1/testinomial', {
+      const response = await fetch(`${API_URL}/testinomial`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

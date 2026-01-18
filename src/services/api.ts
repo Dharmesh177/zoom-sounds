@@ -1,32 +1,6 @@
-const API_URL = import.meta.env.VITE_API_URL || 'https://api.zsindia.com/api/v1';
+import { Product } from '../types/product';
 
-export interface ProductSpecifications {
-  powerOutput?: string;
-  channels?: string;
-  inputChannels?: string;
-  digitalPlayer?: string;
-  speakerOutput?: string;
-  frequencyResponse?: string;
-  snRatio?: string;
-  powerSupply?: string;
-  dimensions?: string;
-  weight?: string;
-}
-
-export interface Product {
-  _id: string;
-  name: string;
-  category: string;
-  family: string;
-  overview: string;
-  keyHighlights?: string[];
-  features?: string[];
-  specifications?: ProductSpecifications;
-  applications?: string[];
-  idealFor?: string[];
-  warranty?: string;
-  images?: string[];
-}
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1';
 
 export interface SerialNumber {
   _id: string;
@@ -102,7 +76,106 @@ export interface WarrantyClaimResponse {
   };
 }
 
+export interface FeaturedProductsResponse {
+  status: string;
+  product: Product[];
+}
+
+export interface AllProductsResponse {
+  page?: number;
+  limit?: number;
+  totalPages?: number;
+  totalProducts?: number;
+  status: string;
+  products: Product[];
+}
+
+export interface ProductDetailResponse {
+  status: string;
+  product: Product;
+}
+
 export const api = {
+  async getFeaturedProducts(): Promise<FeaturedProductsResponse> {
+    try {
+      const response = await fetch(`${API_URL}/products/featuredproducts`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch featured products');
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Featured products error:', error);
+      throw error;
+    }
+  },
+
+  async getAllProducts(page?: number, limit?: number): Promise<AllProductsResponse> {
+    try {
+      let url = `${API_URL}/products`;
+      const params = new URLSearchParams();
+      
+      if (page !== undefined) {
+        params.append('page', page.toString());
+      }
+      if (limit !== undefined) {
+        params.append('limit', limit.toString());
+      }
+      
+      if (params.toString()) {
+        url += `?${params.toString()}`;
+      }
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Get products error:', error);
+      throw error;
+    }
+  },
+
+  async getProductById(productId: string): Promise<ProductDetailResponse> {
+    try {
+      const response = await fetch(`${API_URL}/products/${productId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        if (response.status === 404) {
+          throw new Error('Product not found');
+        }
+        throw new Error('Failed to fetch product details');
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Get product details error:', error);
+      throw error;
+    }
+  },
+
   async verifySerialNumber(serialNumber: string): Promise<VerificationResponse> {
     try {
       const response = await fetch(`${API_URL}/serial-numbers/verify/${serialNumber}`, {
