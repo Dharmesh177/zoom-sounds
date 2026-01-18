@@ -19,3 +19,5 @@ export const QUERY_TYPE_LABELS: Record<string, string> = {
   feedback: "Feedback",
   other: "Other",
 };
+
+export const S3_BASE_URL = "https://zsindia.s3.us-east-1.amazonaws.com/SiteImages";

@@ -1,4 +1,5 @@
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
+import { S3_BASE_URL } from '../constants/CommonConstants';
 
 interface FooterProps {
   onNavigate: (page: string) => void;
@@ -12,7 +13,7 @@ export default function Footer({ onNavigate }: FooterProps) {
           <div>
             <div className="mb-4 bg-white p-3 rounded-lg inline-block">
               <img
-                src="/zsindia-logo.png"
+                src={`${S3_BASE_URL}/zsindia-logo.png`}
                 alt="ZS ACOUSTICS"
                 className="h-20 w-auto object-contain"
               />

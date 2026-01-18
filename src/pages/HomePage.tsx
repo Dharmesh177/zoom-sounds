@@ -14,6 +14,7 @@ import TopProducts from "../components/TopProducts";
 import { Product } from "../types/product";
 import TestimonialForm from "../components/TestimonialForm";
 import { api } from "../services/api";
+import { S3_BASE_URL } from "../constants/CommonConstants";
 
 interface HomePageProps {
   onNavigate: (page: string, productId?: string) => void;
@@ -62,7 +63,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       <section className="hidden lg:block relative text-white overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(/design/background_main.png)" }}
+          style={{ backgroundImage: `url(${S3_BASE_URL}/background_main.png)` }}
         ></div>
 
         <div className="container mx-auto px-8 relative">
@@ -134,7 +135,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         {/* Background Image - Adjusted to show the starry/galaxy background better */}
         <div
           className="absolute inset-0 bg-cover bg-[center_-210px]"
-          style={{ backgroundImage: "url(/design/mobile_bg.png)" }}
+          style={{ backgroundImage: `url(${S3_BASE_URL}/mobile_bg.png)` }}
         ></div>
 
         <div className="container mx-auto px-6 pt-12 pb-12 relative z-10 flex-grow">
