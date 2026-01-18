@@ -205,7 +205,7 @@ export const api = {
 
   async claimWarranty(claimData: WarrantyClaimRequest): Promise<WarrantyClaimResponse> {
     try {
-      const response = await fetch(`${API_URL}/warranty/claim/verify`, {
+      const response = await fetch(`${API_URL}/serial-numbers/warranty/claim/verify`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
