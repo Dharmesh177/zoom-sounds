@@ -85,8 +85,7 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
               </h1>
 
               <p className="text-xl text-slate-300 leading-relaxed max-w-lg">
-                Professional sound systems engineered for perfection. From home
-                theaters to concert venues.
+                <strong className="text-white">ZS India</strong> (also known as <strong className="text-white">ZSIndia</strong> and <strong className="text-white">Zoom Sounds</strong>) – Professional sound systems engineered for perfection. From home theaters to concert venues.
               </p>
 
               <div className="flex gap-4 pt-4">
@@ -157,8 +156,7 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
 
             {/* Description */}
             <p className="text-base text-slate-300 leading-relaxed max-w-[280px]">
-              Professional sound systems engineered for perfection. From home
-              theaters to concert venues.
+              <strong className="text-white">ZS India</strong> (ZSIndia / Zoom Sounds) – Professional sound systems engineered for perfection. From home theaters to concert venues.
             </p>
 
             {/* Hero Image - The Amplifiers */}

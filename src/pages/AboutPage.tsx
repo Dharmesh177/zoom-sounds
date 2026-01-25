@@ -25,7 +25,7 @@ export default function AboutPage() {
               </span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-300 leading-relaxed max-w-4xl mx-auto font-light px-4">
-              For over two decades, we've been crafting extraordinary audio experiences that resonate with perfection
+              <strong className="text-white">ZS India</strong> (also known as <strong className="text-white">ZSIndia</strong> and <strong className="text-white">Zoom Sounds</strong>) – For over two decades, we've been crafting extraordinary audio experiences that resonate with perfection
             </p>
           </div>
         </div>
@@ -45,13 +45,13 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-4 lg:space-y-6 text-base lg:text-lg text-slate-700 leading-relaxed">
               <p>
-                Established in <span className="font-black text-blue-600">2004</span>, <strong>Zoom Sounds</strong> (also known as <strong>ZS India</strong> and <strong>ZSAcoustics</strong>) emerged from a simple yet powerful vision: to bring world-class audio quality to every corner of Gujarat. What started as a modest audio equipment dealership has evolved into one of Surat's most respected manufacturers and suppliers of professional sound systems.
+                Established in <span className="font-black text-blue-600">2004</span>, <strong>ZS India</strong> (also known as <strong>ZSIndia</strong>, <strong>Zoom Sounds</strong>, and <strong>ZSAcoustics</strong>) emerged from a simple yet powerful vision: to bring world-class audio quality to every corner of Gujarat. What started as a modest audio equipment dealership has evolved into one of Surat's most respected manufacturers and suppliers of professional sound systems.
               </p>
               <p>
-                Over two decades of unwavering dedication, we've cultivated lasting relationships with thousands of satisfied customers. From individual audiophiles and home theater enthusiasts to major event companies, wedding planners, and large industrial facilities across <strong>Surat, Varachha, and Gujarat</strong>, our reputation speaks volumes.
+                Over two decades of unwavering dedication, <strong>ZS India</strong> has cultivated lasting relationships with thousands of satisfied customers. From individual audiophiles and home theater enthusiasts to major event companies, wedding planners, and large industrial facilities across <strong>Surat, Varachha, and Gujarat</strong>, our reputation speaks volumes.
               </p>
               <p>
-                Today, <strong>ZoomSound</strong> stands as a beacon of excellence in the audio industry. As a leading <strong>sound manufacturer in Surat</strong>, we don't merely sell products—we deliver comprehensive sound solutions backed by expert consultation, professional installation services, and lifetime technical support. Your success is our mission.
+                Today, <strong>ZS India (ZSIndia)</strong> stands as a beacon of excellence in the audio industry. As a leading <strong>sound manufacturer in Surat</strong>, we don't merely sell products—we deliver comprehensive sound solutions backed by expert consultation, professional installation services, and lifetime technical support. Your success is our mission.
               </p>
             </div>
 
