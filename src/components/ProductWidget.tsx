@@ -38,6 +38,7 @@ export default function ProductWidget({
                 alt={productName}
                 className="w-full h-full object-contain p-6 transition-all duration-500 group-hover:scale-105"
                 loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 via-transparent to-transparent"></div>
             </div>

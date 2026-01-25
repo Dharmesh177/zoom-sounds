@@ -12,6 +12,24 @@
     @apply font-sans;
     letter-spacing: -0.02em;
   }
+
+  /* Smooth transitions for all interactive elements */
+  button, a, input, textarea, select {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Smooth focus states for better accessibility */
+  button:focus-visible, a:focus-visible, input:focus-visible, 
+  textarea:focus-visible, select:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+    transition: outline-offset 0.2s ease;
+  }
+
+  /* Smooth scroll offset for fixed header */
+  :target {
+    scroll-margin-top: 80px;
+  }
 }
 
 @layer utilities {
@@ -26,6 +44,19 @@
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
+  }
+
+  /* Scroll-triggered fade-in animation */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   /* Animation utilities */
@@ -82,6 +113,22 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Smooth page transitions */
+.page-transition {
+  animation: pageTransitionIn 0.4s ease-out forwards;
+}
+
+@keyframes pageTransitionIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Keyframe animations */

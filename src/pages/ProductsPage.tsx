@@ -232,11 +232,13 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
                     key={productId}
                     className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-slate-200 hover:border-blue-300 flex flex-col"
                   >
-                    <div className="relative h-72 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
+                    <div className="relative h-72 overflow-hidden bg-white">
                       <img
                         src={productImage}
                         alt={productName}
                         className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-700"
+                        loading="lazy"
+                        decoding="async"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
 
@@ -302,11 +304,13 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
                     key={productId}
                     className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-slate-200 hover:border-blue-300 flex flex-col md:flex-row"
                   >
-                    <div className="relative md:w-80 h-64 md:h-auto overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 flex-shrink-0">
+                    <div className="relative md:w-80 h-64 md:h-auto overflow-hidden bg-white flex-shrink-0">
                       <img
                         src={productImage}
                         alt={productName}
                         className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-700"
+                        loading="lazy"
+                        decoding="async"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
 

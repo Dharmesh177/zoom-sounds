@@ -16,6 +16,7 @@ function App() {
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const [serialNumber, setSerialNumber] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isHomeDataLoaded, setIsHomeDataLoaded] = useState(false);
 
   useEffect(() => {
     const path = window.location.pathname;
@@ -24,32 +25,49 @@ function App() {
     if (verifyMatch && verifyMatch[1]) {
       setSerialNumber(verifyMatch[1]);
       setCurrentPage('product-verification');
+      // For non-home pages, hide preloader after 1 second
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    } else {
+      // For home page, preloader will be hidden when data loads
+      // (handled by handleHomeDataLoaded callback)
     }
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
   }, []);
+
+  // Hide preloader when home page data is ready
+  useEffect(() => {
+    if (currentPage === 'home' && isHomeDataLoaded) {
+      setIsLoading(false);
+    }
+  }, [currentPage, isHomeDataLoaded]);
 
   const handleNavigate = (page: string, productId?: string) => {
     setCurrentPage(page);
     if (productId) {
       setSelectedProductId(productId);
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Smooth scroll to top with a slight delay for better UX
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  };
+
+  const handleHomeDataLoaded = () => {
+    setIsHomeDataLoaded(true);
   };
 
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <HomePage onNavigate={handleNavigate} />;
+        return <HomePage onNavigate={handleNavigate} onDataLoaded={handleHomeDataLoaded} />;
       case 'products':
         return <ProductsPage onNavigate={handleNavigate} />;
       case 'product-detail':
         return selectedProductId ? (
           <ProductDetailPage productId={selectedProductId} onNavigate={handleNavigate} />
         ) : (
-          <HomePage onNavigate={handleNavigate} />
+          <HomePage onNavigate={handleNavigate} onDataLoaded={handleHomeDataLoaded} />
         );
       case 'about':
         return <AboutPage />;
@@ -64,7 +82,7 @@ function App() {
           <VerifyPage />
         );
       default:
-        return <HomePage onNavigate={handleNavigate} />;
+        return <HomePage onNavigate={handleNavigate} onDataLoaded={handleHomeDataLoaded} />;
     }
   };
 
@@ -75,7 +93,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header currentPage={currentPage} onNavigate={handleNavigate} />
-      <main className="flex-grow">
+      <main className="flex-grow page-transition">
         {renderPage()}
       </main>
       <Footer onNavigate={handleNavigate} />

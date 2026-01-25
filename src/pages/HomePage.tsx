@@ -18,19 +18,18 @@ import { S3_BASE_URL } from "../constants/CommonConstants";
 
 interface HomePageProps {
   onNavigate: (page: string, productId?: string) => void;
+  onDataLoaded: () => void;
 }
 
-export default function HomePage({ onNavigate }: HomePageProps) {
+export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
   const phoneNumber = "919876543210";
   const [showTestimonialForm, setShowTestimonialForm] = useState(false);
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
-  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
   const [productsError, setProductsError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchFeaturedProducts = async () => {
       try {
-        setIsLoadingProducts(true);
         setProductsError(null);
         const response = await api.getFeaturedProducts();
         setFeaturedProducts(response.product);
@@ -38,12 +37,13 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         console.error("Failed to fetch featured products:", error);
         setProductsError("Failed to load featured products");
       } finally {
-        setIsLoadingProducts(false);
+        // Notify parent that data is loaded
+        onDataLoaded();
       }
     };
 
     fetchFeaturedProducts();
-  }, []);
+  }, [onDataLoaded]);
 
   const handleLearnMore = (productId: string) => {
     onNavigate("product-detail", productId);
@@ -167,6 +167,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 src="/design/amplifier_stack.png"
                 alt=""
                 className="w-full h-auto object-contain scale-110"
+                loading="eager"
+                decoding="async"
               />
             </div>
 
@@ -175,6 +177,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 src="/design/amplifier_stack.png"
                 alt=""
                 className="w-full h-auto object-contain scale-110"
+                loading="lazy"
+                decoding="async"
               />
             </div>
 
@@ -183,6 +187,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 src="/design/amplifier_stack.png"
                 alt=""
                 className="w-full h-auto object-contain scale-110"
+                loading="lazy"
+                decoding="async"
               />
             </div>
 
@@ -227,16 +233,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       {/* Top Products Section */}
-      {isLoadingProducts ? (
-        <section className="py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-              <p className="mt-4 text-slate-600">Loading featured products...</p>
-            </div>
-          </div>
-        </section>
-      ) : productsError ? (
+      {productsError ? (
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center text-red-600">

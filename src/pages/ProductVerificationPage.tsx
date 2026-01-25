@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { CheckCircle2, XCircle, AlertTriangle, Shield, Package, Clock, Award } from 'lucide-react';
-import { api, Product, SerialNumber, Warranty, Customer, CustomerInfo } from '../services/api';
+import { api, SerialNumber, Warranty, Customer, CustomerInfo } from '../services/api';
+import { Product } from '../types/product';
 import WarrantyClaimForm from '../components/WarrantyClaimForm';
 
 interface ProductVerificationPageProps {
@@ -374,12 +375,14 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             {product.images && product.images.length > 0 && (
               <div className="space-y-4">
-                {product.images.slice(0, 2).map((image, index) => (
+                {product.images.slice(0, 2).map((image: string, index: number) => (
                   <div key={index} className="relative rounded-xl overflow-hidden shadow-lg border-2 border-slate-200">
                     <img
                       src={image}
                       alt={`${product.name} - Image ${index + 1}`}
                       className="w-full aspect-video object-cover"
+                      loading="eager"
+                      decoding="async"
                     />
                   </div>
                 ))}
@@ -408,7 +411,7 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
                 <div>
                   <h4 className="font-bold text-slate-900 mb-2">Key Highlights</h4>
                   <ul className="space-y-1">
-                    {product.keyHighlights.slice(0, 4).map((highlight, index) => (
+                    {product.keyHighlights.slice(0, 4).map((highlight: string, index: number) => (
                       <li key={index} className="flex items-start space-x-2 text-sm">
                         <span className="text-green-600 font-bold">✓</span>
                         <span className="text-slate-700">{highlight}</span>

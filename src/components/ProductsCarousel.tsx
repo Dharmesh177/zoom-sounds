@@ -73,6 +73,8 @@ export default function ProductsCarousel({ products, phoneNumber, onNavigate }: 
                           src={product.image}
                           alt={product.title}
                           className="w-full h-full object-contain"
+                          loading="lazy"
+                          decoding="async"
                         />
                       </div>
                       <div className="absolute -top-4 -right-4 bg-gradient-to-br from-orange-500 to-red-600 text-white px-6 py-3 rounded-2xl text-sm font-black shadow-2xl transform rotate-3">

@@ -81,6 +81,8 @@ export default function AboutPage() {
                     src="https://images.pexels.com/photos/164938/pexels-photo-164938.jpeg?auto=compress&cs=tinysrgb&w=800"
                     alt="Professional Sound Equipment"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="h-72 rounded-3xl overflow-hidden shadow-2xl hover:shadow-cyan-500/20 transition-all group transform hover:rotate-2">
@@ -88,6 +90,8 @@ export default function AboutPage() {
                     src="https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=800"
                     alt="DJ Equipment"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>
@@ -97,6 +101,8 @@ export default function AboutPage() {
                     src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=800"
                     alt="Sound System Setup"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="h-80 rounded-3xl overflow-hidden shadow-2xl hover:shadow-emerald-500/20 transition-all group transform hover:rotate-2">
@@ -104,6 +110,8 @@ export default function AboutPage() {
                     src="https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=800"
                     alt="Audio Workshop"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>

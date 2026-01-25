@@ -16,6 +16,8 @@ export default function Footer({ onNavigate }: FooterProps) {
                 src={`${S3_BASE_URL}/zsindia-logo.png`}
                 alt="ZS ACOUSTICS"
                 className="h-20 w-auto object-contain"
+                loading="eager"
+                decoding="async"
               />
             </div>
             <p className="text-slate-400 text-sm leading-relaxed">

@@ -120,6 +120,8 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
                 src={productImages[selectedImage]}
                 alt={productName}
                 className="w-full h-full object-contain p-6 lg:p-8 transition-all duration-500"
+                loading="eager"
+                decoding="async"
               />
 
               {productImages.length > 1 && (
@@ -185,6 +187,8 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
                         src={image}
                         alt={`${productName} ${idx + 1}`}
                         className="w-full h-full object-contain"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </div>
                   </button>
