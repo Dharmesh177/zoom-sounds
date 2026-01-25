@@ -107,52 +107,22 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
     }
   };
 
-  const getRemainingTimeDisplay = (): string => {
+  const getWarrantyTimeBreakdown = () => {
     if (isExpired) {
-      return 'Warranty expired';
+      return { years: 0, months: 0, days: 0, hours: 0, isExpired: true };
     }
 
     if (daysRemaining !== undefined) {
-      if (daysRemaining === 0 && hoursRemaining !== undefined) {
-        if (hoursRemaining === 0) {
-          return 'Expires today';
-        } else if (hoursRemaining === 1) {
-          return '1 hour remaining';
-        } else {
-          return `${hoursRemaining} hours remaining`;
-        }
-      } else if (daysRemaining === 1) {
-        return '1 day remaining';
-      } else if (daysRemaining < 30) {
-        return `${daysRemaining} days remaining`;
-      } else if (daysRemaining < 365) {
-        const months = Math.floor(daysRemaining / 30);
-        return `${months} ${months === 1 ? 'month' : 'months'} remaining`;
-      } else {
-        const years = Math.floor(daysRemaining / 365);
-        const months = Math.floor((daysRemaining % 365) / 30);
-        return `${years} ${years === 1 ? 'year' : 'years'}${months > 0 ? `, ${months} ${months === 1 ? 'month' : 'months'}` : ''} remaining`;
-      }
+      const years = Math.floor(daysRemaining / 365);
+      const remainingAfterYears = daysRemaining % 365;
+      const months = Math.floor(remainingAfterYears / 30);
+      const days = Math.floor(remainingAfterYears % 30);
+      const hours = hoursRemaining || 0;
+
+      return { years, months, days, hours, isExpired: false };
     }
 
-    if (warrantyExpireTime) {
-      const end = new Date(warrantyExpireTime);
-      const now = new Date();
-      const diffTime = end.getTime() - now.getTime();
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-      if (diffDays < 0) {
-        return 'Warranty expired';
-      } else if (diffDays === 0) {
-        return 'Expires today';
-      } else if (diffDays === 1) {
-        return '1 day remaining';
-      } else {
-        return `${diffDays} days remaining`;
-      }
-    }
-
-    return 'N/A';
+    return { years: 0, months: 0, days: 0, hours: 0, isExpired: false };
   };
 
   if (loading) {
@@ -250,13 +220,6 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
                     <p className="text-lg font-bold text-slate-900 font-mono">{serialData?.serialNumber}</p>
                   </div>
                 </div>
-                {serialData && serialData.verifiedCount > 0 && (
-                  <div className="bg-blue-50 rounded-lg px-4 py-2 border border-blue-200">
-                    <p className="text-sm text-blue-800">
-                      <span className="font-semibold">Verification Count:</span> {serialData.verifiedCount}
-                    </p>
-                  </div>
-                )}
               </div>
 
               {serialData?.batchNumber && (
@@ -288,17 +251,60 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
                   Your product warranty is registered and active. You are eligible for full after-sales support and service coverage.
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <div className="bg-white/10 rounded-lg p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Clock className="h-5 w-5 text-white" />
-                      <p className="text-sm font-semibold text-white">Time Remaining</p>
+                {/* Warranty Countdown Clock */}
+                <div className="bg-white/10 rounded-xl p-6 mb-4">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="bg-white/20 rounded-full p-2">
+                      <Clock className="h-6 w-6 text-white" />
                     </div>
-                    <p className="text-lg font-bold text-white">{getRemainingTimeDisplay()}</p>
+                    <h3 className="text-xl font-bold text-white">Warranty Time Remaining</h3>
                   </div>
 
-                  <div className="bg-white/10 rounded-lg p-4">
-                    <p className="text-sm font-semibold text-white mb-2">Warranty Status</p>
+                  {(() => {
+                    const timeBreakdown = getWarrantyTimeBreakdown();
+                    if (timeBreakdown.isExpired) {
+                      return (
+                        <div className="text-center py-8">
+                          <p className="text-2xl font-bold text-white">Warranty Expired</p>
+                        </div>
+                      );
+                    }
+
+                    const timeUnits = [
+                      { label: 'Years', value: timeBreakdown.years, show: timeBreakdown.years > 0 },
+                      { label: 'Months', value: timeBreakdown.months, show: timeBreakdown.months > 0 },
+                      { label: 'Days', value: timeBreakdown.days, show: timeBreakdown.days > 0 },
+                      { label: 'Hours', value: timeBreakdown.hours, show: timeBreakdown.hours > 0 && timeBreakdown.years === 0 && timeBreakdown.months === 0 }
+                    ].filter(unit => unit.show);
+
+                    return (
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        {timeUnits.map((unit, idx) => (
+                          <div key={idx} className="bg-white/20 rounded-lg p-4 text-center backdrop-blur-sm">
+                            <div className="text-3xl sm:text-4xl font-bold text-white mb-1 tabular-nums">
+                              {unit.value}
+                            </div>
+                            <div className="text-xs sm:text-sm text-green-100 font-medium uppercase tracking-wide">
+                              {unit.label}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })()}
+
+                  <div className="mt-4 pt-4 border-t border-white/20">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-green-100">Total Days Remaining:</span>
+                      <span className="font-bold text-white tabular-nums">{daysRemaining || 0} days</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white/10 rounded-lg p-4 mb-4">
+                  <p className="text-sm font-semibold text-white mb-2">Warranty Status</p>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-300 rounded-full animate-pulse"></div>
                     <p className="text-lg font-bold text-white capitalize">{warrantyStatus}</p>
                   </div>
                 </div>
