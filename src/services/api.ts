@@ -36,6 +36,17 @@ export interface CustomerInfo {
   claimedAt?: string;
 }
 
+export interface WarrantyExpireTime {
+  daysRemaining?: number;
+  hoursRemaining?: number;
+  warrantyYears?: number;
+  totalWarrantyDays?: number;
+  warrantyPeriod?: string;
+  startDate?: string;
+  endDate?: string;
+  isExpired?: boolean;
+}
+
 export interface VerificationResponse {
   valid: boolean;
   product?: Product;
@@ -45,7 +56,7 @@ export interface VerificationResponse {
   claimed?: boolean;
   claimedWarranty?: boolean;
   warrantyStatus?: string;
-  warrantyExpireTime?: string;
+  warrantyExpireTime?: WarrantyExpireTime;
   daysRemaining?: number;
   hoursRemaining?: number;
   isExpired?: boolean;
