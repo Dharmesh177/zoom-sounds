@@ -30,8 +30,14 @@ function App() {
         setIsLoading(false);
       }, 1000);
     } else {
-      // For home page, preloader will be hidden when data loads
-      // (handled by handleHomeDataLoaded callback)
+      // For home page, add a max timeout fallback (3 seconds)
+      const maxTimeout = setTimeout(() => {
+        console.warn('Preloader timeout - forcing hide');
+        setIsLoading(false);
+      }, 3000);
+
+      // Clear timeout if data loads earlier
+      return () => clearTimeout(maxTimeout);
     }
   }, []);
 
