@@ -48,15 +48,16 @@ function App() {
     }
   }, [currentPage, isHomeDataLoaded]);
 
+  // Scroll to top whenever currentPage changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
+
   const handleNavigate = (page: string, productId?: string) => {
     setCurrentPage(page);
     if (productId) {
       setSelectedProductId(productId);
     }
-    // Smooth scroll to top with a slight delay for better UX
-    requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
   };
 
   const handleHomeDataLoaded = () => {
