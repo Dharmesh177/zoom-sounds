@@ -1,5 +1,6 @@
 import { Check, MessageCircle, ArrowRight } from 'lucide-react';
 import { Product } from '../types/product';
+import { OptimizedImage } from './OptimizedImage';
 
 interface ProductWidgetProps {
   product: Product;
@@ -33,14 +34,14 @@ export default function ProductWidget({
           <div className="relative">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-500 rounded-2xl blur-lg opacity-10 group-hover:opacity-20 transition-opacity duration-500"></div>
             <div className="relative overflow-hidden rounded-xl shadow-lg aspect-[4/3] bg-white border border-slate-200">
-              <img
+              <OptimizedImage
                 src={productImage}
                 alt={productName}
-                className="w-full h-full object-contain p-6 transition-all duration-500 group-hover:scale-105"
-                loading="lazy"
-                decoding="async"
+                className="w-full h-full p-6 transition-all duration-500 group-hover:scale-105"
+                containerClassName="w-full h-full"
+                objectFit="contain"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 via-transparent to-transparent pointer-events-none"></div>
             </div>
           </div>
         </div>

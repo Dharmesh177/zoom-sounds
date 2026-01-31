@@ -1,5 +1,5 @@
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
-import { S3_BASE_URL } from '../constants/CommonConstants';
+import { OptimizedImage } from './OptimizedImage';
 
 interface FooterProps {
   onNavigate: (page: string) => void;
@@ -12,12 +12,13 @@ export default function Footer({ onNavigate }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="mb-4 bg-white p-3 rounded-lg inline-block">
-              <img
-                src={`${S3_BASE_URL}/zsindia-logo.png`}
+              <OptimizedImage
+                src="SiteImages/zsindia-logo.png"
                 alt="ZS ACOUSTICS"
-                className="h-20 w-auto object-contain"
-                loading="eager"
-                decoding="async"
+                className="h-20 w-auto"
+                containerClassName="h-20"
+                objectFit="contain"
+                priority={true}
               />
             </div>
             <p className="text-slate-400 text-sm leading-relaxed">

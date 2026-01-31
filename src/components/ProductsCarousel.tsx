@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { MessageCircle, Star, ArrowRight, Zap, ChevronLeft, ChevronRight } from 'lucide-react';
+import { OptimizedImage } from './OptimizedImage';
 
 interface Product {
   id: string;
@@ -69,12 +70,13 @@ export default function ProductsCarousel({ products, phoneNumber, onNavigate }: 
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                     <div className="relative">
                       <div className="aspect-square bg-white rounded-2xl overflow-hidden shadow-xl border-2 border-slate-100 p-8">
-                        <img
+                        <OptimizedImage
                           src={product.image}
                           alt={product.title}
-                          className="w-full h-full object-contain"
-                          loading="lazy"
-                          decoding="async"
+                          className="w-full h-full"
+                          containerClassName="w-full h-full"
+                          objectFit="contain"
+                          priority={index === currentSlide}
                         />
                       </div>
                       <div className="absolute -top-4 -right-4 bg-gradient-to-br from-orange-500 to-red-600 text-white px-6 py-3 rounded-2xl text-sm font-black shadow-2xl transform rotate-3">

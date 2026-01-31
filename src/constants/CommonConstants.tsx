@@ -20,4 +20,5 @@ export const QUERY_TYPE_LABELS: Record<string, string> = {
   other: "Other",
 };
 
-export const S3_BASE_URL = "https://zsindia.s3.us-east-1.amazonaws.com/SiteImages";
+export const CDN_BASE_URL = import.meta.env.VITE_CDN_DOMAIN_URL;
+export const S3_BASE_URL = `${CDN_BASE_URL}/SiteImages`;

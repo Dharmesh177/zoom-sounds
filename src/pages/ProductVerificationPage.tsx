@@ -3,6 +3,7 @@ import { CheckCircle2, XCircle, AlertTriangle, Shield, Package, Clock, Award } f
 import { api, SerialNumber, Warranty, Customer, CustomerInfo } from '../services/api';
 import { Product } from '../types/product';
 import WarrantyClaimForm from '../components/WarrantyClaimForm';
+import { OptimizedImage } from '../components/OptimizedImage';
 
 interface ProductVerificationPageProps {
   serialNumber: string;
@@ -393,12 +394,13 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
               <div className="space-y-4">
                 {product.images.slice(0, 2).map((image: string, index: number) => (
                   <div key={index} className="relative rounded-xl overflow-hidden shadow-lg border-2 border-slate-200">
-                    <img
+                    <OptimizedImage
                       src={image}
                       alt={`${product.name} - Image ${index + 1}`}
-                      className="w-full aspect-video object-cover"
-                      loading="eager"
-                      decoding="async"
+                      className="w-full aspect-video"
+                      containerClassName="w-full"
+                      objectFit="cover"
+                      priority={index === 0}
                     />
                   </div>
                 ))}

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { ArrowLeft, MessageCircle, CheckCircle, Zap, Package, Target, Lightbulb, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Product } from '../types/product';
 import { api } from '../services/api';
+import { OptimizedImage } from '../components/OptimizedImage';
 
 interface ProductDetailPageProps {
   productId: string;
@@ -116,12 +117,13 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-12">
           <div className="lg:col-span-5 space-y-4">
             <div className="relative overflow-hidden rounded-xl bg-white border border-slate-200 aspect-[4/3] group shadow-sm hover:shadow-md transition-shadow">
-              <img
+              <OptimizedImage
                 src={productImages[selectedImage]}
                 alt={productName}
-                className="w-full h-full object-contain p-6 lg:p-8 transition-all duration-500"
-                loading="eager"
-                decoding="async"
+                className="w-full h-full p-6 lg:p-8 transition-all duration-500"
+                containerClassName="w-full h-full"
+                objectFit="contain"
+                priority={true}
               />
 
               {productImages.length > 1 && (
@@ -183,12 +185,12 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
                     }`}
                   >
                     <div className="aspect-square bg-white p-2">
-                      <img
+                      <OptimizedImage
                         src={image}
                         alt={`${productName} ${idx + 1}`}
-                        className="w-full h-full object-contain"
-                        loading="lazy"
-                        decoding="async"
+                        className="w-full h-full"
+                        containerClassName="w-full h-full"
+                        objectFit="contain"
                       />
                     </div>
                   </button>
