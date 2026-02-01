@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Headphones } from 'lucide-react';
-import { QUERY_TYPES, QUERY_TYPE_LABELS } from '../constants/CommonConstants'
+import { QUERY_TYPES, QUERY_TYPE_LABELS } from '../constants/CommonConstants';
+import SEO from '../components/SEO';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -58,8 +59,35 @@ export default function ContactPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const contactStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "ZS India",
+      "alternateName": ["ZSIndia", "Zoom Sounds", "ZS Acoustics"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Vrundavan Shopping Center, Kohinoor Road, Kodiyar Nagar, Varachha",
+        "addressLocality": "Surat",
+        "addressRegion": "Gujarat",
+        "postalCode": "395006",
+        "addressCountry": "IN"
+      },
+      "telephone": "+91-6354495770",
+      "email": "info@zsindia.com"
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="Contact ZS India (ZSIndia) | Zoom Sounds - ZS Acoustics | Surat, Gujarat"
+        description="Contact ZS India (ZSIndia, Zoom Sounds, ZS Acoustics) for audio systems, DJ equipment, and home theater solutions. Visit our showroom in Varachha, Surat or call +91-6354495770. Expert consultation available."
+        keywords="Contact ZS India, Zoom Sounds contact, ZS Acoustics Surat, audio showroom Varachha, sound systems dealer contact, ZSIndia phone number, audio store Surat Gujarat"
+        canonicalUrl="https://www.zsindia.com/contact"
+        structuredData={contactStructuredData}
+      />
       <section className="relative bg-gradient-to-br from-blue-50 via-white to-blue-50 text-slate-900 py-20 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200/30 rounded-full filter blur-3xl"></div>
@@ -87,7 +115,7 @@ export default function ContactPage() {
             {
               icon: MapPin,
               title: 'Visit Our Showroom',
-              details: ['B-4, Vrundavan Shopping Centre,', 'near gitanjali petrol pump', 'Surat, Gujarat, India'],
+              details: ['Vrundavan Shopping Center, Behind Gitanjali Petrol Pump,', 'Kohinoor Rd, B-4, Kodiyar Nagar, Varachha,', 'Surat, Gujarat 395006, India'],
               color: 'from-blue-600 to-blue-700',
             },
             {
@@ -269,7 +297,7 @@ export default function ContactPage() {
               <h2 className="text-4xl font-bold text-slate-900 mb-6">Find Us on Map</h2>
               <div className="bg-white rounded-2xl overflow-hidden shadow-xl border border-slate-200 h-[400px]">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59434.816344764215!2d72.77098967257662!3d21.17024394499776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04e59411d1563%3A0xfe4558290938b042!2sRing%20Rd%2C%20Surat%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1635789234567!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.3089442567974!2d72.8311!3d21.2043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04dec8b56fdf1%3A0x423b99085d26d1d9!2sVrundavan%20Shopping%20Center%2C%20Behind%20Gitanjali%20Petrol%20Pump%2C%20Varachha%2C%20Kohinoor%20Rd%2C%20Gitanjali%2C%20B%20-%204%2C%20Kodiyar%20Nagar%2C%20Surat%2C%20Gujarat%20395006!5e0!3m2!1sen!2sin!4v1735735200000!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

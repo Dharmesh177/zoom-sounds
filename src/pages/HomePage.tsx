@@ -15,6 +15,7 @@ import { Product } from "../types/product";
 import TestimonialForm from "../components/TestimonialForm";
 import { api } from "../services/api";
 import { S3_BASE_URL } from "../constants/CommonConstants";
+import SEO from "../components/SEO";
 
 interface HomePageProps {
   onNavigate: (page: string, productId?: string) => void;
@@ -57,8 +58,28 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
   };
 
+  const homeStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "ZS India (ZSIndia) - Zoom Sounds - ZS Acoustics | Premium Audio Systems Manufacturer",
+    "description": "ZS India (also known as ZSIndia and Zoom Sounds) - Leading professional audio systems manufacturer in Surat, Gujarat. 20+ years of excellence in DJ systems, home theaters, and sound equipment.",
+    "url": "https://www.zsindia.com",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "ZS India",
+      "alternateName": ["ZSIndia", "Zoom Sounds", "ZS Acoustics", "ZoomSounds", "ZSAcoustics"]
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="ZS India (ZSIndia) | Zoom Sounds – Premium Audio Systems Manufacturer Surat, Gujarat"
+        description="ZS India (also known as ZSIndia and Zoom Sounds) is a leading professional audio systems manufacturer in Surat, Gujarat with 20+ years expertise. Premium sound equipment, DJ systems, home theaters & professional audio solutions. Best sound manufacturer in Surat, Varachha, Gujarat."
+        keywords="ZS India, zs india, ZSIndia, zsindia, Zoom Sounds, zoomsound, ZSAcoustics, ZS Acoustics, zsacoustics, sound manufacturer surat, sound systems manufacturer gujarat, audio manufacturer varachha"
+        canonicalUrl="https://www.zsindia.com/"
+        structuredData={homeStructuredData}
+      />
       {/* Desktop Hero */}
       <section className="hidden lg:block relative text-white overflow-hidden">
         <div
@@ -130,14 +151,8 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
       </section>
 
       {/* Mobile Hero */}
-      <section className="lg:hidden relative text-white overflow-hidden min-h-screen flex flex-col">
-        {/* Background Image - Adjusted to show the starry/galaxy background better */}
-        <div
-          className="absolute inset-0 bg-cover bg-[center_-210px]"
-          style={{ backgroundImage: `url(${S3_BASE_URL}/mobile_bg.png)` }}
-        ></div>
-
-        <div className="container mx-auto px-6 pt-12 pb-12 relative z-10 flex-grow">
+      <section className="lg:hidden relative text-white overflow-hidden" style={{ background: 'linear-gradient(135deg, #0B1F3A 0%, #123B6D 50%, #1E5AA8 100%)' }}>
+        <div className="container mx-auto px-6 pt-12 pb-16 relative z-10">
           <div className="space-y-6 text-left">
             {/* 20+ Years Excellence Badge */}
             <div className="inline-flex items-center space-x-2 bg-cyan-500/10 border border-cyan-400/30 rounded-full px-4 py-2">
@@ -155,43 +170,12 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
             </h1>
 
             {/* Description */}
-            <p className="text-base text-slate-300 leading-relaxed max-w-[280px]">
+            <p className="text-base text-slate-300 leading-relaxed">
               <strong className="text-white">ZS India</strong> (ZSIndia / Zoom Sounds) – Professional sound systems engineered for perfection. From home theaters to concert venues.
             </p>
 
-            {/* Hero Image - The Amplifiers */}
-            <div className="py-4 -mx-6">
-              <img
-                src="/design/amplifier_stack.png"
-                alt=""
-                className="w-full h-auto object-contain scale-110"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
-
-            <div className="py-8 -mx-6">
-              <img
-                src="/design/amplifier_stack.png"
-                alt=""
-                className="w-full h-auto object-contain scale-110"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-
-            <div className="py-4 -mx-6">
-              <img
-                src="/design/amplifier_stack.png"
-                alt=""
-                className="w-full h-auto object-contain scale-110"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-
             {/* Action Buttons */}
-            <div className="flex flex-col gap-3 pt-16">
+            <div className="flex flex-col gap-3 pt-4">
               <button
                 onClick={() => onNavigate("products")}
                 className="group bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center justify-center space-x-2 shadow-lg shadow-blue-900/20"
@@ -207,8 +191,8 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
               </button>
             </div>
 
-            {/* Stats Grid - Now aligned to bottom */}
-            <div className="grid grid-cols-3 gap-2 pt-4">
+            {/* Stats Grid */}
+            <div className="grid grid-cols-3 gap-2 pt-6">
               {[
                 { icon: Users, value: "5000+", label: "Customers" },
                 { icon: Award, value: "20+", label: "Years" },
@@ -463,7 +447,7 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
             <p className="text-slate-700 mb-4">
               Our showroom and manufacturing unit at{" "}
               <strong>
-                B-4, Vrundavan Shopping Centre, Varachha Road, Surat
+                Vrundavan Shopping Center, Behind Gitanjali Petrol Pump, Kohinoor Rd, B-4, Kodiyar Nagar, Varachha, Surat, Gujarat 395006
               </strong>{" "}
               welcomes customers from across Gujarat. Whether you're from Surat,
               Navsari, Bardoli, Valsad, Ahmedabad, or Vadodara, ZSAcoustics is
@@ -485,8 +469,8 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
 
             <div className="bg-slate-50 border-l-4 border-blue-600 p-4 mt-6">
               <p className="text-slate-700 font-semibold">
-                📍 Location: Varachha Road, Surat, Gujarat | 📞 Phone:
-                +91-9876543210 | ⏰ Hours: Mon-Sat, 10 AM - 8 PM
+                📍 Location: Vrundavan Shopping Center, Kohinoor Rd, Varachha, Surat, Gujarat 395006 | 📞 Phone:
+                +91-63544-95770 | ⏰ Hours: Mon-Sat, 10 AM - 8 PM
               </p>
             </div>
           </div>

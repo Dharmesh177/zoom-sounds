@@ -1,8 +1,41 @@
 import { Award, Users, Target, Heart, TrendingUp, Shield, Zap, CheckCircle, Sparkles, Rocket } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function AboutPage() {
+  const aboutStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "ZS India",
+      "alternateName": ["ZSIndia", "Zoom Sounds", "ZS Acoustics", "ZoomSounds", "ZSAcoustics", "zsindia", "zoomsound", "zsacoustics"],
+      "description": "ZS India (also known as ZSIndia, Zoom Sounds, and ZS Acoustics) is a leading professional audio systems manufacturer in Surat, Gujarat. Established in 2004 with 20+ years of experience.",
+      "foundingDate": "2004",
+      "url": "https://www.zsindia.com",
+      "logo": "https://zsindia.s3.us-east-1.amazonaws.com/SiteImages/zsindia-logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Vrundavan Shopping Center, Kohinoor Road, Kodiyar Nagar, Varachha",
+        "addressLocality": "Surat",
+        "addressRegion": "Gujarat",
+        "postalCode": "395006",
+        "addressCountry": "IN"
+      },
+      "areaServed": ["Gujarat", "Maharashtra", "Rajasthan", "India"],
+      "knowsAbout": ["Audio Systems", "Sound Equipment", "DJ Systems", "Home Theater", "Professional Audio", "Sound Engineering", "Audio Manufacturing"],
+      "slogan": "Premium Audio That Delivers"
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
+      <SEO
+        title="About ZS India (ZSIndia) | Zoom Sounds - ZS Acoustics | 20+ Years Audio Excellence"
+        description="Learn about ZS India (ZSIndia, Zoom Sounds, ZS Acoustics) - Surat's leading professional audio systems manufacturer since 2004. 20+ years of excellence, 5000+ satisfied customers, 100% genuine products. Premium sound equipment, DJ systems & home theaters."
+        keywords="About ZS India, ZSIndia company, Zoom Sounds about, ZS Acoustics history, audio manufacturer surat, sound systems manufacturer gujarat, ZS India established, professional audio surat, sound equipment supplier gujarat"
+        canonicalUrl="https://www.zsindia.com/about"
+        structuredData={aboutStructuredData}
+      />
       <section className="relative bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white py-16 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 right-0 w-96 lg:w-[800px] h-96 lg:h-[800px] bg-blue-600/20 rounded-full filter blur-3xl animate-pulse"></div>

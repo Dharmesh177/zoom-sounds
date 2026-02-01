@@ -3,6 +3,7 @@ import { ArrowLeft, MessageCircle, CheckCircle, Zap, Package, Target, Lightbulb,
 import { Product } from '../types/product';
 import { api } from '../services/api';
 import { OptimizedImage } from '../components/OptimizedImage';
+import SEO from '../components/SEO';
 
 interface ProductDetailPageProps {
   productId: string;
@@ -99,8 +100,45 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
     return `https://wa.me/${phoneNumber}?text=${message}`;
   };
 
+  const productStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": productName,
+    "description": product.description || `${productName} by ZS India - Premium audio equipment`,
+    "brand": {
+      "@type": "Brand",
+      "name": "ZS India",
+      "alternateName": ["ZSIndia", "Zoom Sounds", "ZS Acoustics"]
+    },
+    "manufacturer": {
+      "@type": "Organization",
+      "name": "ZS India",
+      "alternateName": ["ZSIndia", "Zoom Sounds", "ZS Acoustics"]
+    },
+    "image": productImages[0],
+    "category": product.category || "Audio Equipment",
+    "offers": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "priceCurrency": "INR",
+      "seller": {
+        "@type": "Organization",
+        "name": "ZS India"
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
+      <SEO
+        title={`${productName} | ZS India (Zoom Sounds) Premium Audio Systems`}
+        description={`${product.description || productName} - Premium audio equipment by ZS India (ZSIndia, Zoom Sounds, ZS Acoustics). 100% genuine product with warranty. Professional sound systems manufacturer in Surat, Gujarat.`}
+        keywords={`${productName}, ZS India, Zoom Sounds, ZS Acoustics, ${product.category || 'audio equipment'}, sound systems surat, professional audio gujarat`}
+        canonicalUrl={`https://www.zsindia.com/products/${productId}`}
+        ogType="product"
+        ogImage={productImages[0]}
+        structuredData={productStructuredData}
+      />
       <div className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <button

@@ -3,6 +3,7 @@ import { MessageCircle, Star, Package, Zap, ChevronLeft, ChevronRight, Search, G
 import { Product } from '../types/product';
 import { api } from '../services/api';
 import { OptimizedImage } from '../components/OptimizedImage';
+import SEO from '../components/SEO';
 
 interface ProductsPageProps {
   onNavigate: (page: string, productId?: string) => void;
@@ -97,8 +98,28 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const productsStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "ZS India Products - Audio Systems by Zoom Sounds",
+    "description": "Browse premium audio products from ZS India (ZSIndia, Zoom Sounds, ZS Acoustics). Professional sound systems, DJ equipment, home theater systems, amplifiers and speakers.",
+    "url": "https://www.zsindia.com/products",
+    "provider": {
+      "@type": "Organization",
+      "name": "ZS India",
+      "alternateName": ["ZSIndia", "Zoom Sounds", "ZS Acoustics"]
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <SEO
+        title="ZS India Products | Zoom Sounds Audio Systems | ZS Acoustics Sound Equipment"
+        description="Shop premium audio products from ZS India (ZSIndia, Zoom Sounds, ZS Acoustics). Professional DJ systems, home theater systems, amplifiers, speakers and complete sound solutions. 100% genuine products with warranty."
+        keywords="ZS India products, Zoom Sounds audio systems, ZS Acoustics speakers, ZSIndia sound equipment, DJ systems surat, home theater systems gujarat, professional audio products, sound system price, amplifiers"
+        canonicalUrl="https://www.zsindia.com/products"
+        structuredData={productsStructuredData}
+      />
       <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white py-20 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full filter blur-3xl animate-pulse"></div>
