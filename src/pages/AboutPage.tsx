@@ -9,7 +9,7 @@ export default function AboutPage() {
       "@type": "Organization",
       "name": "ZS India",
       "alternateName": ["ZSIndia", "ZS Acoustics", "ZSAcoustics", "zsindia", "zsacoustics"],
-      "description": "ZS India – ZS Acoustics is a leading professional audio systems manufacturer in Surat, Gujarat. Established in 2004 with 20+ years of experience.",
+      "description": "ZS Acoustics - A Brand by ZS India. Professional DJ and event sound systems designed for Indian customers. High-voltage amplifiers & speakers trusted across India.",
       "foundingDate": "2004",
       "url": "https://www.zsindia.com",
       "logo": "https://zsindia.s3.us-east-1.amazonaws.com/SiteImages/zsindia-logo.png",
@@ -22,17 +22,17 @@ export default function AboutPage() {
         "addressCountry": "IN"
       },
       "areaServed": ["Gujarat", "Maharashtra", "Rajasthan", "India"],
-      "knowsAbout": ["Audio Systems", "Sound Equipment", "DJ Systems", "Home Theater", "Professional Audio", "Sound Engineering", "Audio Manufacturing"],
-      "slogan": "Premium Audio That Delivers"
+      "knowsAbout": ["Professional DJ Systems", "Event Sound Systems", "High Voltage Amplifiers", "Professional Speakers", "Sound Equipment", "Audio Manufacturing"],
+      "slogan": "Professional DJ and Event Sound Systems - Designed for Indian Customers"
     }
   };
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       <SEO
-        title="About ZS India | ZS Acoustics | 20+ Years Audio Excellence"
-        description="Learn about ZS India – ZS Acoustics, Surat's leading professional audio systems manufacturer since 2004. 20+ years of excellence, 5000+ satisfied customers, 100% genuine products. Premium sound equipment, DJ systems & home theaters."
-        keywords="About ZS India, ZSIndia company, ZS Acoustics history, audio manufacturer surat, sound systems manufacturer gujarat, ZS India established, professional audio surat, sound equipment supplier gujarat"
+        title="About ZS India | ZS Acoustics - A Brand by ZS India | 20+ Years Excellence"
+        description="ZS Acoustics - A Brand by ZS India. Professional DJ and event sound systems designed for Indian customers. High-voltage amplifiers & speakers trusted across India. 20+ years of excellence, 5000+ satisfied customers."
+        keywords="About ZS India, ZS Acoustics brand, professional DJ systems, event sound systems india, high voltage amplifiers, audio manufacturer surat gujarat"
         canonicalUrl="https://www.zsindia.com/about"
         structuredData={aboutStructuredData}
       />
@@ -58,7 +58,7 @@ export default function AboutPage() {
               </span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-300 leading-relaxed max-w-4xl mx-auto font-light px-4">
-              <strong className="text-white">ZS India</strong> – <strong className="text-white">ZS Acoustics</strong> – For over two decades, we've been crafting extraordinary audio experiences that resonate with perfection
+              <strong className="text-cyan-400">ZS Acoustics</strong> – A Brand by <strong className="text-white">ZS India</strong>. Professional DJ and event sound systems designed for Indian customers. High-voltage amplifiers & speakers trusted across India.
             </p>
           </div>
         </div>

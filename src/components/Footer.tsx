@@ -21,8 +21,11 @@ export default function Footer({ onNavigate }: FooterProps) {
                 priority={true}
               />
             </div>
+            <p className="text-slate-400 text-sm leading-relaxed mb-2">
+              <strong className="text-cyan-400">ZS Acoustics</strong> – A Brand by <strong className="text-white">ZS India</strong>
+            </p>
             <p className="text-slate-400 text-sm leading-relaxed">
-              <strong className="text-white">ZS India</strong> – <strong className="text-white">ZS Acoustics</strong> – Leading manufacturer and dealer of premium sound systems in Surat, Gujarat. Quality you can trust, sound you can feel.
+              Professional DJ and event sound systems designed for Indian customers. High-voltage amplifiers & speakers trusted across India.
             </p>
           </div>
 

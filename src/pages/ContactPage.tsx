@@ -82,9 +82,9 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Contact ZS India | ZS Acoustics | Surat, Gujarat"
-        description="Contact ZS India – ZS Acoustics for audio systems, DJ equipment, and home theater solutions. Visit our showroom in Varachha, Surat or call +91-6354495770. Expert consultation available."
-        keywords="Contact ZS India, ZS Acoustics contact, ZSIndia Surat, audio showroom Varachha, sound systems dealer contact, ZSIndia phone number, audio store Surat Gujarat"
+        title="Contact ZS India | ZS Acoustics - A Brand by ZS India | Surat, Gujarat"
+        description="Contact ZS India for professional DJ and event sound systems. ZS Acoustics - A Brand by ZS India. High-voltage amplifiers & speakers trusted across India. Visit our showroom in Varachha, Surat or call +91-6354495770."
+        keywords="Contact ZS India, ZS Acoustics contact, professional DJ systems surat, event sound systems gujarat, high voltage amplifiers dealer, audio showroom varachha"
         canonicalUrl="https://www.zsindia.com/contact"
         structuredData={contactStructuredData}
       />
@@ -102,8 +102,11 @@ export default function ContactPage() {
               <span className="text-sm font-medium text-blue-700">Get In Touch</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6 text-slate-900">Contact Us</h1>
+            <p className="text-lg text-slate-500 mb-4">
+              <strong className="text-blue-600">ZS Acoustics</strong> – A Brand by <strong className="text-slate-900">ZS India</strong>
+            </p>
             <p className="text-xl text-slate-600 leading-relaxed">
-              We're here to help with all your sound system needs and questions
+              We're here to help with all your professional DJ and event sound system needs
             </p>
           </div>
         </div>

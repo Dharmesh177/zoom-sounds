@@ -109,8 +109,8 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
   const homeStructuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "ZS India - ZS Acoustics | Premium Audio Systems Manufacturer",
-    "description": "ZS India – ZS Acoustics: Leading professional audio systems manufacturer in Surat, Gujarat. 20+ years of excellence in DJ systems, home theaters, and sound equipment.",
+    "name": "ZS Acoustics - A Brand by ZS India | Professional DJ & Event Sound Systems",
+    "description": "ZS Acoustics - A Brand by ZS India. Professional DJ and event sound systems designed for Indian customers. High-voltage amplifiers & speakers trusted across India.",
     "url": "https://www.zsindia.com",
     "mainEntity": {
       "@type": "Organization",
@@ -122,9 +122,9 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="ZS India | ZS Acoustics – Premium Audio Systems Manufacturer Surat, Gujarat"
-        description="ZS India – ZS Acoustics is a leading professional audio systems manufacturer in Surat, Gujarat with 20+ years expertise. Premium sound equipment, DJ systems, home theaters & professional audio solutions. Best sound manufacturer in Surat, Varachha, Gujarat."
-        keywords="ZS India, zs india, ZSIndia, zsindia, ZSAcoustics, ZS Acoustics, zsacoustics, sound manufacturer surat, sound systems manufacturer gujarat, audio manufacturer varachha"
+        title="ZS Acoustics - A Brand by ZS India | Professional DJ & Event Sound Systems"
+        description="ZS Acoustics - A Brand by ZS India. Professional DJ and event sound systems designed for Indian customers. High-voltage amplifiers & speakers trusted across India. 20+ years of excellence in Surat, Gujarat."
+        keywords="ZS India, ZS Acoustics, professional DJ systems, event sound systems, high voltage amplifiers, speakers india, sound manufacturer surat, audio equipment gujarat"
         canonicalUrl="https://www.zsindia.com/"
         structuredData={homeStructuredData}
       />
@@ -146,15 +146,15 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
               </div>
 
               <h1 className="text-6xl font-black leading-tight">
-                Premium Audio
+                Professional DJ &
                 <br />
                 <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                  That Delivers
+                  Event Sound Systems
                 </span>
               </h1>
 
               <p className="text-xl text-slate-300 leading-relaxed max-w-lg">
-                <strong className="text-white">ZS India</strong> – <strong className="text-white">ZS Acoustics</strong> – Professional sound systems engineered for perfection. From home theaters to concert venues.
+                <strong className="text-cyan-400">ZS Acoustics</strong> – A Brand by <strong className="text-white">ZS India</strong>. High-voltage amplifiers & speakers designed for Indian customers and trusted across India.
               </p>
 
               <div className="flex gap-4 pt-4">
@@ -212,14 +212,14 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
 
             {/* Main Headline */}
             <h1 className="text-4xl font-black leading-[1.1] tracking-tight">
-              Premium Audio
+              Professional DJ &
               <br />
-              <span className="text-blue-400">That Delivers</span>
+              <span className="text-blue-400">Event Sound Systems</span>
             </h1>
 
             {/* Description */}
             <p className="text-base text-slate-300 leading-relaxed">
-              <strong className="text-white">ZS India</strong> – <strong className="text-white">ZS Acoustics</strong> – Professional sound systems engineered for perfection. From home theaters to concert venues.
+              <strong className="text-cyan-400">ZS Acoustics</strong> – A Brand by <strong className="text-white">ZS India</strong>. High-voltage amplifiers & speakers designed for Indian customers and trusted across India.
             </p>
 
             {/* Action Buttons */}
