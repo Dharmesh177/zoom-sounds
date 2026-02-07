@@ -93,19 +93,21 @@ function App() {
     }
   };
 
-  if (isLoading) {
-    return <Preloader />;
-  }
-
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header currentPage={currentPage} onNavigate={handleNavigate} />
-      <main className="flex-grow page-transition">
-        {renderPage()}
-      </main>
-      <Footer onNavigate={handleNavigate} />
-      <ScrollToTop />
-    </div>
+    <>
+      {/* Preloader overlay - shown while loading */}
+      {isLoading && <Preloader />}
+      
+      {/* Main content - always rendered but hidden behind preloader */}
+      <div className={`min-h-screen flex flex-col ${isLoading ? 'invisible' : 'visible'}`}>
+        <Header currentPage={currentPage} onNavigate={handleNavigate} />
+        <main className="flex-grow page-transition">
+          {renderPage()}
+        </main>
+        <Footer onNavigate={handleNavigate} />
+        <ScrollToTop />
+      </div>
+    </>
   );
 }
 
