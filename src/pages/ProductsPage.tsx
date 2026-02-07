@@ -101,22 +101,22 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
   const productsStructuredData = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "ZS India Products - Audio Systems by Zoom Sounds",
-    "description": "Browse premium audio products from ZS India (ZSIndia, Zoom Sounds, ZS Acoustics). Professional sound systems, DJ equipment, home theater systems, amplifiers and speakers.",
+    "name": "ZS India Products - Audio Systems by ZS Acoustics",
+    "description": "Browse premium audio products from ZS India – ZS Acoustics. Professional sound systems, DJ equipment, home theater systems, amplifiers and speakers.",
     "url": "https://www.zsindia.com/products",
     "provider": {
       "@type": "Organization",
       "name": "ZS India",
-      "alternateName": ["ZSIndia", "Zoom Sounds", "ZS Acoustics"]
+      "alternateName": ["ZSIndia", "ZS Acoustics"]
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <SEO
-        title="ZS India Products | Zoom Sounds Audio Systems | ZS Acoustics Sound Equipment"
-        description="Shop premium audio products from ZS India (ZSIndia, Zoom Sounds, ZS Acoustics). Professional DJ systems, home theater systems, amplifiers, speakers and complete sound solutions. 100% genuine products with warranty."
-        keywords="ZS India products, Zoom Sounds audio systems, ZS Acoustics speakers, ZSIndia sound equipment, DJ systems surat, home theater systems gujarat, professional audio products, sound system price, amplifiers"
+        title="ZS India Products | ZS Acoustics Audio Systems | Sound Equipment"
+        description="Shop premium audio products from ZS India – ZS Acoustics. Professional DJ systems, home theater systems, amplifiers, speakers and complete sound solutions. 100% genuine products with warranty."
+        keywords="ZS India products, ZS Acoustics audio systems, ZSIndia speakers, sound equipment, DJ systems surat, home theater systems gujarat, professional audio products, sound system price, amplifiers"
         canonicalUrl="https://www.zsindia.com/products"
         structuredData={productsStructuredData}
       />

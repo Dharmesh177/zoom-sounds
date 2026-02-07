@@ -65,7 +65,7 @@ export default function ContactPage() {
     "mainEntity": {
       "@type": "Organization",
       "name": "ZS India",
-      "alternateName": ["ZSIndia", "Zoom Sounds", "ZS Acoustics"],
+      "alternateName": ["ZSIndia", "ZS Acoustics"],
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Vrundavan Shopping Center, Kohinoor Road, Kodiyar Nagar, Varachha",
@@ -82,9 +82,9 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Contact ZS India (ZSIndia) | Zoom Sounds - ZS Acoustics | Surat, Gujarat"
-        description="Contact ZS India (ZSIndia, Zoom Sounds, ZS Acoustics) for audio systems, DJ equipment, and home theater solutions. Visit our showroom in Varachha, Surat or call +91-6354495770. Expert consultation available."
-        keywords="Contact ZS India, Zoom Sounds contact, ZS Acoustics Surat, audio showroom Varachha, sound systems dealer contact, ZSIndia phone number, audio store Surat Gujarat"
+        title="Contact ZS India | ZS Acoustics | Surat, Gujarat"
+        description="Contact ZS India – ZS Acoustics for audio systems, DJ equipment, and home theater solutions. Visit our showroom in Varachha, Surat or call +91-6354495770. Expert consultation available."
+        keywords="Contact ZS India, ZS Acoustics contact, ZSIndia Surat, audio showroom Varachha, sound systems dealer contact, ZSIndia phone number, audio store Surat Gujarat"
         canonicalUrl="https://www.zsindia.com/contact"
         structuredData={contactStructuredData}
       />
@@ -304,7 +304,7 @@ export default function ContactPage() {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="ZSINDIA Location"
+                  title="ZS India Location"
                 ></iframe>
               </div>
             </div>

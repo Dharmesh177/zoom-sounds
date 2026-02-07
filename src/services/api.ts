@@ -36,6 +36,16 @@ export interface CustomerInfo {
   claimedAt?: string;
 }
 
+export interface Testimonial {
+  _id: string;
+  name: string;
+  message: string;
+  rating: number;
+  approved: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface WarrantyExpireTime {
   daysRemaining?: number;
   hoursRemaining?: number;
@@ -233,6 +243,28 @@ export const api = {
       return data;
     } catch (error) {
       console.error('Warranty claim error:', error);
+      throw error;
+    }
+  },
+
+  async getApprovedTestimonials(): Promise<Testimonial[]> {
+    try {
+      const response = await fetch(`${API_URL}/testinomial`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch testimonials');
+      }
+
+      const result = await response.json();
+      // Filter only approved testimonials
+      return result.data.filter((t: Testimonial) => t.approved);
+    } catch (error) {
+      console.error('Testimonials fetch error:', error);
       throw error;
     }
   },

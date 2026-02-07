@@ -14,7 +14,7 @@ All technical SEO optimizations for brand SERP dominance have been implemented:
 - [x] Products page with brand association
 - [x] Product detail pages with brand schema
 - [x] Contact page with consistent NAP
-- [x] All brand variations included (ZS India, ZSIndia, Zoom Sounds, ZS Acoustics)
+- [x] All brand variations included (ZS India, ZSIndia, ZS Acoustics)
 
 ## 🎯 Immediate Actions Required (Week 1)
 
@@ -32,7 +32,7 @@ All technical SEO optimizations for brand SERP dominance have been implemented:
 ### Day 2 - Google Business Profile
 - [ ] Visit [Google Business Profile](https://www.google.com/business/)
 - [ ] Create/claim business listing
-- [ ] Business Name: **ZS India (Zoom Sounds)** or just **ZS India**
+- [ ] Business Name: **ZS India (ZS Acoustics)** or just **ZS India**
 - [ ] Add address: Vrundavan Shopping Center, Kohinoor Road, Kodiyar Nagar, Varachha, Surat, Gujarat 395006
 - [ ] Add phone: +91-6354495770
 - [ ] Add website: https://www.zsindia.com
@@ -48,7 +48,6 @@ All technical SEO optimizations for brand SERP dominance have been implemented:
 ### Day 3 - Brand Monitoring Setup
 - [ ] Set up Google Alerts for:
   - [ ] "ZS India"
-  - [ ] "Zoom Sounds"
   - [ ] "ZS Acoustics"
   - [ ] "ZSIndia"
 - [ ] Create tracking sheet for weekly rank monitoring
@@ -114,7 +113,6 @@ Check these metrics every week:
 
 ### Search Rankings
 - [ ] Check position for "ZS India" in Google
-- [ ] Check position for "Zoom Sounds" in Google
 - [ ] Check position for "ZS Acoustics" in Google
 - [ ] Check position for "ZSIndia" in Google
 
@@ -144,14 +142,14 @@ Check these metrics every week:
 
 ### Week 8
 - [ ] Top 3 position for "ZS India"
-- [ ] Top 5 position for "Zoom Sounds"
+- [ ] Top 5 position for "ZS Acoustics"
 - [ ] 25+ Google reviews
 - [ ] Knowledge Panel initiated
 
 ### Week 12
 - [ ] #1 position for "ZS India"
-- [ ] #1 position for "Zoom Sounds"
 - [ ] #1 position for "ZS Acoustics"
+- [ ] #1 position for "ZSIndia"
 - [ ] Knowledge Panel active
 - [ ] 50+ Google reviews
 

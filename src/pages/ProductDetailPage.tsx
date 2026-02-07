@@ -108,12 +108,12 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
     "brand": {
       "@type": "Brand",
       "name": "ZS India",
-      "alternateName": ["ZSIndia", "Zoom Sounds", "ZS Acoustics"]
+      "alternateName": ["ZSIndia", "ZS Acoustics"]
     },
     "manufacturer": {
       "@type": "Organization",
       "name": "ZS India",
-      "alternateName": ["ZSIndia", "Zoom Sounds", "ZS Acoustics"]
+      "alternateName": ["ZSIndia", "ZS Acoustics"]
     },
     "image": productImages[0],
     "category": product.category || "Audio Equipment",
@@ -131,9 +131,9 @@ export default function ProductDetailPage({ productId, onNavigate }: ProductDeta
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
       <SEO
-        title={`${productName} | ZS India (Zoom Sounds) Premium Audio Systems`}
-        description={`${product.description || productName} - Premium audio equipment by ZS India (ZSIndia, Zoom Sounds, ZS Acoustics). 100% genuine product with warranty. Professional sound systems manufacturer in Surat, Gujarat.`}
-        keywords={`${productName}, ZS India, Zoom Sounds, ZS Acoustics, ${product.category || 'audio equipment'}, sound systems surat, professional audio gujarat`}
+        title={`${productName} | ZS India – ZS Acoustics Premium Audio Systems`}
+        description={`${product.description || productName} - Premium audio equipment by ZS India – ZS Acoustics. 100% genuine product with warranty. Professional sound systems manufacturer in Surat, Gujarat.`}
+        keywords={`${productName}, ZS India, ZS Acoustics, ZSIndia, ${product.category || 'audio equipment'}, sound systems surat, professional audio gujarat`}
         canonicalUrl={`https://www.zsindia.com/products/${productId}`}
         ogType="product"
         ogImage={productImages[0]}

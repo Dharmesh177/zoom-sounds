@@ -2,15 +2,15 @@
 
 ## Executive Summary
 
-This document outlines the comprehensive brand-focused SEO optimizations implemented for ZS India (zsindia.com) to achieve top rankings for brand-related searches including "ZS India", "Zoom Sounds", "ZS Acoustics", and variations.
+This document outlines the comprehensive brand-focused SEO optimizations implemented for ZS India (zsindia.com) to achieve top rankings for brand-related searches including "ZS India", "ZS Acoustics", and variations.
 
 ## Core Objective
 
 Ensure **zsindia.com ranks #1** for:
 - ZS India
-- Zoom Sound / Zoom Sounds
 - ZS Acoustic / ZS Acoustics
-- Brand + product variations (e.g., "Zoom Sound speakers", "ZS India sound system")
+- ZSIndia / zsindia
+- Brand + product variations (e.g., "ZS India speakers", "ZS Acoustics sound system")
 
 ## What Was Implemented
 
@@ -22,7 +22,7 @@ Added explicit Brand schema to strengthen brand recognition:
 {
   "@type": "Brand",
   "name": "ZS India",
-  "alternateName": ["ZSIndia", "Zoom Sounds", "ZS Acoustics", ...]
+  "alternateName": ["ZSIndia", "ZS Acoustics", ...]
 }
 ```
 
@@ -50,7 +50,7 @@ Implemented for Google sitelinks search box:
 #### d) FAQ Schema for Brand Queries
 Added FAQPage schema answering common brand questions:
 - "What is ZS India?"
-- "Is ZS India the same as Zoom Sounds?"
+- "What are the brand names for ZS India?"
 - "Where is ZS India located?"
 - "What products does ZS India manufacture?"
 - "Is ZS Acoustics a genuine brand?"
@@ -76,38 +76,39 @@ Created `/src/components/SEO.tsx` - A reusable component that:
 ### 3. Page-Specific SEO Optimization
 
 #### Home Page (/)
-- **Title**: "ZS India (ZSIndia) | Zoom Sounds – Premium Audio Systems Manufacturer Surat, Gujarat"
-- **Focus**: Brand awareness with all brand name variations
+- **Title**: "ZS India | ZS Acoustics – Premium Audio Systems Manufacturer Surat, Gujarat"
+- **Focus**: Brand awareness with ZS India as primary brand, ZSIndia in alternateName schemas
 - **Structured Data**: WebPage schema linking to Organization
 
 #### About Page (/about)
-- **Title**: "About ZS India (ZSIndia) | Zoom Sounds - ZS Acoustics | 20+ Years Audio Excellence"
+- **Title**: "About ZS India | ZS Acoustics | 20+ Years Audio Excellence"
 - **Focus**: Brand history, establishment (2004), brand authority signals
 - **Structured Data**: AboutPage schema with comprehensive organization details
-- **Content**: Strong brand mentions throughout with all name variations
+- **Content**: Strong brand mentions with ZS India as primary name
 
 #### Products Page (/products)
-- **Title**: "ZS India Products | Zoom Sounds Audio Systems | ZS Acoustics Sound Equipment"
+- **Title**: "ZS India Products | ZS Acoustics Audio Systems | Sound Equipment"
 - **Focus**: Product catalog discovery with brand association
 - **Structured Data**: CollectionPage schema
 
 #### Product Detail Pages (/products/:id)
-- **Title**: "[Product Name] | ZS India (Zoom Sounds) Premium Audio Systems"
+- **Title**: "[Product Name] | ZS India – ZS Acoustics Premium Audio Systems"
 - **Focus**: Product-brand association
 - **Structured Data**: Product schema with brand manufacturer details
 
 #### Contact Page (/contact)
-- **Title**: "Contact ZS India (ZSIndia) | Zoom Sounds - ZS Acoustics | Surat, Gujarat"
-- **Focus**: Local business contact with brand variations
+- **Title**: "Contact ZS India | ZS Acoustics | Surat, Gujarat"
+- **Focus**: Local business contact with brand association
 - **Structured Data**: ContactPage schema with organization details
 
 ### 4. Brand Name Consistency
 
-All brand variations consistently mentioned across the site:
-- **Primary**: ZS India
-- **Variations**: ZSIndia, zsindia, Zoom Sounds, ZoomSounds, zoomsound, ZS Acoustics, ZSAcoustics, zsacoustics, ZS Acoustic
+SEO-optimized brand strategy:
+- **Primary Display Name**: ZS India (with space) - used in all visible content
+- **Schema alternateName**: ZSIndia, zsindia - for search coverage without space
+- **Sub-brand**: ZS Acoustics, ZSAcoustics - product line
 
-This ensures Google recognizes all variations as the same entity.
+This ensures Google recognizes searches for both "zs india" and "zsindia" as the same entity.
 
 ### 5. Meta Tags Optimization
 
@@ -144,7 +145,7 @@ These actions MUST be taken externally to achieve top brand rankings:
 
 ### 2. Google Business Profile (Critical)
 1. Create/claim at [Google Business Profile](https://www.google.com/business/)
-2. Use exact business name: **ZS India** or **ZS India (Zoom Sounds)**
+2. Use exact business name: **ZS India** or **ZS India (ZS Acoustics)**
 3. Add alternate names in business description
 4. Complete all sections:
    - Address: Vrundavan Shopping Center, Kohinoor Road, Varachha, Surat 395006
@@ -168,7 +169,7 @@ Ensure consistent NAP (Name, Address, Phone) across:
 
 ### 4. Brand Citations & Directory Listings
 Submit to Indian business directories with **exact brand name**:
-- JustDial (zsindia, zoom sounds, zs acoustics)
+- JustDial (zsindia, zs acoustics)
 - IndiaMART
 - TradeIndia
 - Sulekha
@@ -202,23 +203,22 @@ Google tracks unlinked brand mentions for entity recognition.
 
 #### Blog Posts to Create:
 - "The Story of ZS India: 20 Years of Audio Excellence"
-- "Zoom Sounds vs [Competitor]: A Detailed Comparison"
+- "ZS India vs [Competitor]: A Detailed Comparison"
 - "Why ZS Acoustics is Gujarat's Trusted Audio Brand"
 - Customer success stories
 - Installation case studies
 
 #### Brand-Focused Keywords to Target:
 - "ZS India reviews"
-- "Zoom Sounds products"
-- "ZS Acoustics warranty"
+- "ZS Acoustics products"
+- "ZS India warranty"
 - "ZSIndia dealer"
-- "Zoom Sound price list"
+- "ZS Acoustics price list"
 - "ZS India vs [competitor]"
 
 ### 8. Monitor Brand SERP
 Weekly monitoring of:
 - Position for "ZS India"
-- Position for "Zoom Sounds"
 - Position for "ZS Acoustics"
 - Position for "ZSIndia"
 - Brand impressions in Google Search Console
@@ -262,8 +262,8 @@ Weekly monitoring of:
 ### Primary KPIs:
 1. **Brand Keyword Rankings**
    - "ZS India" → Target: #1
-   - "Zoom Sounds" → Target: #1
    - "ZS Acoustics" → Target: #1
+   - "ZSIndia" → Target: #1
    - Tracked weekly
 
 2. **Brand Search Impressions**
@@ -334,7 +334,7 @@ ZS India's advantages for brand SERP success:
 - [PageSpeed Insights](https://pagespeed.web.dev/)
 
 ### Brand Monitoring:
-- [Google Alerts](https://www.google.com/alerts) - Set up for "ZS India", "Zoom Sounds", "ZS Acoustics"
+- [Google Alerts](https://www.google.com/alerts) - Set up for "ZS India", "ZS Acoustics", "ZSIndia"
 - [Google Trends](https://trends.google.com/) - Track brand search trends
 
 ## Conclusion

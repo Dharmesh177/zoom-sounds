@@ -11,9 +11,9 @@ interface SEOProps {
 }
 
 const SEO = ({
-  title = "ZS India (ZSIndia) | Zoom Sounds – Premium Audio Systems Manufacturer",
-  description = "ZS India (also known as ZSIndia and Zoom Sounds) is a leading professional audio systems manufacturer in Surat, Gujarat with 20+ years expertise. Premium sound equipment, DJ systems, home theaters & professional audio solutions.",
-  keywords = "ZS India, zs india, ZSIndia, zsindia, Zoom Sounds, zoomsound, ZSAcoustics, ZS Acoustics, zsacoustics, sound manufacturer surat, audio systems manufacturer gujarat",
+  title = "ZS India | ZS Acoustics – Premium Audio Systems Manufacturer",
+  description = "ZS India – ZS Acoustics is a leading professional audio systems manufacturer in Surat, Gujarat with 20+ years expertise. Premium sound equipment, DJ systems, home theaters & professional audio solutions.",
+  keywords = "ZS India, zs india, ZSIndia, zsindia, ZSAcoustics, ZS Acoustics, zsacoustics, sound manufacturer surat, audio systems manufacturer gujarat",
   canonicalUrl = "https://www.zsindia.com/",
   ogType = "website",
   ogImage = "https://zsindia.s3.us-east-1.amazonaws.com/SiteImages/zsindia-logo.png",
@@ -59,7 +59,7 @@ const SEO = ({
 
     if (structuredData) {
       const scriptId = 'structured-data-page';
-      let script = document.getElementById(scriptId);
+      let script = document.getElementById(scriptId) as HTMLScriptElement | null;
 
       if (!script) {
         script = document.createElement('script');

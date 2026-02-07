@@ -1,6 +1,6 @@
-# ZSIndia - Zoom Sounds
+# ZSIndia - ZS Acoustics
 
-Official website for ZSIndia (Zoom Sounds / ZS Acoustics) with product verification and warranty claim functionality.
+Official website for ZSIndia (ZS India / ZS Acoustics) with product verification and warranty claim functionality.
 
 ## Features
 

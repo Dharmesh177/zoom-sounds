@@ -1,4 +1,4 @@
-# robots.txt for Zoom Sounds | ZS India | ZSAcoustics
+# robots.txt for ZS India | ZS Acoustics
 User-agent: *
 Allow: /
 

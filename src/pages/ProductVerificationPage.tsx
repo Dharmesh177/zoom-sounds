@@ -174,7 +174,7 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
               </p>
               <ul className="space-y-3">
                 {[
-                  'Contact ZSIndia support immediately at +91 63544 95770',
+                  'Contact ZS India support immediately at +91 63544 95770',
                   'Keep your purchase receipt and product packaging',
                   'Note down the seller details and purchase location',
                   'Do not use the product as it may be unsafe or unreliable',
@@ -205,7 +205,7 @@ export default function ProductVerificationPage({ serialNumber }: ProductVerific
             </div>
             <h1 className="text-4xl font-bold mb-3">Authentic Product Verified!</h1>
             <p className="text-green-100 text-lg font-medium">
-              This is a genuine ZSIndia product
+              This is a genuine ZS India product
             </p>
           </div>
 

@@ -7,13 +7,14 @@ import {
   Users,
   Sparkles,
   MessageSquare,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { useState, useEffect } from "react";
-import testimonialsData from "../data/testimonials.json";
 import TopProducts from "../components/TopProducts";
 import { Product } from "../types/product";
 import TestimonialForm from "../components/TestimonialForm";
-import { api } from "../services/api";
+import { api, Testimonial } from "../services/api";
 import { S3_BASE_URL } from "../constants/CommonConstants";
 import SEO from "../components/SEO";
 
@@ -27,6 +28,9 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
   const [showTestimonialForm, setShowTestimonialForm] = useState(false);
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
   const [productsError, setProductsError] = useState<string | null>(null);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
+  const [testimonialsLoading, setTestimonialsLoading] = useState(true);
 
   useEffect(() => {
     const fetchFeaturedProducts = async () => {
@@ -46,6 +50,22 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
     fetchFeaturedProducts();
   }, [onDataLoaded]);
 
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        setTestimonialsLoading(true);
+        const data = await api.getApprovedTestimonials();
+        setTestimonials(data);
+      } catch (error) {
+        console.error("Failed to fetch testimonials:", error);
+      } finally {
+        setTestimonialsLoading(false);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
+
   const handleLearnMore = (productId: string) => {
     onNavigate("product-detail", productId);
   };
@@ -58,25 +78,46 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
   };
 
+  // Carousel navigation
+  const nextTestimonials = () => {
+    if (testimonials.length > 3) {
+      setCurrentTestimonialIndex((prev) => 
+        prev + 3 >= testimonials.length ? 0 : prev + 3
+      );
+    }
+  };
+
+  const prevTestimonials = () => {
+    if (testimonials.length > 3) {
+      setCurrentTestimonialIndex((prev) => 
+        prev === 0 ? Math.max(0, testimonials.length - 3) : Math.max(0, prev - 3)
+      );
+    }
+  };
+
+  const getVisibleTestimonials = () => {
+    return testimonials.slice(currentTestimonialIndex, currentTestimonialIndex + 3);
+  };
+
   const homeStructuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "ZS India (ZSIndia) - Zoom Sounds - ZS Acoustics | Premium Audio Systems Manufacturer",
-    "description": "ZS India (also known as ZSIndia and Zoom Sounds) - Leading professional audio systems manufacturer in Surat, Gujarat. 20+ years of excellence in DJ systems, home theaters, and sound equipment.",
+    "name": "ZS India - ZS Acoustics | Premium Audio Systems Manufacturer",
+    "description": "ZS India – ZS Acoustics: Leading professional audio systems manufacturer in Surat, Gujarat. 20+ years of excellence in DJ systems, home theaters, and sound equipment.",
     "url": "https://www.zsindia.com",
     "mainEntity": {
       "@type": "Organization",
       "name": "ZS India",
-      "alternateName": ["ZSIndia", "Zoom Sounds", "ZS Acoustics", "ZoomSounds", "ZSAcoustics"]
+      "alternateName": ["ZSIndia", "ZS Acoustics", "ZSAcoustics"]
     }
   };
 
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="ZS India (ZSIndia) | Zoom Sounds – Premium Audio Systems Manufacturer Surat, Gujarat"
-        description="ZS India (also known as ZSIndia and Zoom Sounds) is a leading professional audio systems manufacturer in Surat, Gujarat with 20+ years expertise. Premium sound equipment, DJ systems, home theaters & professional audio solutions. Best sound manufacturer in Surat, Varachha, Gujarat."
-        keywords="ZS India, zs india, ZSIndia, zsindia, Zoom Sounds, zoomsound, ZSAcoustics, ZS Acoustics, zsacoustics, sound manufacturer surat, sound systems manufacturer gujarat, audio manufacturer varachha"
+        title="ZS India | ZS Acoustics – Premium Audio Systems Manufacturer Surat, Gujarat"
+        description="ZS India – ZS Acoustics is a leading professional audio systems manufacturer in Surat, Gujarat with 20+ years expertise. Premium sound equipment, DJ systems, home theaters & professional audio solutions. Best sound manufacturer in Surat, Varachha, Gujarat."
+        keywords="ZS India, zs india, ZSIndia, zsindia, ZSAcoustics, ZS Acoustics, zsacoustics, sound manufacturer surat, sound systems manufacturer gujarat, audio manufacturer varachha"
         canonicalUrl="https://www.zsindia.com/"
         structuredData={homeStructuredData}
       />
@@ -106,7 +147,7 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
               </h1>
 
               <p className="text-xl text-slate-300 leading-relaxed max-w-lg">
-                <strong className="text-white">ZS India</strong> (also known as <strong className="text-white">ZSIndia</strong> and <strong className="text-white">Zoom Sounds</strong>) – Professional sound systems engineered for perfection. From home theaters to concert venues.
+                <strong className="text-white">ZS India</strong> – <strong className="text-white">ZS Acoustics</strong> – Professional sound systems engineered for perfection. From home theaters to concert venues.
               </p>
 
               <div className="flex gap-4 pt-4">
@@ -171,7 +212,7 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
 
             {/* Description */}
             <p className="text-base text-slate-300 leading-relaxed">
-              <strong className="text-white">ZS India</strong> (ZSIndia / Zoom Sounds) – Professional sound systems engineered for perfection. From home theaters to concert venues.
+              <strong className="text-white">ZS India</strong> – <strong className="text-white">ZS Acoustics</strong> – Professional sound systems engineered for perfection. From home theaters to concert venues.
             </p>
 
             {/* Action Buttons */}
@@ -254,39 +295,90 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-            {testimonialsData.map((testimonial, idx) => (
-              <div
-                key={testimonial.id}
-                className={`bg-white/5 backdrop-blur-sm rounded-2xl lg:rounded-3xl p-6 lg:p-8 hover:bg-white/10 hover:scale-105 hover:-translate-y-1 transition-all duration-300 border-2 border-white/10 hover:border-cyan-400/30 text-center animate-fade-in delay-${
-                  (idx % 4) * 100 + 100
-                }`}
-              >
-                <div className="flex items-center justify-center mb-4 space-x-1">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="h-4 lg:h-5 w-4 lg:w-5 fill-yellow-400 text-yellow-400 hover:scale-125 transition-transform"
+          {testimonialsLoading ? (
+            <div className="flex justify-center items-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400"></div>
+            </div>
+          ) : testimonials.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-slate-300 text-lg">No testimonials available yet</p>
+            </div>
+          ) : (
+            <div className="relative">
+              {/* Navigation Buttons */}
+              {testimonials.length > 3 && (
+                <>
+                  <button
+                    onClick={prevTestimonials}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 z-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full p-3 lg:p-4 transition-all border-2 border-white/20 hover:border-cyan-400/50 group"
+                    aria-label="Previous testimonials"
+                  >
+                    <ChevronLeft className="h-6 w-6 lg:h-8 lg:w-8 text-white group-hover:text-cyan-400 transition-colors" />
+                  </button>
+                  <button
+                    onClick={nextTestimonials}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 z-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full p-3 lg:p-4 transition-all border-2 border-white/20 hover:border-cyan-400/50 group"
+                    aria-label="Next testimonials"
+                  >
+                    <ChevronRight className="h-6 w-6 lg:h-8 lg:w-8 text-white group-hover:text-cyan-400 transition-colors" />
+                  </button>
+                </>
+              )}
+
+              {/* Testimonials Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+                {getVisibleTestimonials().map((testimonial, idx) => (
+                  <div
+                    key={testimonial._id}
+                    className={`bg-white/5 backdrop-blur-sm rounded-2xl lg:rounded-3xl p-6 lg:p-8 hover:bg-white/10 hover:scale-105 hover:-translate-y-1 transition-all duration-300 border-2 border-white/10 hover:border-cyan-400/30 text-center animate-fade-in delay-${
+                      idx * 100 + 100
+                    }`}
+                  >
+                    <div className="flex items-center justify-center mb-4 space-x-1">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className="h-4 lg:h-5 w-4 lg:w-5 fill-yellow-400 text-yellow-400 hover:scale-125 transition-transform"
+                        />
+                      ))}
+                    </div>
+                    <p className="text-sm lg:text-base text-slate-200 mb-4 lg:mb-6 leading-relaxed italic line-clamp-4">
+                      "{testimonial.message}"
+                    </p>
+                    <div className="border-t border-white/10 pt-4 lg:pt-6">
+                      <p className="font-black text-white text-base lg:text-lg">
+                        {testimonial.name}
+                      </p>
+                      <p className="text-xs text-cyan-400 mt-1 lg:mt-2 font-bold">
+                        {new Date(testimonial.createdAt).toLocaleDateString('en-US', { 
+                          year: 'numeric', 
+                          month: 'short' 
+                        })}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Pagination Dots */}
+              {testimonials.length > 3 && (
+                <div className="flex justify-center items-center space-x-2 mt-8">
+                  {Array.from({ length: Math.ceil(testimonials.length / 3) }).map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentTestimonialIndex(idx * 3)}
+                      className={`transition-all ${
+                        currentTestimonialIndex === idx * 3
+                          ? 'w-8 h-2 bg-cyan-400'
+                          : 'w-2 h-2 bg-white/30 hover:bg-white/50'
+                      } rounded-full`}
+                      aria-label={`Go to testimonials page ${idx + 1}`}
                     />
                   ))}
                 </div>
-                <p className="text-sm lg:text-base text-slate-200 mb-4 lg:mb-6 leading-relaxed italic line-clamp-4">
-                  "{testimonial.content}"
-                </p>
-                <div className="border-t border-white/10 pt-4 lg:pt-6">
-                  <p className="font-black text-white text-base lg:text-lg">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-xs lg:text-sm text-slate-300">
-                    {testimonial.role}
-                  </p>
-                  <p className="text-xs text-cyan-400 mt-1 lg:mt-2 font-bold">
-                    {testimonial.company}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+              )}
+            </div>
+          )}
         </div>
       </section>
 
@@ -376,11 +468,11 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="prose prose-slate max-w-none">
             <h2 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-4">
-              Zoom Sounds - Premier Sound Systems Manufacturer in Surat, Gujarat
+              ZS India - Premier Sound Systems Manufacturer in Surat, Gujarat
             </h2>
             <p className="text-slate-700 mb-4">
-              <strong>Zoom Sounds</strong> (also known as{" "}
-              <strong>ZS India</strong>, <strong>ZSAcoustics</strong>, and{" "}
+              <strong>ZS India</strong> (searchable as{" "}
+              <strong>ZSIndia</strong> or{" "}
               <strong>ZS Acoustics</strong>) is a leading sound systems
               manufacturer and supplier based in{" "}
               <strong>Varachha, Surat, Gujarat</strong>. With over 20 years of
@@ -389,14 +481,14 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
             </p>
 
             <h3 className="text-xl lg:text-2xl font-bold text-slate-900 mb-3 mt-6">
-              Why Choose ZoomSound for Your Audio Needs?
+              Why Choose ZS India for Your Audio Needs?
             </h3>
             <p className="text-slate-700 mb-4">
               As a trusted <strong>sound manufacturer in Surat</strong>,{" "}
-              <strong>zsacoustics</strong> specializes in manufacturing and
+              <strong>ZS Acoustics</strong> specializes in manufacturing and
               supplying premium audio equipment for homes, businesses, and
-              professional venues. Whether you're searching for "zoom sounds,"
-              "zoomsound," or "sounds manufacture surat," you've come to the
+              professional venues. Whether you're searching for "zs india,"
+              "zsindia," or "sounds manufacture surat," you've come to the
               right place. Our state-of-the-art facility in Varachha, Surat
               produces world-class DJ systems, home theater solutions, and
               professional sound equipment.
@@ -412,7 +504,7 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
               manufacturing facility ensures that every product meets the
               highest quality standards. When you search for "sound manufacturer
               Gujarat," "sounds manufacture by Surat," or "audio manufacturer
-              Varachha," ZoomSound stands as the premier choice.
+              Varachha," ZS India stands as the premier choice.
             </p>
 
             <h3 className="text-xl lg:text-2xl font-bold text-slate-900 mb-3 mt-6">
@@ -457,12 +549,12 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
             </p>
 
             <h3 className="text-xl lg:text-2xl font-bold text-slate-900 mb-3 mt-6">
-              Contact Zoom Sounds Today
+              Contact ZS India Today
             </h3>
             <p className="text-slate-700 mb-4">
               Looking for the best{" "}
               <strong>sound systems manufacturer in Surat</strong>? Search no
-              more! ZS India (ZoomSound, ZSAcoustics) is here to serve you with
+              more! ZS India – ZS Acoustics is here to serve you with
               premium quality, competitive pricing, and exceptional customer
               service. Contact us today to discuss your audio requirements.
             </p>

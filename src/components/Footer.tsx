@@ -22,7 +22,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               />
             </div>
             <p className="text-slate-400 text-sm leading-relaxed">
-              <strong className="text-white">ZS India</strong> (ZSIndia / Zoom Sounds) – Leading manufacturer and dealer of premium sound systems in Surat, Gujarat. Quality you can trust, sound you can feel.
+              <strong className="text-white">ZS India</strong> – <strong className="text-white">ZS Acoustics</strong> – Leading manufacturer and dealer of premium sound systems in Surat, Gujarat. Quality you can trust, sound you can feel.
             </p>
           </div>
 
@@ -74,7 +74,7 @@ export default function Footer({ onNavigate }: FooterProps) {
 
         <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-slate-400 text-sm">
-            &copy; {new Date().getFullYear()} ZS India (ZSIndia / Zoom Sounds). All rights reserved.
+            &copy; {new Date().getFullYear()} ZS India – ZS Acoustics. All rights reserved.
           </p>
           <div className="flex space-x-6 text-sm">
             <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors">Privacy Policy</a>

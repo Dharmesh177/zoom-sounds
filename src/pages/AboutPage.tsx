@@ -8,8 +8,8 @@ export default function AboutPage() {
     "mainEntity": {
       "@type": "Organization",
       "name": "ZS India",
-      "alternateName": ["ZSIndia", "Zoom Sounds", "ZS Acoustics", "ZoomSounds", "ZSAcoustics", "zsindia", "zoomsound", "zsacoustics"],
-      "description": "ZS India (also known as ZSIndia, Zoom Sounds, and ZS Acoustics) is a leading professional audio systems manufacturer in Surat, Gujarat. Established in 2004 with 20+ years of experience.",
+      "alternateName": ["ZSIndia", "ZS Acoustics", "ZSAcoustics", "zsindia", "zsacoustics"],
+      "description": "ZS India – ZS Acoustics is a leading professional audio systems manufacturer in Surat, Gujarat. Established in 2004 with 20+ years of experience.",
       "foundingDate": "2004",
       "url": "https://www.zsindia.com",
       "logo": "https://zsindia.s3.us-east-1.amazonaws.com/SiteImages/zsindia-logo.png",
@@ -30,9 +30,9 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       <SEO
-        title="About ZS India (ZSIndia) | Zoom Sounds - ZS Acoustics | 20+ Years Audio Excellence"
-        description="Learn about ZS India (ZSIndia, Zoom Sounds, ZS Acoustics) - Surat's leading professional audio systems manufacturer since 2004. 20+ years of excellence, 5000+ satisfied customers, 100% genuine products. Premium sound equipment, DJ systems & home theaters."
-        keywords="About ZS India, ZSIndia company, Zoom Sounds about, ZS Acoustics history, audio manufacturer surat, sound systems manufacturer gujarat, ZS India established, professional audio surat, sound equipment supplier gujarat"
+        title="About ZS India | ZS Acoustics | 20+ Years Audio Excellence"
+        description="Learn about ZS India – ZS Acoustics, Surat's leading professional audio systems manufacturer since 2004. 20+ years of excellence, 5000+ satisfied customers, 100% genuine products. Premium sound equipment, DJ systems & home theaters."
+        keywords="About ZS India, ZSIndia company, ZS Acoustics history, audio manufacturer surat, sound systems manufacturer gujarat, ZS India established, professional audio surat, sound equipment supplier gujarat"
         canonicalUrl="https://www.zsindia.com/about"
         structuredData={aboutStructuredData}
       />
@@ -58,7 +58,7 @@ export default function AboutPage() {
               </span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-300 leading-relaxed max-w-4xl mx-auto font-light px-4">
-              <strong className="text-white">ZS India</strong> (also known as <strong className="text-white">ZSIndia</strong> and <strong className="text-white">Zoom Sounds</strong>) – For over two decades, we've been crafting extraordinary audio experiences that resonate with perfection
+              <strong className="text-white">ZS India</strong> – <strong className="text-white">ZS Acoustics</strong> – For over two decades, we've been crafting extraordinary audio experiences that resonate with perfection
             </p>
           </div>
         </div>
@@ -78,13 +78,13 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-4 lg:space-y-6 text-base lg:text-lg text-slate-700 leading-relaxed">
               <p>
-                Established in <span className="font-black text-blue-600">2004</span>, <strong>ZS India</strong> (also known as <strong>ZSIndia</strong>, <strong>Zoom Sounds</strong>, and <strong>ZSAcoustics</strong>) emerged from a simple yet powerful vision: to bring world-class audio quality to every corner of Gujarat. What started as a modest audio equipment dealership has evolved into one of Surat's most respected manufacturers and suppliers of professional sound systems.
+                Established in <span className="font-black text-blue-600">2004</span>, <strong>ZS India</strong> – <strong>ZS Acoustics</strong> emerged from a simple yet powerful vision: to bring world-class audio quality to every corner of Gujarat. What started as a modest audio equipment dealership has evolved into one of Surat's most respected manufacturers and suppliers of professional sound systems.
               </p>
               <p>
                 Over two decades of unwavering dedication, <strong>ZS India</strong> has cultivated lasting relationships with thousands of satisfied customers. From individual audiophiles and home theater enthusiasts to major event companies, wedding planners, and large industrial facilities across <strong>Surat, Varachha, and Gujarat</strong>, our reputation speaks volumes.
               </p>
               <p>
-                Today, <strong>ZS India (ZSIndia)</strong> stands as a beacon of excellence in the audio industry. As a leading <strong>sound manufacturer in Surat</strong>, we don't merely sell products—we deliver comprehensive sound solutions backed by expert consultation, professional installation services, and lifetime technical support. Your success is our mission.
+                Today, <strong>ZS India</strong> stands as a beacon of excellence in the audio industry. As a leading <strong>sound manufacturer in Surat</strong>, we don't merely sell products—we deliver comprehensive sound solutions backed by expert consultation, professional installation services, and lifetime technical support. Your success is our mission.
               </p>
             </div>
 
@@ -217,7 +217,7 @@ export default function AboutPage() {
 
           <div className="relative">
             <div className="text-center mb-12 lg:mb-16">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 lg:mb-6">Why Choose ZSINDIA?</h2>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 lg:mb-6">Why Choose ZS India?</h2>
               <p className="text-base sm:text-lg lg:text-2xl text-slate-300 max-w-3xl mx-auto font-light">
                 Experience the difference that two decades of expertise makes
               </p>
