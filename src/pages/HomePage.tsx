@@ -31,6 +31,7 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
   const [testimonialsLoading, setTestimonialsLoading] = useState(true);
+  const [productsLoaded, setProductsLoaded] = useState(false);
 
   useEffect(() => {
     const fetchFeaturedProducts = async () => {
@@ -42,13 +43,12 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
         console.error("Failed to fetch featured products:", error);
         setProductsError("Failed to load featured products");
       } finally {
-        // Notify parent that data is loaded
-        onDataLoaded();
+        setProductsLoaded(true);
       }
     };
 
     fetchFeaturedProducts();
-  }, [onDataLoaded]);
+  }, []);
 
   useEffect(() => {
     const fetchTestimonials = async () => {
@@ -65,6 +65,13 @@ export default function HomePage({ onNavigate, onDataLoaded }: HomePageProps) {
 
     fetchTestimonials();
   }, []);
+
+  // Call onDataLoaded only when both products and testimonials are loaded
+  useEffect(() => {
+    if (productsLoaded && !testimonialsLoading) {
+      onDataLoaded();
+    }
+  }, [productsLoaded, testimonialsLoading, onDataLoaded]);
 
   const handleLearnMore = (productId: string) => {
     onNavigate("product-detail", productId);
