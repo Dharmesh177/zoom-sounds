@@ -19,6 +19,7 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
   const [error, setError] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [inputValue, setInputValue] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -78,8 +79,21 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
     setCurrentPage(1);
   };
 
-  const handleSearchChange = (query: string) => {
-    setSearchQuery(query);
+  const commitSearch = (value: string) => {
+    setSearchQuery(value);
+    setCurrentPage(1);
+  };
+
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      commitSearch(inputValue);
+    }
+  };
+
+  const clearSearch = () => {
+    setInputValue('');
+    setSearchQuery('');
     setCurrentPage(1);
   };
 
@@ -150,23 +164,33 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-6">
             <div className="flex-1">
               <h2 className="text-lg font-bold text-slate-900 mb-3">Search Products</h2>
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
-                <input
-                  type="text"
-                  placeholder="Search by name, description, or features..."
-                  value={searchQuery}
-                  onChange={(e) => handleSearchChange(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 border-2 border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
-                />
-                {searchQuery && (
-                  <button
-                    onClick={() => handleSearchChange('')}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 text-sm font-medium"
-                  >
-                    Clear
-                  </button>
-                )}
+              <div className="flex gap-2">
+                <div className="relative flex-1">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
+                  <input
+                    type="text"
+                    placeholder="Search by name, description, or features..."
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyDown={handleSearchKeyDown}
+                    className="w-full pl-12 pr-20 py-3 border-2 border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                  />
+                  {inputValue && (
+                    <button
+                      onClick={clearSearch}
+                      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 text-sm font-medium"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
+                <button
+                  onClick={() => commitSearch(inputValue)}
+                  className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all shadow-md hover:shadow-lg whitespace-nowrap"
+                >
+                  <Search className="h-4 w-4" />
+                  <span>Search</span>
+                </button>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -214,6 +238,7 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
             <button
               onClick={() => {
                 setSelectedCategory('all');
+                setInputValue('');
                 setSearchQuery('');
                 setCurrentPage(1);
               }}
@@ -451,6 +476,7 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
             <button
               onClick={() => {
                 setSelectedCategory('all');
+                setInputValue('');
                 setSearchQuery('');
                 setCurrentPage(1);
               }}
