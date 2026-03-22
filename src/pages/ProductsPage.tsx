@@ -10,9 +10,9 @@ interface ProductsPageProps {
 }
 
 export default function ProductsPage({ onNavigate }: ProductsPageProps) {
-  // allProductsForFilter: fetched once (all products) for categories & search
-  const [allProductsForFilter, setAllProductsForFilter] = useState<Product[]>([]);
-  // displayProducts: current page products shown (server-side when no filter, client-side when filtering)
+  // knownCategories: accumulated from each server response — no extra fetch needed
+  const [knownCategories, setKnownCategories] = useState<Set<string>>(new Set());
+  // displayProducts: current page products from server (always server-side)
   const [displayProducts, setDisplayProducts] = useState<Product[]>([]);
   const [totalProducts, setTotalProducts] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -25,32 +25,28 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
   const PRODUCTS_PER_PAGE = 9;
   const phoneNumber = '919876543210';
 
-  const isFilterActive = selectedCategory !== 'all' || searchQuery.trim() !== '';
-
-  // Fetch all products once (for category list + client-side filtering)
+  // Server-side fetch: page + search keyword + category — all handled by the API
   useEffect(() => {
-    const fetchAllForFilter = async () => {
-      try {
-        const response = await api.getAllProducts(1, 1000);
-        setAllProductsForFilter(response.products || []);
-      } catch (err) {
-        console.error('Failed to fetch all products for filtering:', err);
-      }
-    };
-    fetchAllForFilter();
-  }, []);
-
-  // Server-side pagination: fetch when no filter is active and page changes
-  useEffect(() => {
-    if (isFilterActive) return;
     const fetchPage = async () => {
       try {
         setIsLoading(true);
         setError(null);
-        const response = await api.getAllProducts(currentPage, PRODUCTS_PER_PAGE);
-        setDisplayProducts(response.products || []);
+        const response = await api.getAllProducts(
+          currentPage,
+          PRODUCTS_PER_PAGE,
+          searchQuery,
+          selectedCategory
+        );
+        const fetched = response.products || [];
+        setDisplayProducts(fetched);
         setTotalPages(response.totalPages || 1);
         setTotalProducts(response.totalProducts || 0);
+        // Accumulate categories discovered from server responses
+        setKnownCategories(prev => {
+          const next = new Set(prev);
+          fetched.forEach(p => { if (p.category) next.add(p.category); });
+          return next;
+        });
       } catch (err) {
         console.error('Failed to fetch products:', err);
         setError('Failed to load products');
@@ -59,45 +55,14 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
       }
     };
     fetchPage();
-  }, [currentPage, isFilterActive]);
+  }, [currentPage, searchQuery, selectedCategory]);
 
-  // Client-side filtering + pagination when a filter is active
-  useEffect(() => {
-    if (!isFilterActive) return;
-    setIsLoading(true);
-    let filtered = selectedCategory === 'all'
-      ? allProductsForFilter
-      : allProductsForFilter.filter(p => p.category === selectedCategory);
-
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(p =>
-        (p.name?.toLowerCase().includes(query)) ||
-        (p.overview?.toLowerCase().includes(query)) ||
-        (p.family?.toLowerCase().includes(query)) ||
-        (p.technology?.toLowerCase().includes(query)) ||
-        (p.keyHighlights?.some(h => h.toLowerCase().includes(query)))
-      );
-    }
-
-    const pages = Math.ceil(filtered.length / PRODUCTS_PER_PAGE);
-    setTotalPages(pages || 1);
-    setTotalProducts(filtered.length);
-    const start = (currentPage - 1) * PRODUCTS_PER_PAGE;
-    setDisplayProducts(filtered.slice(start, start + PRODUCTS_PER_PAGE));
-    setIsLoading(false);
-  }, [isFilterActive, selectedCategory, searchQuery, currentPage, allProductsForFilter]);
-
-  // Get unique categories from all products
+  // Build category list from accumulated known categories (no extra fetch needed)
   const categories = [
-    { id: 'all', label: 'All Products', count: allProductsForFilter.length },
-    ...Array.from(new Set(allProductsForFilter.map(p => p.category)))
+    { id: 'all', label: 'All Products' },
+    ...Array.from(knownCategories)
       .filter(cat => cat)
-      .map(cat => ({
-        id: cat,
-        label: cat.replace(/-/g, ' '),
-        count: allProductsForFilter.filter(p => p.category === cat).length
-      }))
+      .map(cat => ({ id: cat, label: cat.replace(/-/g, ' ') }))
   ];
 
   const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
@@ -229,18 +194,13 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
               <button
                 key={category.id}
                 onClick={() => handleCategoryChange(category.id)}
-                className={`group relative overflow-hidden px-6 py-3 rounded-full font-semibold transition-all ${
+                className={`px-6 py-3 rounded-full font-semibold transition-all text-sm ${
                   selectedCategory === category.id
                     ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/30'
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
               >
-                <span className="text-sm">{category.label}</span>
-                <span className={`ml-2 text-xs font-bold ${
-                  selectedCategory === category.id ? 'text-white/90' : 'text-blue-600'
-                }`}>
-                  ({category.count})
-                </span>
+                {category.label}
               </button>
             ))}
           </div>

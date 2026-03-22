@@ -138,7 +138,7 @@ export const api = {
     }
   },
 
-  async getAllProducts(page?: number, limit?: number): Promise<AllProductsResponse> {
+  async getAllProducts(page?: number, limit?: number, keyword?: string, category?: string): Promise<AllProductsResponse> {
     try {
       let url = `${API_URL}/products`;
       const params = new URLSearchParams();
@@ -148,6 +148,12 @@ export const api = {
       }
       if (limit !== undefined) {
         params.append('limit', limit.toString());
+      }
+      if (keyword && keyword.trim()) {
+        params.append('keyword', keyword.trim());
+      }
+      if (category && category !== 'all') {
+        params.append('category', category);
       }
       
       if (params.toString()) {
