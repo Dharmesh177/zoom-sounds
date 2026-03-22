@@ -10,8 +10,11 @@ interface ProductsPageProps {
 }
 
 export default function ProductsPage({ onNavigate }: ProductsPageProps) {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  // allProductsForFilter: fetched once (all products) for categories & search
+  const [allProductsForFilter, setAllProductsForFilter] = useState<Product[]>([]);
+  // displayProducts: current page products shown (server-side when no filter, client-side when filtering)
+  const [displayProducts, setDisplayProducts] = useState<Product[]>([]);
+  const [totalProducts, setTotalProducts] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -19,46 +22,52 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const productsPerPage = 9;
+  const PRODUCTS_PER_PAGE = 9;
   const phoneNumber = '919876543210';
 
-  // Fetch all products on component mount
+  const isFilterActive = selectedCategory !== 'all' || searchQuery.trim() !== '';
+
+  // Fetch all products once (for category list + client-side filtering)
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchAllForFilter = async () => {
+      try {
+        const response = await api.getAllProducts(1, 1000);
+        setAllProductsForFilter(response.products || []);
+      } catch (err) {
+        console.error('Failed to fetch all products for filtering:', err);
+      }
+    };
+    fetchAllForFilter();
+  }, []);
+
+  // Server-side pagination: fetch when no filter is active and page changes
+  useEffect(() => {
+    if (isFilterActive) return;
+    const fetchPage = async () => {
       try {
         setIsLoading(true);
         setError(null);
-        const response = await api.getAllProducts();
-        setProducts(response.products);
-        setFilteredProducts(response.products);
-      } catch (error) {
-        console.error('Failed to fetch products:', error);
+        const response = await api.getAllProducts(currentPage, PRODUCTS_PER_PAGE);
+        setDisplayProducts(response.products || []);
+        setTotalPages(response.totalPages || 1);
+        setTotalProducts(response.totalProducts || 0);
+      } catch (err) {
+        console.error('Failed to fetch products:', err);
         setError('Failed to load products');
       } finally {
         setIsLoading(false);
       }
     };
+    fetchPage();
+  }, [currentPage, isFilterActive]);
 
-    fetchProducts();
-  }, []);
-
-  // Get unique categories from products
-  const categories = [
-    { id: 'all', label: 'All Products', count: products.length },
-    ...Array.from(new Set(products.map(p => p.category)))
-      .filter(cat => cat)
-      .map(cat => ({
-        id: cat,
-        label: cat.replace(/-/g, ' '),
-        count: products.filter(p => p.category === cat).length
-      }))
-  ];
-
-  // Filter products whenever search or category changes
+  // Client-side filtering + pagination when a filter is active
   useEffect(() => {
+    if (!isFilterActive) return;
+    setIsLoading(true);
     let filtered = selectedCategory === 'all'
-      ? products
-      : products.filter(p => p.category === selectedCategory);
+      ? allProductsForFilter
+      : allProductsForFilter.filter(p => p.category === selectedCategory);
 
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
@@ -71,14 +80,28 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
       );
     }
 
-    setFilteredProducts(filtered);
-    setTotalPages(Math.ceil(filtered.length / productsPerPage));
-    setCurrentPage(1); // Reset to first page when filters change
-  }, [products, selectedCategory, searchQuery]);
+    const pages = Math.ceil(filtered.length / PRODUCTS_PER_PAGE);
+    setTotalPages(pages || 1);
+    setTotalProducts(filtered.length);
+    const start = (currentPage - 1) * PRODUCTS_PER_PAGE;
+    setDisplayProducts(filtered.slice(start, start + PRODUCTS_PER_PAGE));
+    setIsLoading(false);
+  }, [isFilterActive, selectedCategory, searchQuery, currentPage, allProductsForFilter]);
 
-  const startIndex = (currentPage - 1) * productsPerPage;
-  const endIndex = startIndex + productsPerPage;
-  const currentProducts = filteredProducts.slice(startIndex, endIndex);
+  // Get unique categories from all products
+  const categories = [
+    { id: 'all', label: 'All Products', count: allProductsForFilter.length },
+    ...Array.from(new Set(allProductsForFilter.map(p => p.category)))
+      .filter(cat => cat)
+      .map(cat => ({
+        id: cat,
+        label: cat.replace(/-/g, ' '),
+        count: allProductsForFilter.filter(p => p.category === cat).length
+      }))
+  ];
+
+  const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+  const currentProducts = displayProducts;
 
   const createWhatsAppLink = (productName: string) => {
     const message = encodeURIComponent(`Hi, I'm interested in ${productName}. Can you provide more details?`);
@@ -87,10 +110,12 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
 
   const handleCategoryChange = (categoryId: string) => {
     setSelectedCategory(categoryId);
+    setCurrentPage(1);
   };
 
   const handleSearchChange = (query: string) => {
     setSearchQuery(query);
+    setCurrentPage(1);
   };
 
   const goToPage = (page: number) => {
@@ -223,7 +248,7 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
 
         <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-gradient-to-r from-blue-50 to-slate-50 border border-blue-200 rounded-xl px-6 py-4">
           <p className="text-slate-700 font-medium">
-            Showing <span className="text-xl font-bold text-blue-600">{startIndex + 1}-{Math.min(endIndex, filteredProducts.length)}</span> of <span className="text-xl font-bold text-blue-600">{filteredProducts.length}</span> product{filteredProducts.length !== 1 ? 's' : ''}
+            Showing <span className="text-xl font-bold text-blue-600">{startIndex + 1}-{startIndex + currentProducts.length}</span> of <span className="text-xl font-bold text-blue-600">{totalProducts}</span> product{totalProducts !== 1 ? 's' : ''}
           </p>
           {(selectedCategory !== 'all' || searchQuery) && (
             <button
